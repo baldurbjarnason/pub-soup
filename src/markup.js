@@ -15,10 +15,15 @@ const purifyConfig = {
 };
 
 // In theory this should work for SVG images as well.
-export async function purify(chapter, chapterPath, contentType = "text/html") {
+export async function purify({
+  chapter,
+  path,
+  contentType = "text/html",
+  names = new Map(),
+}) {
   let styles = [];
   let links = [];
-  const resourceURL = new URL(chapterPath, "https://example.com/");
+  const resourceURL = new URL(path, "https://example.com/");
   let dom;
   try {
     dom = new JSDOM(chapter, {
@@ -103,7 +108,7 @@ export async function purify(chapter, chapterPath, contentType = "text/html") {
   const soupBody = window.document.createElement("soup-body");
   cloneAttributes(soupBody, window.document.body);
   soupBody.append(...window.document.body.children);
-  return { styles, links, content: soupBody.outerHTML, id: chapterPath, title };
+  return { styles, links, content: soupBody.outerHTML, id: path, title };
 }
 
 function testPath(path, resourceURL) {
