@@ -69,7 +69,8 @@ function parseNCX($, url) {
     children: [],
   };
   toc.heading = $("docTitle > text").text();
-  toc.inLanguage = $("ncx").attr("xml:lang") || "en";
+  // if undefined, fall back on publication language when rendering.
+  toc.inLanguage = $("ncx").attr("xml:lang");
   $("navMap > navPoint").each((i, element) =>
     parseNavPoint(i, element, toc, $)
   );
