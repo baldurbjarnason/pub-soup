@@ -1,4 +1,4 @@
-import { parseOPF } from "../src/epub/opf.js";
+import { opf as parseOPF } from "../src/epub/opf.js";
 import { createRequire } from "module";
 import { fileURLToPath } from "url";
 const require = createRequire(import.meta.url);

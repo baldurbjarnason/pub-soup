@@ -9,7 +9,7 @@ const options = {
   decodeEntities: true,
 };
 
-export function parseOPF(text, opfPath) {
+export function opf(text, opfPath) {
   const $ = cheerio.load(text, options);
   const book = {
     type: "Publication",
