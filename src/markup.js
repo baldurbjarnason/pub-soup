@@ -1,37 +1,34 @@
 import { css } from "./css.js";
+import { Names } from "./names.js";
 import { createRequire } from "module";
 const require = createRequire(import.meta.url);
 const createDOMPurify = require("dompurify");
 const { JSDOM } = require("jsdom");
 const validDataUrl = require("valid-data-url");
 
+// Support srcset
 const purifyConfig = {
   KEEP_CONTENT: false,
   IN_PLACE: true,
   WHOLE_DOCUMENT: true,
-  ADD_TAGS: ["link", "ink-page"],
+  ADD_TAGS: ["link"],
   FORBID_TAGS: ["meta", "form"],
   FORBID_ATTR: ["srcset", "action", "background", "poster"],
 };
 
-// In theory this should work for SVG images as well.
-export async function purify({
-  chapter,
-  path,
-  contentType = "text/html",
-  names = new Map(),
-}) {
+export async function purify(file, { names = new Names() } = {}) {
+  const { value, path, contentType = "text/html", id } = file;
   let styles = [];
   let links = [];
   const resourceURL = new URL(path, "https://example.com/");
   let dom;
   try {
-    dom = new JSDOM(chapter, {
+    dom = new JSDOM(value, {
       contentType,
       url: "http://localhost",
     });
   } catch (err) {
-    dom = new JSDOM(chapter, {
+    dom = new JSDOM(value, {
       contentType: "text/html",
       url: "http://localhost",
     });
@@ -108,7 +105,14 @@ export async function purify({
   const soupBody = window.document.createElement("soup-body");
   cloneAttributes(soupBody, window.document.body);
   soupBody.append(...window.document.body.children);
-  return { styles, links, content: soupBody.outerHTML, id: path, title };
+  return {
+    styles,
+    links,
+    path,
+    content: soupBody.outerHTML,
+    id,
+    title,
+  };
 }
 
 function testPath(path, resourceURL) {
