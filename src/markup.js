@@ -1,10 +1,10 @@
 import { css } from "./css.js";
 import { Names } from "./names.js";
+import { attributes } from "./attributes.js";
 import { createRequire } from "module";
 const require = createRequire(import.meta.url);
 const createDOMPurify = require("dompurify");
 const { JSDOM } = require("jsdom");
-const validDataUrl = require("valid-data-url");
 
 // Support srcset
 const purifyConfig = {
@@ -13,11 +13,11 @@ const purifyConfig = {
   WHOLE_DOCUMENT: true,
   ADD_TAGS: ["link"],
   FORBID_TAGS: ["meta", "form"],
-  FORBID_ATTR: ["srcset", "action", "background", "poster"],
+  FORBID_ATTR: ["action", "background", "poster"],
 };
 
 export async function purify(file, { names = new Names() } = {}) {
-  const { value, path, contentType = "text/html", id } = file;
+  const { value, path, contentType = "text/html", id, base } = file;
   let styles = [];
   let links = [];
   const resourceURL = new URL(path, "https://example.com/");
@@ -60,7 +60,7 @@ export async function purify(file, { names = new Names() } = {}) {
   const DOMPurify = createDOMPurify(window);
   // Based on sample from https://github.com/cure53/DOMPurify/tree/master/demos, same license as DOMPurify
 
-  DOMPurify.addHook("uponSanitizeElement", function (node, data) {
+  DOMPurify.addHook("uponSanitizeElement", function (node) {
     if (
       node.getAttributeNS &&
       node.getAttributeNS("http://www.idpf.org/2007/ops", "type")
@@ -72,14 +72,6 @@ export async function purify(file, { names = new Names() } = {}) {
     }
   });
   DOMPurify.addHook("afterSanitizeAttributes", function (node) {
-    // All src urls must be relative. This will have to be improved once we start expanding our format support
-    if (
-      node.hasAttribute("src") &&
-      !testPath(node.getAttribute("src"), resourceURL) &&
-      !validDataUrl(node.getAttribute("src"))
-    ) {
-      node.remove();
-    }
     if (
       node.tagName.toLowerCase() === "link" &&
       node.hasAttribute("href") &&
@@ -96,10 +88,12 @@ export async function purify(file, { names = new Names() } = {}) {
       links = links.concat({
         type: "LinkedResource",
         rel: ["stylesheet"],
-        url: node.getAttribute("href"),
+        url: base.transform(node.getAttribute("href"), path, "style"),
         encodingFormat: "text/css",
       });
+      node.remove();
     }
+    attributes(node, base, path);
   });
   DOMPurify.sanitize(window.document.documentElement, purifyConfig);
   const soupBody = window.document.createElement("soup-body");
