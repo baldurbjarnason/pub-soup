@@ -9,7 +9,7 @@ const purifyConfig = {
   KEEP_CONTENT: false,
   IN_PLACE: true,
   WHOLE_DOCUMENT: true,
-  ADD_TAGS: ["link", "ink-page"],
+  ADD_TAGS: ["link"],
   FORBID_TAGS: ["meta", "form"],
   FORBID_ATTR: ["srcset", "action", "background", "poster"],
 };
