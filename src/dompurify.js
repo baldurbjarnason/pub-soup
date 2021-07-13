@@ -13,16 +13,17 @@ const purifyConfig = {
 };
 
 // In theory this should work for SVG images as well.
-export async function purify(chapter, chapterPath, contentType = "text/html") {
-  const resourceURL = new URL(chapterPath, "https://example.com/");
+export async function purify(file) {
+  const { value, path, contentType = "text/html", id } = file;
+  const resourceURL = new URL(path, "https://example.com/");
   let dom;
   try {
-    dom = new JSDOM(chapter, {
+    dom = new JSDOM(value, {
       contentType,
       url: "http://localhost",
     });
   } catch (err) {
-    dom = new JSDOM(chapter, {
+    dom = new JSDOM(value, {
       contentType: "text/html",
       url: "http://localhost",
     });
@@ -32,8 +33,10 @@ export async function purify(chapter, chapterPath, contentType = "text/html") {
     try {
       const styles = await css(
         `body {${node.getAttribute("style")}}`,
-        resourceURL.href
+        id,
+        file
       );
+      console.log(id, styles);
       node.setAttribute("style", styles.split(/{|}/)[1]);
     } catch (err) {
       node.removeAttribute("style");
@@ -41,7 +44,7 @@ export async function purify(chapter, chapterPath, contentType = "text/html") {
   }
   for (const node of window.document.querySelectorAll("style")) {
     try {
-      node.textContent = await css(node.textContent, resourceURL.href);
+      node.textContent = await css(node.textContent, id, file);
     } catch (err) {
       node.textContent = "";
     }

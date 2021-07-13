@@ -7,7 +7,7 @@
 'use strict'
 exports[`tests/dompurify.test.js TAP dompurify - html > dompurify html 1`] = `
 <html><head>
-    <style>#pub-soup soup-body { background-color: red;}</style>
+    <style>[data-stylesheets~="1_id"] soup-body { background-color: red;}</style>
     </head><body>
     <h1>Test</h1>
     </body></html>
@@ -15,7 +15,7 @@ exports[`tests/dompurify.test.js TAP dompurify - html > dompurify html 1`] = `
 
 exports[`tests/dompurify.test.js TAP dompurify - invalid xhtml > dompurify invalid xhtml 1`] = `
 <!--?xml version="1.0" encoding="utf-8"?--><!DOCTYPE html><html lang="en" xmlns="http://www.w3.org/1999/xhtml"><head>
-    <style>#pub-soup soup-body { background-color: red;}</style>
+    <style>[data-stylesheets~="1_id"] soup-body { background-color: red;}</style>
     </head><body>
     <br>
     <h1>Test</h1>

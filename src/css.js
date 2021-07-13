@@ -25,10 +25,10 @@ const replaceRootsWithCustomElements = (options = {}) => {
   };
 };
 
-export async function css(cssString, file, prefix = "#pub-soup") {
+export async function css(cssString, cssURL, file) {
   const result = await postcss([
     purify(file),
-    prefixer({ prefix }),
+    prefixer({ prefix: `[data-stylesheets~="${cssURL}"]` }),
     replaceRootsWithCustomElements(),
   ]).process(cssString, { from: file.path, to: file.path });
   return result.css;

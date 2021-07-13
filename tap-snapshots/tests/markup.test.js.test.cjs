@@ -13,7 +13,7 @@ Object {
   "links": Array [],
   "path": "chapter/path/page.html",
   "styles": Array [
-    "#pub-soup soup-body { background-color: red;}",
+    "[data-stylesheets~=\\"1_id\\"] soup-body { background-color: red;}",
   ],
   "title": "Test",
 }
@@ -27,30 +27,35 @@ Object {
   "links": Array [],
   "path": "chapter/path/page.html",
   "styles": Array [
-    "#pub-soup soup-body { background-color: red;}",
+    "[data-stylesheets~=\\"1_id\\"] soup-body { background-color: red;}",
   ],
   "title": "Test",
 }
 `
 
 exports[`tests/markup.test.js TAP markup - render html > markup render html html 1`] = `
-<soup-chapter data-stylesheets="" id="1_id" data-path="chapter/path/page.html" data-title="Test" null>
+<soup-chapter data-stylesheets="1_id" id="1_id" data-path="chapter/path/page.html" data-title="Test" null>
   <soup-html><soup-body class="HTML"><h1>Test</h1></soup-body></soup-html>
 </soup-chapter>
 `
 
 exports[`tests/markup.test.js TAP markup - render html > markup render html styles 1`] = `
-<style>#pub-soup soup-body { background-color: red;}</style>
+<style>[data-stylesheets~="1_id"] soup-body { background-color: red;}</style>
 
 `
 
 exports[`tests/markup.test.js TAP markup - render svg > markup render svg html 1`] = `
-<soup-chapter data-stylesheets="" id="1_id" data-path="chapter/path/svg.xhtml" data-title="SVG test" lang="en">
+<soup-chapter data-stylesheets="1_id" id="1_id" data-path="chapter/path/svg.xhtml" data-title="SVG test" lang="en">
   <soup-html><soup-body><br><svg xmlns="http://www.w3.org/2000/svg" height="20" width="38" style="background-color: red;"><path fill="#000" fill-rule="nonzero" d="M0 10c0 .546.414.983.932.983h33.887l-6.954 7.337a1.015 1.015 0 0 0 0 1.39.892.892 0 0 0 1.317 0l8.545-9.015a1.023 1.023 0 0 0 0-1.39L29.182.29a.892.892 0 0 0-1.317 0 1.015 1.015 0 0 0 0 1.39l6.954 7.337H.932C.414 9.017 0 9.454 0 10z"></path><a xlink:href="#1_id:linkies"><image xlink:href="http://media.example.com/2_id"></image></a><image href="http://media.example.com/3_id"></image></svg></soup-body></soup-html>
 </soup-chapter>
 `
 
 exports[`tests/markup.test.js TAP markup - render svg > markup render svg styles 1`] = `
+
+`
+
+exports[`tests/markup.test.js TAP markup - render xhtml > markup render xhtml stylesheets 1`] = `
+<link rel="stylesheet" href="http://style.example.com/2_id">
 
 `
 

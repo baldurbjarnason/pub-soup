@@ -5,6 +5,7 @@ import { Base } from "../src/base.js";
 import {
   renderMarkup,
   renderStyles,
+  renderStylesheets,
 } from "../src/epub/stringify/stringify-markup.js";
 import tap from "tap";
 
@@ -173,4 +174,9 @@ tap.test("markup - render html", async (test) => {
   test.matchSnapshot(result, "markup render html html");
   const styles = renderStyles(results[1].styles);
   test.matchSnapshot(styles, "markup render html styles");
+});
+
+tap.test("markup - render xhtml", async (test) => {
+  const styles = renderStylesheets(results[2].links);
+  test.matchSnapshot(styles, "markup render xhtml stylesheets");
 });
