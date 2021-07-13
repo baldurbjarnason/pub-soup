@@ -1,6 +1,7 @@
 import validDataUrl from "valid-data-url";
 
-export function attributes(node, base, path) {
+export function attributes(node, file) {
+  const { base, path } = file;
   if (node.hasAttribute("id")) {
     node.setAttribute("id", base.id(node.getAttribute("id"), path));
   }
@@ -17,15 +18,12 @@ export function attributes(node, base, path) {
     base.full(node.getAttribute("src"), path) &&
     !validDataUrl(node.getAttribute("src"))
   ) {
-    node.setAttribute(
-      "src",
-      base.transform(node.getAttribute("src"), path, "media")
-    );
+    node.setAttribute("src", file.src(node.getAttribute("src")));
   }
 
   // Need to support responsive images as well
   if (node.hasAttribute("srcset")) {
-    node.setAttribute("srcset", base.srcset(node.getAttribute("srcset"), path));
+    node.setAttribute("srcset", file.srcset(node.getAttribute("srcset")));
   }
 
   // There are two types of href attributes that remain: links (which become internal id refs) and SVG images

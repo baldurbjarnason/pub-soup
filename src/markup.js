@@ -86,12 +86,12 @@ export async function purify(file, { names = new Names() } = {}) {
       links = links.concat({
         type: "LinkedResource",
         rel: ["stylesheet"],
-        url: base.transform(node.getAttribute("href"), path, "style"),
+        url: file.stylesheet(node.getAttribute("href")),
         encodingFormat: "text/css",
       });
       node.remove();
     }
-    attributes(node, base, path);
+    attributes(node, file, path);
   });
   DOMPurify.sanitize(window.document.documentElement, purifyConfig);
   const soupBody = window.document.createElement("soup-body");
