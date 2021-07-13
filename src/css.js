@@ -25,11 +25,11 @@ const replaceRootsWithCustomElements = (options = {}) => {
   };
 };
 
-export async function css(cssString, base, prefix = "#pub-soup") {
+export async function css(cssString, file, prefix = "#pub-soup") {
   const result = await postcss([
-    purify({ base }),
+    purify(file),
     prefixer({ prefix }),
     replaceRootsWithCustomElements(),
-  ]).process(cssString, { from: base, to: base });
+  ]).process(cssString, { from: file.path, to: file.path });
   return result.css;
 }

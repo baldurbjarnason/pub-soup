@@ -49,10 +49,7 @@ export async function purify(file, { names = new Names() } = {}) {
   }
   for (const node of window.document.querySelectorAll("[style]")) {
     try {
-      const styles = await css(
-        `body {${node.getAttribute("style")}}`,
-        resourceURL.href
-      );
+      const styles = await css(`body {${node.getAttribute("style")}}`, file);
       node.setAttribute("style", styles.split(/{|}/)[1]);
     } catch (err) {
       node.removeAttribute("style");
@@ -60,7 +57,7 @@ export async function purify(file, { names = new Names() } = {}) {
   }
   for (const node of window.document.querySelectorAll("style")) {
     try {
-      styles = styles.concat(await css(node.textContent, resourceURL.href));
+      styles = styles.concat(await css(node.textContent, file));
     } catch (err) {}
     node.remove();
   }

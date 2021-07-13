@@ -8,7 +8,7 @@ const deleteEmptyRules = (rule) => {
   if (rule.nodes.length === 0) rule.remove();
 };
 
-export function purify({ base }) {
+export function purify(file) {
   return {
     postcssPlugin: "postcss-purify",
     Once: (css) => {
@@ -27,12 +27,13 @@ export function purify({ base }) {
           if (node.type === "function" && node.value === "url") {
             node.nodes = node.nodes
               .map((urlNode) => {
-                if (
-                  !testPath(urlNode.value, base) &&
-                  !validDataUrl(urlNode.value)
-                ) {
+                const full = file.base.full(urlNode.value);
+                if (!full && !validDataUrl(urlNode.value)) {
                   return null;
+                } else if (validDataUrl(urlNode.value)) {
+                  return urlNode;
                 } else {
+                  urlNode.value = file.src(urlNode.value);
                   return urlNode;
                 }
               })
@@ -50,11 +51,4 @@ export function purify({ base }) {
       css.walkRules((rule) => deleteEmptyRules(rule));
     },
   };
-}
-
-function testPath(path, resourceURL) {
-  const base = new URL(resourceURL, "http://example.com");
-  const url = new URL(path, base);
-  // If the hostname doesn't equal that of the base URL we provided, then it is a full URL and so not supported
-  return url.hostname === base.hostname;
 }

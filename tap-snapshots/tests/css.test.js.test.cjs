@@ -10,11 +10,11 @@ exports[`tests/css.test.js TAP css > parseCSS @import 1`] = `
 `
 
 exports[`tests/css.test.js TAP css > parseCSS basic 1`] = `
-#pub-soup soup-html.js soup-body.testClass span.someClass {background-color: red; --custom-property: url('what-is-this/image.png')}@font-face {
+#pub-soup soup-html.js soup-body.testClass span.someClass {background-color: red; --custom-property: url('http://media.example.com/1_id')}@font-face {
     font-family: "Stix";
     font-weight: normal;
     font-style: normal;
-    src: url(../fonts/STIXGeneral.otf);
+    src: url(http://media.example.com/2_id);
   }
 `
 
