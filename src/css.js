@@ -1,9 +1,7 @@
 import { purify } from "./postcss-purify/index.js";
-import { createRequire } from "module";
-const require = createRequire(import.meta.url);
-const postcss = require("postcss");
-const prefixer = require("postcss-prefix-selector");
-const selectorParser = require("postcss-selector-parser");
+import postcss from "postcss";
+import prefixer from "postcss-prefix-selector";
+import selectorParser from "postcss-selector-parser";
 
 function processor(root) {
   root.walkTags((tagNode) => {

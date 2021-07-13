@@ -1,6 +1,4 @@
-import { createRequire } from "module";
-const require = createRequire(import.meta.url);
-const cheerio = require("cheerio");
+import cheerio from "cheerio";
 
 const options = {
   withDomLvl1: true,

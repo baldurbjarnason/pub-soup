@@ -1,9 +1,7 @@
 import { css } from "./css.js";
-import { createRequire } from "module";
-const require = createRequire(import.meta.url);
-const createDOMPurify = require("dompurify");
-const { JSDOM } = require("jsdom");
-const validDataUrl = require("valid-data-url");
+import createDOMPurify from "dompurify";
+import validDataUrl from "valid-data-url";
+import { JSDOM } from "jsdom";
 
 const purifyConfig = {
   KEEP_CONTENT: false,

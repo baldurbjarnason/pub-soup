@@ -1,7 +1,5 @@
 import { css } from "../src/css.js";
-import { createRequire } from "module";
-const require = createRequire(import.meta.url);
-const tap = require("tap");
+import tap from "tap";
 
 tap.test("css", async (test) => {
   const cssString = `html.js body.testClass span.someClass {background-color: red; position: fixed; text-align: justify; fake-property: bling; --custom-property: url('what-is-this/image.png'); background-image: url('https://dangerous.example.com/test.png')} div {position: fixed;}@font-face {

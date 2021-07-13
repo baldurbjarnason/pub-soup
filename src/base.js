@@ -1,8 +1,5 @@
 import { Names } from "./names.js";
-import { createRequire } from "module";
-
-const require = createRequire(import.meta.url);
-const srcset = require("srcset");
+import srcset from "srcset";
 
 export class Base {
   constructor({ media, link, style, base } = {}, { names = new Names() } = {}) {

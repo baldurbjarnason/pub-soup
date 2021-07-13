@@ -1,8 +1,6 @@
 import { Base } from "../src/base.js";
 import { Names } from "../src/names.js";
-import { createRequire } from "module";
-const require = createRequire(import.meta.url);
-const tap = require("tap");
+import tap from "tap";
 
 tap.test("base", async (test) => {
   const base = new Base();

@@ -1,10 +1,8 @@
 import { toc as parseToC } from "../src/epub/nav.js";
 import { readFile } from "fs/promises";
 import * as path from "path";
+import tap from "tap";
 import { fileURLToPath } from "url";
-import { createRequire } from "module";
-const require = createRequire(import.meta.url);
-const tap = require("tap");
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename).replace(process.cwd() + "/", "");
 

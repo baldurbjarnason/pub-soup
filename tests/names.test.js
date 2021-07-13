@@ -1,7 +1,5 @@
 import { Names } from "../src/names.js";
-import { createRequire } from "module";
-const require = createRequire(import.meta.url);
-const tap = require("tap");
+import tap from "tap";
 
 tap.test("names", async (test) => {
   const names = new Names();

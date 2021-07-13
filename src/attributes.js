@@ -1,6 +1,4 @@
-import { createRequire } from "module";
-const require = createRequire(import.meta.url);
-const validDataUrl = require("valid-data-url");
+import validDataUrl from "valid-data-url";
 
 export function attributes(node, base, path) {
   if (node.hasAttribute("id")) {

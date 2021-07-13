@@ -1,10 +1,8 @@
 import { css } from "./css.js";
 import { Names } from "./names.js";
 import { attributes } from "./attributes.js";
-import { createRequire } from "module";
-const require = createRequire(import.meta.url);
-const createDOMPurify = require("dompurify");
-const { JSDOM } = require("jsdom");
+import createDOMPurify from "dompurify";
+import { JSDOM } from "jsdom";
 
 // Support srcset
 const purifyConfig = {

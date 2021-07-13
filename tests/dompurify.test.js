@@ -1,7 +1,5 @@
 import { purify } from "../src/dompurify.js";
-import { createRequire } from "module";
-const require = createRequire(import.meta.url);
-const tap = require("tap");
+import tap from "tap";
 
 tap.test("dompurify - svg", async (test) => {
   const result = await purify(

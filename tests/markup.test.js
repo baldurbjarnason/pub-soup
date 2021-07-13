@@ -1,9 +1,7 @@
 import { purify } from "../src/markup.js";
 import { Names } from "../src/names.js";
 import { Base } from "../src/base.js";
-import { createRequire } from "module";
-const require = createRequire(import.meta.url);
-const tap = require("tap");
+import tap from "tap";
 
 tap.test("markup - svg", async (test) => {
   let counter = 0;

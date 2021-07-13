@@ -1,10 +1,8 @@
 import { opf as parseOPF } from "../src/epub/opf.js";
-import { createRequire } from "module";
+import tap from "tap";
 import { fileURLToPath } from "url";
-const require = createRequire(import.meta.url);
-const tap = require("tap");
-const fs = require("fs");
-const path = require("path");
+import * as fs from "fs";
+import * as path from "path";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename).replace(process.cwd() + "/", "");
 
