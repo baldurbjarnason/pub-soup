@@ -15,7 +15,7 @@ const purifyConfig = {
 };
 
 export async function purify(file, { names = new Names() } = {}) {
-  const { value, path, contentType = "text/html", id, base } = file;
+  const { value, path, contentType = "text/html", id } = file;
   let styles = [];
   let links = [];
   const resourceURL = new URL(path, "https://example.com/");
@@ -32,6 +32,21 @@ export async function purify(file, { names = new Names() } = {}) {
     });
   }
   const window = dom.window;
+  const document = window.document;
+  let inLanguage;
+  if (document.documentElement.hasAttribute("xml:lang")) {
+    // This is an XHTML file with a parsing error
+    inLanguage = document.documentElement.getAttribute("xml:lang");
+  } else if (document.documentElement.hasAttribute("lang")) {
+    // HTML5 lang, could be XHTML5 or HTML5
+    inLanguage = document.documentElement.getAttribute("lang");
+  } else {
+    // If we aren't in XML by now, the lang will be undefined
+    inLanguage = document.documentElement.getAttributeNS(
+      "http://www.w3.org/XML/1998/namespace",
+      "lang"
+    );
+  }
   for (const node of window.document.querySelectorAll("[style]")) {
     try {
       const styles = await css(
@@ -104,6 +119,7 @@ export async function purify(file, { names = new Names() } = {}) {
     content: soupBody.outerHTML,
     id,
     title,
+    inLanguage,
   };
 }
 
