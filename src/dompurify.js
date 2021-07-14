@@ -64,6 +64,7 @@ export async function purify(file) {
   });
   DOMPurify.addHook("afterSanitizeAttributes", function (node) {
     // All src urls must be relative. This will have to be improved once we start expanding our format support
+    // In theory this here bit breaks external links and images in sanitized svgs. We rename all files upon extraction so are going to need to process all _external_ hrefs to use the new names and urls
     if (
       node.hasAttribute("src") &&
       !testPath(node.getAttribute("src"), resourceURL) &&
