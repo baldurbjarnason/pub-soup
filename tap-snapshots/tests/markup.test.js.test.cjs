@@ -46,7 +46,7 @@ exports[`tests/markup.test.js TAP markup - render html > markup render html styl
 
 exports[`tests/markup.test.js TAP markup - render svg > markup render svg html 1`] = `
 <soup-chapter data-stylesheets="1_id" id="1_id" data-path="chapter/path/svg.xhtml" data-title="SVG test" lang="en">
-  <soup-html><soup-body><br><svg xmlns="http://www.w3.org/2000/svg" height="20" width="38" style="background-color: red;"><path fill="#000" fill-rule="nonzero" d="M0 10c0 .546.414.983.932.983h33.887l-6.954 7.337a1.015 1.015 0 0 0 0 1.39.892.892 0 0 0 1.317 0l8.545-9.015a1.023 1.023 0 0 0 0-1.39L29.182.29a.892.892 0 0 0-1.317 0 1.015 1.015 0 0 0 0 1.39l6.954 7.337H.932C.414 9.017 0 9.454 0 10z"></path><a xlink:href="#1_id:linkies"><image xlink:href="http://media.example.com/2_id.jpg"></image></a><image href="http://media.example.com/3_id.jpg"></image></svg></soup-body></soup-html>
+  <soup-html><soup-body xmlns="http://www.w3.org/1999/xhtml"><br /><svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" height="20" width="38" style="background-color: red;"><path fill="#000" fill-rule="nonzero" d="M0 10c0 .546.414.983.932.983h33.887l-6.954 7.337a1.015 1.015 0 0 0 0 1.39.892.892 0 0 0 1.317 0l8.545-9.015a1.023 1.023 0 0 0 0-1.39L29.182.29a.892.892 0 0 0-1.317 0 1.015 1.015 0 0 0 0 1.39l6.954 7.337H.932C.414 9.017 0 9.454 0 10z"/><a xlink:href="#1_id:linkies"><image width="100" height="100" xlink:href="http://media.example.com/2_id.jpg"/></a><image width="100" height="100" href="http://media.example.com/3_id.jpg"/></svg></soup-body></soup-html>
 </soup-chapter>
 `
 
@@ -61,7 +61,7 @@ exports[`tests/markup.test.js TAP markup - render xhtml > markup render xhtml st
 
 exports[`tests/markup.test.js TAP markup - svg > markup svg 1`] = `
 Object {
-  "content": "<soup-body><br><svg xmlns=\\"http://www.w3.org/2000/svg\\" height=\\"20\\" width=\\"38\\" style=\\"background-color: red;\\"><path fill=\\"#000\\" fill-rule=\\"nonzero\\" d=\\"M0 10c0 .546.414.983.932.983h33.887l-6.954 7.337a1.015 1.015 0 0 0 0 1.39.892.892 0 0 0 1.317 0l8.545-9.015a1.023 1.023 0 0 0 0-1.39L29.182.29a.892.892 0 0 0-1.317 0 1.015 1.015 0 0 0 0 1.39l6.954 7.337H.932C.414 9.017 0 9.454 0 10z\\"></path><a xlink:href=\\"#1_id:linkies\\"><image xlink:href=\\"http://media.example.com/2_id.jpg\\"></image></a><image href=\\"http://media.example.com/3_id.jpg\\"></image></svg></soup-body>",
+  "content": "<soup-body xmlns=\\"http://www.w3.org/1999/xhtml\\"><br /><svg xmlns:xlink=\\"http://www.w3.org/1999/xlink\\" xmlns=\\"http://www.w3.org/2000/svg\\" height=\\"20\\" width=\\"38\\" style=\\"background-color: red;\\"><path fill=\\"#000\\" fill-rule=\\"nonzero\\" d=\\"M0 10c0 .546.414.983.932.983h33.887l-6.954 7.337a1.015 1.015 0 0 0 0 1.39.892.892 0 0 0 1.317 0l8.545-9.015a1.023 1.023 0 0 0 0-1.39L29.182.29a.892.892 0 0 0-1.317 0 1.015 1.015 0 0 0 0 1.39l6.954 7.337H.932C.414 9.017 0 9.454 0 10z\\"/><a xlink:href=\\"#1_id:linkies\\"><image width=\\"100\\" height=\\"100\\" xlink:href=\\"http://media.example.com/2_id.jpg\\"/></a><image width=\\"100\\" height=\\"100\\" href=\\"http://media.example.com/3_id.jpg\\"/></svg></soup-body>",
   "id": "1_id",
   "inLanguage": "en",
   "links": Array [],

@@ -1,12 +1,7 @@
 import validDataUrl from "valid-data-url";
 
-export function attributes(node, file) {
+export function src(node, file) {
   const { base, path } = file;
-  if (node.hasAttribute("id")) {
-    node.setAttribute("id", base.id(node.getAttribute("id"), path));
-  }
-  // All src attributes that are left unsanitized should be valid media references
-  // All src urls must be relative. This will have to be improved once we start expanding our format support
   if (
     node.hasAttribute("src") &&
     !base.full(node.getAttribute("src"), path) &&
@@ -25,7 +20,10 @@ export function attributes(node, file) {
   if (node.hasAttribute("srcset")) {
     node.setAttribute("srcset", file.srcset(node.getAttribute("srcset")));
   }
+}
 
+export function href(node, file) {
+  const { base, path } = file;
   // There are two types of href attributes that remain: links (which become internal id refs) and SVG images
   if (node.hasAttribute("href") && !validDataUrl(node.getAttribute("href"))) {
     const type = node.localName === "image" ? "media" : "link";
@@ -50,4 +48,14 @@ export function attributes(node, file) {
       )
     );
   }
+}
+
+export function attributes(node, file) {
+  const { base, path } = file;
+  if (node.hasAttribute("id")) {
+    node.setAttribute("id", base.id(node.getAttribute("id"), path));
+  }
+
+  src(node, file);
+  href(node, file);
 }

@@ -1,7 +1,8 @@
 import { css } from "./css.js";
 import createDOMPurify from "dompurify";
-import validDataUrl from "valid-data-url";
 import { JSDOM } from "jsdom";
+import { src } from "./attributes.js";
+import validDataUrl from "valid-data-url";
 
 const purifyConfig = {
   KEEP_CONTENT: false,
@@ -12,10 +13,42 @@ const purifyConfig = {
   FORBID_ATTR: ["srcset", "action", "background", "poster"],
 };
 
+function href(node, file) {
+  const { base, path } = file;
+  if (
+    node.hasAttribute("href") &&
+    !validDataUrl(node.getAttribute("href")) &&
+    !node.getAttribute("href").startsWith("#")
+  ) {
+    node.setAttribute(
+      "href",
+      base.transform(node.getAttribute("href"), path, "media")
+    );
+  }
+  // then there is xlink:href on images
+  if (
+    node.getAttributeNS("http://www.w3.org/1999/xlink", "href") &&
+    !validDataUrl(
+      node.getAttributeNS("http://www.w3.org/1999/xlink", "href")
+    ) &&
+    !node.getAttributeNS("http://www.w3.org/1999/xlink", "href").startsWith("#")
+  ) {
+    node.setAttributeNS(
+      "http://www.w3.org/1999/xlink",
+      "href",
+      base.transform(
+        node.getAttributeNS("http://www.w3.org/1999/xlink", "href"),
+        path,
+        "media"
+      )
+    );
+  }
+}
+
 // In theory this should work for SVG images as well.
 export async function purify(file) {
-  const { value, path, contentType = "text/html", id } = file;
-  const resourceURL = new URL(path, "https://example.com/");
+  const { value, path, contentType = "text/html", id, base } = file;
+  let links = [id];
   let dom;
   try {
     dom = new JSDOM(value, {
@@ -23,6 +56,7 @@ export async function purify(file) {
       url: "http://localhost",
     });
   } catch (err) {
+    console.log(err);
     dom = new JSDOM(value, {
       contentType: "text/html",
       url: "http://localhost",
@@ -63,34 +97,28 @@ export async function purify(file) {
     }
   });
   DOMPurify.addHook("afterSanitizeAttributes", function (node) {
-    // All src urls must be relative. This will have to be improved once we start expanding our format support
-    // In theory this here bit breaks external links and images in sanitized svgs. We rename all files upon extraction so are going to need to process all _external_ hrefs to use the new names and urls
-    if (
-      node.hasAttribute("src") &&
-      !testPath(node.getAttribute("src"), resourceURL) &&
-      !validDataUrl(node.getAttribute("src"))
-    ) {
-      node.remove();
-    }
     if (
       node.tagName.toLowerCase() === "link" &&
       node.hasAttribute("href") &&
       node.getAttribute("rel") === "stylesheet" &&
-      !testPath(node.getAttribute("href"), resourceURL)
+      !base.full(node.getAttribute("href"), path)
     ) {
       node.remove();
+    } else if (
+      node.tagName.toLowerCase() === "link" &&
+      node.hasAttribute("href") &&
+      node.getAttribute("rel") === "stylesheet" &&
+      base.full(node.getAttribute("href"), path)
+    ) {
+      links = links.concat(file.stylesheet(node.getAttribute("href")));
     }
+    src(node, file);
+    href(node, file);
   });
   const clean = DOMPurify.sanitize(
     window.document.documentElement,
     purifyConfig
   );
+  window.document.documentElement.dataset.stylesheets = links.join(" ");
   return dom.serialize(clean);
-}
-
-function testPath(path, resourceURL) {
-  const base = new URL(resourceURL, "http://example.com");
-  const url = new URL(path, base);
-  // If the hostname doesn't equal that of the base URL we provided, then it is a full URL and so not supported
-  return url.hostname === base.hostname;
 }

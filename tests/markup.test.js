@@ -37,7 +37,7 @@ tap.test("markup - svg", async (test) => {
     <head><title>SVG test</title></head>
     <body>
     <br />
-<svg style="position: fixed; background-color: red;" width="38" height="20" xmlns="http://www.w3.org/2000/svg"><path d="M0 10c0 .546.414.983.932.983h33.887l-6.954 7.337a1.015 1.015 0 0 0 0 1.39.892.892 0 0 0 1.317 0l8.545-9.015a1.023 1.023 0 0 0 0-1.39L29.182.29a.892.892 0 0 0-1.317 0 1.015 1.015 0 0 0 0 1.39l6.954 7.337H.932C.414 9.017 0 9.454 0 10z" fill-rule="nonzero" fill="#000" style="}background-color: red;}" /><a xlink:href="#linkies"><image xlink:href="/path/to/img.jpg" /></a><image href="/path/to/second-img.jpg" /></svg></body></html>`,
+<svg style="position: fixed; background-color: red;" width="38" height="20" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M0 10c0 .546.414.983.932.983h33.887l-6.954 7.337a1.015 1.015 0 0 0 0 1.39.892.892 0 0 0 1.317 0l8.545-9.015a1.023 1.023 0 0 0 0-1.39L29.182.29a.892.892 0 0 0-1.317 0 1.015 1.015 0 0 0 0 1.39l6.954 7.337H.932C.414 9.017 0 9.454 0 10z" fill-rule="nonzero" fill="#000" style="}background-color: red;}" /><a xlink:href="#linkies"><image xlink:href="/path/to/img.jpg" height="100" width="100" /></a><image href="/path/to/second-img.jpg" height="100" width="100"  /></svg></body></html>`,
     path: "chapter/path/svg.xhtml",
     contentType: "application/xhtml+xml",
     id: names.id("chapter/path/svg.xhtml"),
