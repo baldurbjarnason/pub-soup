@@ -25,6 +25,14 @@ const replaceRootsWithCustomElements = (options = {}) => {
   };
 };
 
+export async function uploads(cssString, cssURL, file) {
+  const result = await postcss([
+    purify(file),
+    prefixer({ prefix: `[data-stylesheets~="${cssURL}"]` }),
+  ]).process(cssString, { from: file.path, to: file.path });
+  return result.css;
+}
+
 export async function css(cssString, cssURL, file) {
   const result = await postcss([
     purify(file),

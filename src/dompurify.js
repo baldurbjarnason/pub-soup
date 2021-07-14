@@ -1,4 +1,4 @@
-import { css } from "./css.js";
+import { uploads } from "./css.js";
 import createDOMPurify from "dompurify";
 import { JSDOM } from "jsdom";
 import { src } from "./attributes.js";
@@ -65,7 +65,7 @@ export async function purify(file) {
   const window = dom.window;
   for (const node of window.document.querySelectorAll("[style]")) {
     try {
-      const styles = await css(
+      const styles = await uploads(
         `body {${node.getAttribute("style")}}`,
         id,
         file
@@ -77,7 +77,7 @@ export async function purify(file) {
   }
   for (const node of window.document.querySelectorAll("style")) {
     try {
-      node.textContent = await css(node.textContent, id, file);
+      node.textContent = await uploads(node.textContent, id, file);
     } catch (err) {
       node.textContent = "";
     }
