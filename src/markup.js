@@ -11,6 +11,7 @@ const purifyConfig = {
   WHOLE_DOCUMENT: true,
   ADD_TAGS: ["link"],
   FORBID_TAGS: ["meta", "form"],
+  ADD_ATTR: ["my-attr"],
   FORBID_ATTR: ["action", "background", "poster"],
 };
 
@@ -108,6 +109,11 @@ export async function markup(file, { names = new Names() } = {}) {
       node.remove();
     }
     attributes(node, file, path);
+  });
+  DOMPurify.addHook("afterSanitizeElements", function (node) {
+    if (node.tagName && node.tagName.toLowerCase() === "img") {
+      node.setAttribute("loading", "lazy");
+    }
   });
   DOMPurify.sanitize(window.document.documentElement, purifyConfig);
   const soupBody = window.document.createElement("soup-body");
