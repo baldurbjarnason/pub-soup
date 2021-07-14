@@ -1,5 +1,4 @@
 import { Names } from "./names.js";
-import { extname, basename } from "path";
 import srcset from "srcset";
 
 export class Base {

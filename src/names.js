@@ -1,4 +1,4 @@
-import { extname, basename } from "path";
+import { extname } from "path";
 
 export class Names {
   constructor(nanoid = () => "_id") {
