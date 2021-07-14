@@ -27,7 +27,7 @@ tap.test("dompurify - svg", async (test) => {
 <svg style="position: fixed; background-color: red;" width="38" height="20" xmlns="http://www.w3.org/2000/svg"><path d="M0 10c0 .546.414.983.932.983h33.887l-6.954 7.337a1.015 1.015 0 0 0 0 1.39.892.892 0 0 0 1.317 0l8.545-9.015a1.023 1.023 0 0 0 0-1.39L29.182.29a.892.892 0 0 0-1.317 0 1.015 1.015 0 0 0 0 1.39l6.954 7.337H.932C.414 9.017 0 9.454 0 10z" fill-rule="nonzero" fill="#000" style="}background-color: red;}" /></svg>`,
     base,
     names,
-    id: names.get("chapter/path/page.svg"),
+    id: names.id("chapter/path/page.svg"),
     path: "chapter/path/page.svg",
     contentType: "image/svg+xml",
   });
@@ -61,7 +61,7 @@ tap.test("dompurify - html", async (test) => {
     </body></html>`,
     base,
     names,
-    id: names.get("chapter/path/page.html"),
+    id: names.id("chapter/path/page.html"),
     path: "chapter/path/page.html",
   });
   const result = await purify(file);
@@ -104,7 +104,7 @@ tap.test("dompurify - xhtml", async (test) => {
     </body></html>`,
     base,
     names,
-    id: names.get("chapter/path/page.html"),
+    id: names.id("chapter/path/page.html"),
     path: "chapter/path/page.html",
     contentType: "application/xhtml+xml",
   });
@@ -142,7 +142,7 @@ tap.test("dompurify - invalid xhtml", async (test) => {
     </body></html>`,
     base,
     names,
-    id: names.get("chapter/path/page.html"),
+    id: names.id("chapter/path/page.html"),
     path: "chapter/path/page.html",
     contentType: "application/xhtml+xml",
   });

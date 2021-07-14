@@ -14,7 +14,7 @@ const purifyConfig = {
   FORBID_ATTR: ["action", "background", "poster"],
 };
 
-export async function purify(file, { names = new Names() } = {}) {
+export async function markup(file, { names = new Names() } = {}) {
   const { value, path, contentType = "text/html", id } = file;
   let styles = [];
   let links = [];
@@ -54,7 +54,6 @@ export async function purify(file, { names = new Names() } = {}) {
         id,
         file
       );
-      console.log(id, styles);
       node.setAttribute("style", styles.split(/{|}/)[1]);
     } catch (err) {
       node.removeAttribute("style");

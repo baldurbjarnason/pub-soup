@@ -83,7 +83,7 @@ tap.test("base - srcset", async (test) => {
       "images/Moby-Dick_FE_title_page-hd.jpg 2x, images/Moby-Dick_FE_title_page-phone.jpg 100w, images/Moby-Dick_FE_title_page-phone-HD.jpg 100w 2x",
       "chapter/path.xhtml"
     ),
-    "http://media.example.com/1_id 2x, http://media.example.com/2_id 100w, http://media.example.com/3_id 100w 2x"
+    "http://media.example.com/1_id.jpg 2x, http://media.example.com/2_id.jpg 100w, http://media.example.com/3_id.jpg 100w 2x"
   );
 });
 
@@ -119,11 +119,11 @@ tap.test("base - transform", async (test) => {
   );
   test.equal(
     base.transform("relative/path/src.img", "chapter/path.xhtml", "media"),
-    "http://media.example.com/2_id"
+    "http://media.example.com/2_id.img"
   );
   test.equal(
     base.transform("relative/path/src.css", "chapter/path.xhtml", "style"),
-    "http://style.example.com/3_id"
+    "http://style.example.com/3_id.css"
   );
   test.equal(
     base.transform("http://img.example.com/path/src.img", "chapter/path.xhtml"),

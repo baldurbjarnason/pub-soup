@@ -36,7 +36,6 @@ export async function purify(file) {
         id,
         file
       );
-      console.log(id, styles);
       node.setAttribute("style", styles.split(/{|}/)[1]);
     } catch (err) {
       node.removeAttribute("style");

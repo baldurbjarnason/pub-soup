@@ -1,4 +1,5 @@
 import { Names } from "./names.js";
+import { extname, basename } from "path";
 import srcset from "srcset";
 
 export class Base {
@@ -28,7 +29,7 @@ export class Base {
     const full = this.full(path, fileBase);
     let id;
     if (full && type === "link") {
-      id = this.names.get(full);
+      id = this.names.id(full);
       // We ignore query parameters for internal references.
       const hash = new URL(
         path,
@@ -53,7 +54,7 @@ export class Base {
   }
 
   id(hash, fileBase) {
-    return `${this.names.get(fileBase)}:${hash}`;
+    return `${this.names.id(fileBase)}:${hash}`;
   }
 
   href(url) {

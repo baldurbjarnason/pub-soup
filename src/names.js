@@ -1,3 +1,5 @@
+import { extname, basename } from "path";
+
 export class Names {
   constructor(nanoid = () => "_id") {
     this.map = new Map();
@@ -5,12 +7,22 @@ export class Names {
     this.get = this.getId;
   }
 
-  getId(path) {
-    if (this.map.get(path)) {
-      return this.map.get(path);
-    } else {
+  id(path) {
+    return this.getId(path, true);
+  }
+
+  // Always include file type suffix?
+  getId(path, id = false) {
+    const ext = extname(path);
+    let name = this.map.get(path);
+    if (!name) {
       this.map.set(path, this.nanoid());
-      return this.map.get(path);
+      name = this.map.get(path);
+    }
+    if (id) {
+      return name;
+    } else {
+      return name + ext;
     }
   }
 }
