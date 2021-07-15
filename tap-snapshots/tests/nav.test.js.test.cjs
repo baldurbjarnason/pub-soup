@@ -297,7 +297,7 @@ Object {
 `
 
 exports[`tests/nav.test.js TAP render ToC - epub2 > render ToC - epub2 1`] = `
-<soup-toc>
+<soup-toc role="doc-toc">
   <nav aria-labelledby="soup-toc-heading" lang="en">
     <h1 id="soup-toc-heading">THE CONTENTS</h1>
     <ol>

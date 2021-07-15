@@ -1,7 +1,7 @@
 export function render(file, { metadata }) {
   const nav = file.value;
   const lang = nav.inLanguage;
-  return `<soup-toc>
+  return `<soup-toc role="doc-toc">
   <nav aria-labelledby="soup-toc-heading" lang="${lang}">
     <h1 id="soup-toc-heading">${nav.heading}</h1>
     <ol>${nav.children.map((child) => renderChild(child, file)).join("")}
