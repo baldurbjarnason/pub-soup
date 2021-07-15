@@ -16,7 +16,7 @@ const purifyConfig = {
 };
 
 export async function markup(file, { names = new Names() } = {}) {
-  const { value, path, contentType = "text/html", id } = file;
+  const { value, path, contentType = "text/html", id, rel = [] } = file;
   let styles = [];
   let links = [];
   const resourceURL = new URL(path, "https://example.com/");
@@ -127,6 +127,7 @@ export async function markup(file, { names = new Names() } = {}) {
     id,
     title,
     inLanguage,
+    rel,
   };
 }
 

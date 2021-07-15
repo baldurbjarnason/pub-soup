@@ -7,15 +7,15 @@ export function renderMarkup(markup, linear = true) {
   return `<soup-chapter data-stylesheets="${stylesheets.join(" ")}" id="${
     markup.id
   }" data-path="${markup.path}" data-title="${markup.title}" ${
-    markup.inLanguage && `lang="${markup.inLanguage}"`
-  }${nonLinearAttributes(linear)}>
+    (markup.inLanguage && `lang="${markup.inLanguage}"`) || ""
+  }${nonLinearAttributes(linear)} data-rel="${markup.rel.join(" ")}">
   <soup-html>${markup.content}</soup-html>
 </soup-chapter>`;
 }
 
 function nonLinearAttributes(linear) {
   if (linear) {
-    return "";
+    return ``;
   } else {
     return ' data-linear="false" hidden';
   }
@@ -24,7 +24,7 @@ function nonLinearAttributes(linear) {
 export function renderImage(file) {
   return `<soup-image id="${file.id}" data-title="${file.title}" data-path="${
     file.path
-  }"${nonLinearAttributes(true)}>
+  }"${nonLinearAttributes(true)} data-rel="${file.rel.join(" ")}">
   <soup-html><img src="${file.href}" alt="${
     file.title
   }" loading="lazy"></soup-html>
