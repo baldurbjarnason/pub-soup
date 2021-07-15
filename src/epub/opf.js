@@ -1,5 +1,7 @@
 import cheerio from "cheerio";
 
+// This should be rewritten to use a proper xml parser.
+
 const options = {
   withDomLvl1: true,
   normalizeWhitespace: false,
@@ -10,11 +12,11 @@ const options = {
 export function opf(text, opfPath) {
   const $ = cheerio.load(text, options);
   const book = {
-    type: "Publication",
+    "@context": ["https://schema.org", "https://www.w3.org/ns/wp-context"],
+    type: ["Book"],
     links: [],
     resources: [],
     readingOrder: [],
-    json: {},
   };
   book.inLanguage = $("dc\\:language").text();
   const titles = [];
@@ -25,8 +27,8 @@ export function opf(text, opfPath) {
 
   const packageElement = $("package");
   const idforid = packageElement.attr("unique-identifier");
-  book.identifier = $(`#${idforid}`).text();
-  book.json.epubVersion = packageElement.attr("version");
+  book.id = $(`#${idforid}`).text();
+  book._epubVersion = packageElement.attr("version");
   const ncxId = $("spine").attr("toc");
   const coverId = $('[name="cover"]').attr("content");
   book.resources = $("manifest > item")
@@ -105,7 +107,7 @@ export function opf(text, opfPath) {
       };
     })
     .toArray();
-  if (book.json.epubVersion !== "2.0") {
+  if (book._epubVersion !== "2.0") {
     $('meta[property="role"]').each((index, role) => {
       const node = $(role);
       const id = node.attr("refines");
@@ -114,6 +116,23 @@ export function opf(text, opfPath) {
         contributors.find((item) => item.id === id.replace("#", ""));
       refined.role = node.text();
     });
+    if ($('meta[property="dcterms\\:modified"]').text()) {
+      book.dateModified = $('meta[property="dcterms\\:modified"]').text();
+    }
+    if ($("metadata dc\\:date").text()) {
+      book.datePublished = $("metadata dc\\:date").text();
+    }
+  } else if (book._epubVersion === "2.0") {
+    if ($(`metadata dc\\:date[opf\\:event="publication"]`).text()) {
+      book.datePublished = $(
+        `metadata dc\\:date[opf\\:event="publication"]`
+      ).text();
+    }
+    if ($(`metadata dc\\:date[opf\\:event="modification"]`).text()) {
+      book.dateModified = $(
+        `metadata dc\\:date[opf\\:event="publication"]`
+      ).text();
+    }
   }
   book.author = creators
     .filter((creator) => creator.role === "aut")

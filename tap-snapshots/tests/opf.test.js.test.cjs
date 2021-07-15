@@ -7,6 +7,11 @@
 'use strict'
 exports[`tests/opf.test.js TAP parseOPF - epub2 > parseOPF - epub2 1`] = `
 Object {
+  "_epubVersion": "2.0",
+  "@context": Array [
+    "https://schema.org",
+    "https://www.w3.org/ns/wp-context",
+  ],
   "author": Array [
     "Lewis Carroll",
   ],
@@ -20,17 +25,16 @@ Object {
   "creator": Array [
     "Fake Author For Testing",
   ],
+  "dateModified": "2017-08-30",
+  "datePublished": "2017-08-30",
   "editor": Array [
     "Fake Editor For Testing",
   ],
-  "identifier": "http://www.gutenberg.org/ebooks/55456",
+  "id": "http://www.gutenberg.org/ebooks/55456",
   "illustrator": Array [
     "John Tenniel",
   ],
   "inLanguage": "fr",
-  "json": Object {
-    "epubVersion": "2.0",
-  },
   "links": Array [],
   "name": "Aventures d'Alice au pays des merveilles",
   "publisher": Array [
@@ -396,12 +400,19 @@ Object {
   "translator": Array [
     "Henri Bué",
   ],
-  "type": "Publication",
+  "type": Array [
+    "Book",
+  ],
 }
 `
 
 exports[`tests/opf.test.js TAP parseOPF - epub3 > parseOPF - epub3 1`] = `
 Object {
+  "_epubVersion": "3.0",
+  "@context": Array [
+    "https://schema.org",
+    "https://www.w3.org/ns/wp-context",
+  ],
   "author": Array [],
   "colorist": Array [
     "Fake Colourist",
@@ -415,17 +426,16 @@ Object {
     "Charles Madison Curry",
     "Erle Elsworth Clippinger",
   ],
+  "dateModified": "2010-02-17T04:39:13Z",
+  "datePublished": "2008-05-20",
   "editor": Array [
     "Fake Editor",
   ],
-  "identifier": "http://www.gutenberg.org/ebooks/25545",
+  "id": "http://www.gutenberg.org/ebooks/25545",
   "illustrator": Array [
     "Fake Illustrator",
   ],
   "inLanguage": "en",
-  "json": Object {
-    "epubVersion": "3.0",
-  },
   "links": Array [],
   "name": String(
     Children's Literature
@@ -506,6 +516,8 @@ Object {
   "translator": Array [
     "Fake Translator",
   ],
-  "type": "Publication",
+  "type": Array [
+    "Book",
+  ],
 }
 `
