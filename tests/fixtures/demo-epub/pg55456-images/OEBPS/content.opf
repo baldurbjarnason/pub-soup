@@ -15,7 +15,7 @@
     <dc:title>Aventures d'Alice au pays des merveilles</dc:title>
     <dc:language xsi:type="dcterms:RFC4646">fr</dc:language>
     <dc:date opf:event="publication">2017-08-30</dc:date>
-    <dc:date opf:event="conversion">2018-10-27T06:59:39.442041+00:00</dc:date>
+    <dc:date opf:event="modification">2018-10-27T06:59:39.442041+00:00</dc:date>
     <dc:source>http://www.gutenberg.org/files/55456/55456-h/55456-h.htm</dc:source>
     <meta name="cover" content="item1"/>
   </metadata>
