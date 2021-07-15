@@ -1,7 +1,9 @@
 import { Base } from "./base.js";
+import EventEmitter from "events";
 
-export class ZipFactory {
+export class ZipFactory extends EventEmitter {
   constructor(env) {
+    super();
     this.env = env;
   }
 
@@ -50,7 +52,7 @@ export class Zip {
     return content.toString();
   }
 
-  async datafile(name) {
+  async dataFile(name) {
     const file = this.directory.files.find((d) => d.path === name);
     return file.buffer();
   }
