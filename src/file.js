@@ -1,10 +1,11 @@
 export class File {
-  constructor({ value, path, base, contentType, id }) {
+  constructor({ value, path, base, contentType, id, rel = [] }) {
     this.value = value;
     this.path = path;
     this.base = base;
     this.contentType = contentType;
     this.id = id;
+    this.rel = rel;
   }
 
   src(path) {

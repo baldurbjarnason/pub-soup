@@ -1,13 +1,23 @@
+import { renderMarkup } from "./stringify-markup.js";
 export function render(file, { metadata }) {
   const nav = file.value;
   const lang = nav.inLanguage;
-  return `<soup-toc role="doc-toc">
-  <nav aria-labelledby="soup-toc-heading" lang="${lang}">
+  const content = `<soup-body>
+  <nav aria-labelledby="soup-toc-heading" lang="${lang}" role="doc-toc">
     <h1 id="soup-toc-heading">${nav.heading}</h1>
     <ol>${nav.children.map((child) => renderChild(child, file)).join("")}
     </ol>
-  </nav>
-</soup-toc>`;
+  </nav></soup-body>`;
+  return renderMarkup(
+    {
+      ...file,
+      content,
+      links: [],
+      title: nav.heading,
+      rel: ["contents"],
+    },
+    false
+  );
 }
 
 function renderChild(child, file) {

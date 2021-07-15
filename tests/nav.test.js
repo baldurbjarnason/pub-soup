@@ -112,7 +112,12 @@ tap.test("render ToC - epub2", async (test) => {
     },
     { names }
   );
-  const file = new File({ value: results[0], path: "OEBPS/toc.ncx", base });
+  const file = new File({
+    value: results[0],
+    path: "OEBPS/toc.ncx",
+    base,
+    id: names.id("OEBPS/toc.ncx"),
+  });
   const result = render(file, { metadata: { inLanguage: "en" } });
   test.matchSnapshot(result, "render ToC - epub2");
 });
