@@ -5,9 +5,8 @@ export * from "./file.js";
 export * from "./names.js";
 export { Base } from "./base.js";
 
-export class ZipFactory extends EventEmitter {
+export class ZipFactory {
   constructor(env) {
-    super();
     this.env = env;
   }
 
@@ -32,8 +31,9 @@ export class ZipFactory extends EventEmitter {
   }
 }
 
-export class Zip {
+export class Zip extends EventEmitter {
   constructor(directory, env) {
+    super();
     this.directory = directory;
     this.files = {};
     this.names = env.names;

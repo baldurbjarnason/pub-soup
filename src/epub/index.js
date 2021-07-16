@@ -27,7 +27,7 @@ const JSTYPES = [
   "application/ecmascript",
 ];
 
-function isTextFile(type) {
+export function isTextFile(type) {
   if (
     type.includes("text") ||
     type.includes("xml") ||
@@ -95,7 +95,7 @@ export class Epub extends Zip {
 
   async contents() {
     const resource = this.metadata.resources.find((resource) => {
-      !resource.rel.includes("contents") && resource.rel.includes("ncx");
+      return !resource.rel.includes("contents") && resource.rel.includes("ncx");
     });
     const file = await this.getTextFile(resource);
     this.contents = new File({
@@ -122,10 +122,15 @@ export class Epub extends Zip {
 
   async processMarkup(resource) {
     const file = await this.getTextFile(resource);
-    return markup(file);
+    const result = await markup(file);
+    this.chapters.push(result);
+    return result;
   }
 
   markup() {
+    if (!this.chapters) {
+      this.chapters = [];
+    }
     const chapterTasks = this.metadata.resources
       .filter((resource) => {
         return (
@@ -145,14 +150,14 @@ export class Epub extends Zip {
     const file = await this.getTextFile(resource);
     if (file.contentType === "text/css") {
       file.path = this.names.get(file.path);
-      file.value = css(file.value, file.path, file);
+      file.value = await css(file.value, file.path, file);
       return file;
     } else if (
       file.contentType === "text/html" ||
       file.contentType === "application/xhtml+xml" ||
       file.contentType === "image/svg+xml"
     ) {
-      file.value = purify(file);
+      file.value = await purify(file);
       file.path = this.names.get(file.path);
       return file;
     } else if (!JSTYPES.includes(file.contentType)) {
@@ -162,26 +167,21 @@ export class Epub extends Zip {
   }
 
   async processBinaryFile(resource) {
-    let file;
-    if (this.files[resource.url]) {
-      file = this.files[resource.url];
-    } else {
-      file = new File({
-        value: await this.dataFile(resource.url),
-        path: resource.url,
-        contentType: resource.encodingFormat,
-        base: this.base,
-        id: this.names.id(resource.url),
-        rel: [].concat(resource.rel),
-      });
-    }
+    const file = new File({
+      value: await this.dataFile(resource.url),
+      path: resource.url,
+      contentType: resource.encodingFormat,
+      base: this.base,
+      id: this.names.id(resource.url),
+      rel: [].concat(resource.rel),
+    });
     if (!JSTYPES.includes(file.contentType)) {
       file.path = this.names.get(file.path);
       return file;
     }
   }
 
-  async upload({ worker }) {
+  upload({ worker }) {
     const uploads = this.metadata.resources.map((resource) => {
       return async () => {
         if (isTextFile(resource.encodingFormat)) {
@@ -202,8 +202,12 @@ Epub.prototype.process = async function* process({
 }) {
   this.base = new this.Base(url, this.env);
   const opfFile = await this.task("getOPF");
-  worker(opfFile);
-  yield this.task("opf", opfFile);
+  const opfResult = new File({
+    value: await this.task("opf", opfFile),
+    contentType: "application/json",
+    path: "index.json",
+  });
+  yield opfResult;
   await this.task("contents");
   const queue = new PQueue({ concurrency });
   let count = 0;

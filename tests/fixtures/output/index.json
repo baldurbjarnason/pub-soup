@@ -1,0 +1,78 @@
+{
+  "@context": [
+    "https://schema.org",
+    "https://www.w3.org/ns/wp-context"
+  ],
+  "type": [
+    "Book"
+  ],
+  "links": [],
+  "resources": [
+    {
+      "url": "http://media.example.com/test.xhtml",
+      "rel": [],
+      "encodingFormat": "application/xhtml+xml"
+    },
+    {
+      "url": "http://media.example.com/cover.xhtml",
+      "rel": [],
+      "encodingFormat": "application/xhtml+xml"
+    },
+    {
+      "url": "http://media.example.com/style.css",
+      "rel": [],
+      "encodingFormat": "text/css"
+    },
+    {
+      "url": "http://media.example.com/modernizr-1.6.min.js",
+      "rel": [],
+      "encodingFormat": "text/javascript"
+    },
+    {
+      "url": "http://media.example.com/content.ncx",
+      "rel": [
+        "ncx"
+      ],
+      "encodingFormat": "application/x-dtbncx+xml"
+    },
+    {
+      "url": "http://media.example.com/cover.jpg",
+      "rel": [
+        "cover"
+      ],
+      "encodingFormat": "image/jpeg"
+    },
+    {
+      "type": "LinkedResource",
+      "rel": [
+        "alternate",
+        "describedby"
+      ],
+      "url": "http://media.example.com/content.opf",
+      "encodingFormat": "application/oebps-package+xml"
+    }
+  ],
+  "readingOrder": [
+    {
+      "url": "http://media.example.com/test.xhtml",
+      "rel": [],
+      "encodingFormat": "application/xhtml+xml"
+    }
+  ],
+  "inLanguage": "en",
+  "name": "ePub Experiment 1",
+  "id": "tag:baldur.bjarnason@gmail.com,2010-09:test/1",
+  "_epubVersion": "2.0",
+  "creator": [],
+  "publisher": [
+    "Baldur Bjarnason"
+  ],
+  "author": [
+    "Baldur Bjarnason"
+  ],
+  "translator": [],
+  "illustrator": [],
+  "editor": [],
+  "colorist": [],
+  "contributor": []
+}

@@ -12,7 +12,7 @@ import { embed } from "../../metadata.js";
 export function stringify(epub) {
   let strings = [
     `<script type="application/ld+json">
-${embed(epub)}
+${JSON.stringify(embed(epub))}
     </script>`,
   ];
   // Render nav
@@ -26,7 +26,7 @@ ${embed(epub)}
     const chapter = epub.chapters.find((file) => file.path === resource);
     strings = strings.concat(renderMarkup(chapter));
   }
-  const nonLinear = epub.chapter.filter(
+  const nonLinear = epub.chapters.filter(
     (file) => !resources.includes(file.path)
   );
 
@@ -35,8 +35,8 @@ ${embed(epub)}
     strings = strings.concat(renderMarkup(markup, false));
   }
   // render images from resources.
-  const images = epub.resources.filter((resource) =>
-    resource.url.includes("image")
+  const images = epub.metadata.resources.filter((resource) =>
+    resource.encodingFormat.includes("image")
   );
   for (const image of images) {
     const id = epub.names.id(image.url);
@@ -52,7 +52,7 @@ ${embed(epub)}
   }
 
   // render styles and stylesheets for head
-  const styles = epub.markup
+  const styles = epub.chapters
     .map((markup) => {
       const stylesheets = renderStylesheets(markup.links);
       const styles = renderStyles(markup.styles);

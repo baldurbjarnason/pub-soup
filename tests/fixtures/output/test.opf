@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" unique-identifier="dcidid" version="2.0">
+	<metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+		<dc:title>ePub Experiment 1</dc:title>
+		<dc:creator opf:role="aut" opf:file-as="Bjarnason, Baldur">Baldur Bjarnason</dc:creator>
+		<dc:date>2010-10-27</dc:date>
+		<dc:subject>Something</dc:subject>
+		<dc:identifier id="dcidid" opf:scheme="URI">tag:baldur.bjarnason@gmail.com,2010-09:test/1</dc:identifier>
+		<dc:language>en</dc:language>
+		<dc:description></dc:description>
+      	<dc:publisher>Baldur Bjarnason</dc:publisher>
+		<meta name="cover" content="image1" />
+	</metadata>
+	<manifest>
+		<item id="test" href="test.xhtml" media-type="application/xhtml+xml"/>
+		<item id="cover" href="cover.xhtml" media-type="application/xhtml+xml"/>
+		<item id="stylesheet" href="style.css" media-type="text/css"/>
+    	<item id="script" href="modernizr-1.6.min.js" media-type="text/javascript"/>
+		<item id="ncx" href="content.ncx" media-type="application/x-dtbncx+xml"/>
+   		<item id="image1" href="cover.jpg" media-type="image/jpeg" />
+	</manifest>
+	<spine toc="ncx">
+		<itemref idref="cover" linear="no"/>
+		<itemref idref="test" linear="yes"/>
+	</spine>
+	<guide>
+    	<reference type="cover" title="Cover" href="cover.xhtml"/>
+    </guide>
+</package>
