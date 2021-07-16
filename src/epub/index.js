@@ -73,7 +73,7 @@ export class Epub extends Zip {
   // Extract start position. Meaningless in a single page?
   async opf(file) {
     this.metadata = opf(file.value, file.path);
-    return toJSON(this.metadata);
+    return toJSON(this);
   }
 
   async getTextFile(resource) {
