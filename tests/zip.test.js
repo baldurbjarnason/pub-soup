@@ -7,11 +7,6 @@ import { readFile } from "fs/promises";
 import { join } from "path";
 import handler from "serve-handler";
 import * as http from "http";
-// import { fileURLToPath } from "url";
-// import * as fs from "fs";
-// import * as path from "path";
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename).replace(process.cwd() + "/", "");
 
 tap.afterEach(() => {
   td.reset();
