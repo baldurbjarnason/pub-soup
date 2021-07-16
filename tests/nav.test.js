@@ -1,8 +1,6 @@
 import { toc as parseToC } from "../src/epub/nav.js";
 import { render } from "../src/epub/stringify/stringify-nav.js";
-import { File } from "../src/file.js";
-import { Names } from "../src/names.js";
-import { Base } from "../src/base.js";
+import { File, Base, Names } from "../src/zip/index.js";
 import { readFile } from "fs/promises";
 import * as path from "path";
 import tap from "tap";

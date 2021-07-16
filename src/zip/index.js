@@ -1,6 +1,10 @@
 import { Base } from "./base.js";
 import EventEmitter from "events";
 
+export * from "./file.js";
+export * from "./names.js";
+export { Base } from "./base.js";
+
 export class ZipFactory extends EventEmitter {
   constructor(env) {
     super();
@@ -12,28 +16,22 @@ export class ZipFactory extends EventEmitter {
   }
 
   static async file(path) {
-    return new this.Archive(await this.env.unzipper.Open.file(path), this.env);
+    return new this.Archive(await this.env.unzip.file(path), this.env);
   }
 
   static async url(path) {
-    return new this.Archive(
-      await this.env.unzipper.Open.file(this.env.request, path),
-      this.env
-    );
+    return new this.Archive(await this.env.unzip.url(path), this.env);
   }
 
   static async s3(s3Client, config) {
     return new this.Archive(
-      await this.env.unzipper.Open.s3(s3Client, config),
+      await this.env.unzip.s3(s3Client, config),
       this.env
     );
   }
 
   static async buffer(data) {
-    return new this.Archive(
-      await this.env.unzipper.Open.buffer(data),
-      this.env
-    );
+    return new this.Archive(await this.env.unzip.buffer(data), this.env);
   }
 }
 

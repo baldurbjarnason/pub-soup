@@ -1,4 +1,4 @@
-import { Names } from "../src/names.js";
+import { Names } from "../src/zip/index.js";
 import tap from "tap";
 
 tap.test("names", async (test) => {

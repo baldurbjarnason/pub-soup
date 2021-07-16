@@ -1,5 +1,4 @@
-import { css } from "./css.js";
-import { Names } from "./names.js";
+import { css } from "../css.js";
 import { attributes } from "./attributes.js";
 import createDOMPurify from "dompurify";
 import { JSDOM } from "jsdom";
@@ -15,7 +14,7 @@ const purifyConfig = {
   FORBID_ATTR: ["action", "background", "poster"],
 };
 
-export async function markup(file, { names = new Names() } = {}) {
+export async function markup(file) {
   const { value, path, contentType = "text/html", id, rel = [] } = file;
   let styles = [];
   let links = [];

@@ -1,4 +1,4 @@
-import { uploads } from "./css.js";
+import { uploads } from "../css.js";
 import createDOMPurify from "dompurify";
 import { JSDOM } from "jsdom";
 import { src } from "./attributes.js";

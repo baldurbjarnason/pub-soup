@@ -1,7 +1,5 @@
 import { css } from "../src/css.js";
-import { File } from "../src/file.js";
-import { Base } from "../src/base.js";
-import { Names } from "../src/names.js";
+import { File, Base, Names } from "../src/zip/index.js";
 import tap from "tap";
 
 tap.test("css", async (test) => {

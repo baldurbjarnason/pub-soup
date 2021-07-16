@@ -1,7 +1,5 @@
-import { markup } from "../src/markup.js";
-import { File } from "../src/file.js";
-import { Names } from "../src/names.js";
-import { Base } from "../src/base.js";
+import { markup } from "../src/parsers/markup.js";
+import { File, Base, Names } from "../src/zip/index.js";
 import {
   renderMarkup,
   renderStyles,

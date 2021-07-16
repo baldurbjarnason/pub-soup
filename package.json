@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "healthier && prettier --write --plugin-search-dir=. '**/*.{js,json,css,yml,svelte}'",
     "prepublishOnly": "npm run lint",
-    "test": "c8 tap --no-cov tests/*.test.js && c8 report --reporter=lcov",
+    "test": "c8 --all tap --no-cov tests/*.test.js && c8 report --reporter=lcov",
     "test-single": "c8 tap --no-cov",
     "snapshots": "TAP_SNAPSHOT=1 npm run test"
   },
@@ -27,6 +27,7 @@
     "jsdom": "^16.6.0",
     "mime": "^2.5.2",
     "nanoid": "^3.1.23",
+    "p-queue": "^7.1.0",
     "postcss": "^8.3.5",
     "postcss-prefix-selector": "^1.10.0",
     "postcss-selector-parser": "^6.0.6",
