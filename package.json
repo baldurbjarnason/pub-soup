@@ -43,6 +43,7 @@
     "healthier": "^4.0.0",
     "prettier": "^2.3.2",
     "tap": "^15.0.9",
+    "testdouble": "^3.16.1",
     "typescript": "^4.3.5"
   }
 }

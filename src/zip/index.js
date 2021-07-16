@@ -11,26 +11,26 @@ export class ZipFactory extends EventEmitter {
     this.env = env;
   }
 
-  static get Archive() {
+  get Archive() {
     return Zip;
   }
 
-  static async file(path) {
+  async file(path) {
     return new this.Archive(await this.env.unzip.file(path), this.env);
   }
 
-  static async url(path) {
+  async url(path) {
     return new this.Archive(await this.env.unzip.url(path), this.env);
   }
 
-  static async s3(s3Client, config) {
+  async s3(s3Client, config) {
     return new this.Archive(
       await this.env.unzip.s3(s3Client, config),
       this.env
     );
   }
 
-  static async buffer(data) {
+  async buffer(data) {
     return new this.Archive(await this.env.unzip.buffer(data), this.env);
   }
 }

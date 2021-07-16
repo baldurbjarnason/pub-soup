@@ -1,20 +1,20 @@
-import { Names } from "../zip/names.js";
+import { Names } from "./zip/names.js";
 import { nanoid } from "nanoid";
 import unzipper from "unzipper";
 import request from "request";
 
 const unzip = {
   async file(path) {
-    return new this.Archive(await unzipper.Open.file(path), this.env);
+    return unzipper.Open.file(path);
   },
   async url(path) {
-    return new this.Archive(await unzipper.Open.url(request, path), this.env);
+    return unzipper.Open.url(request, path);
   },
   async s3(s3Client, config) {
-    return new this.Archive(await unzipper.Open.s3(s3Client, config), this.env);
+    return unzipper.Open.s3(s3Client, config);
   },
   async buffer(data) {
-    return new this.Archive(await unzipper.Open.buffer(data), this.env);
+    return unzipper.Open.buffer(data);
   },
 };
 
