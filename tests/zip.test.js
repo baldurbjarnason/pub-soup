@@ -3,6 +3,10 @@ import { ZipFactory } from "../src/zip/index.js";
 import { env } from "../src/env.js";
 import tap from "tap";
 import * as td from "testdouble";
+import { readFile } from "fs/promises";
+import { join } from "path";
+import handler from "serve-handler";
+import * as http from "http";
 // import { fileURLToPath } from "url";
 // import * as fs from "fs";
 // import * as path from "path";
@@ -22,34 +26,36 @@ tap.test("Epub factory file", async (test) => {
   test.ok(epub);
 });
 
-tap.test("Zip factory url", async (test) => {
-  const unzip = td.object(env.unzip);
-  const testEnv = { ...env, unzip };
-  const factory = new ZipFactory(testEnv);
-  const epub = await factory.url("test.epub");
+tap.test("Zip factory url", async (test, done) => {
+  const server = http.createServer((request, response) => {
+    return handler(request, response);
+  });
+  server.listen(3000, () => {
+    console.log("Running at http://localhost:3000");
+  });
+  const factory = new ZipFactory(env);
+  const epub = await factory.url("http://localhost:3000/test.epub");
   test.ok(epub);
-  td.verify(unzip.url("test.epub"));
+  const file = await epub.textFile("mimetype");
+  test.equal(file, "application/epub+zip");
+  server.close(done);
 });
 
 tap.test("Zip factory buffer", async (test) => {
-  const unzip = td.object(env.unzip);
-  const testEnv = { ...env, unzip };
-  const factory = new ZipFactory(testEnv);
-  const buffer = Buffer.from("test.epub");
+  const factory = new ZipFactory(env);
+  const buffer = await readFile(join(process.cwd(), "test.epub"));
   const epub = await factory.buffer(buffer);
   test.ok(epub);
-  td.verify(unzip.buffer(buffer));
 });
 
 tap.test("Zip factory s3", async (test) => {
-  const unzip = td.object(env.unzip);
-  const testEnv = { ...env, unzip };
+  const testEnv = td.object(env);
   const factory = new ZipFactory(testEnv);
   const s3Client = () => {};
   const config = {};
   const epub = await factory.s3(s3Client, config);
   test.ok(epub);
-  td.verify(unzip.s3(s3Client, config));
+  td.verify(testEnv.s3(s3Client, config));
 });
 
 tap.test("Zip textFile", async (test) => {

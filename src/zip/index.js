@@ -16,22 +16,19 @@ export class ZipFactory extends EventEmitter {
   }
 
   async file(path) {
-    return new this.Archive(await this.env.unzip.file(path), this.env);
+    return new this.Archive(await this.env.file(path), this.env);
   }
 
   async url(path) {
-    return new this.Archive(await this.env.unzip.url(path), this.env);
+    return new this.Archive(await this.env.url(path), this.env);
   }
 
   async s3(s3Client, config) {
-    return new this.Archive(
-      await this.env.unzip.s3(s3Client, config),
-      this.env
-    );
+    return new this.Archive(await this.env.s3(s3Client, config), this.env);
   }
 
   async buffer(data) {
-    return new this.Archive(await this.env.unzip.buffer(data), this.env);
+    return new this.Archive(await this.env.buffer(data), this.env);
   }
 }
 
