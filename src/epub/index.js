@@ -184,11 +184,15 @@ export class Epub extends Zip {
   upload({ worker }) {
     const uploads = this.metadata.resources.map((resource) => {
       return async () => {
+        let task;
         if (isTextFile(resource.encodingFormat)) {
-          return worker(await this.task("processTextFile", resource));
+          task = this.task("processTextFile", resource);
         } else {
-          return worker(await this.task("processBinaryFile", resource));
+          task = this.task("processBinaryFile", resource);
         }
+        return task.then((result) => {
+          if (result) return worker(result);
+        });
       };
     });
     return uploads;
@@ -218,9 +222,6 @@ Epub.prototype.process = async function* process({
       total: this.total,
       pending: queue.pending,
     });
-  });
-  queue.on("error", (err) => {
-    this.error(err);
   });
   await queue.addAll(this.markup());
   const main = stringify(this);

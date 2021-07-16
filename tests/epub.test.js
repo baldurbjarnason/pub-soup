@@ -262,8 +262,8 @@ tap.test("Epub process", async (test) => {
   const testEnv = { ...env, names };
   const factory = new EpubFactory(testEnv);
   const epub = await factory.file("test.epub");
-  function worker(promise) {
-    return promise;
+  async function worker(upload) {
+    return upload;
   }
   const iterator = epub.process({
     url: {
@@ -289,6 +289,46 @@ tap.test("Epub process", async (test) => {
     );
   }
 });
+
+// tap.test("Epub process error", async (test) => {
+//   let counter = 0;
+
+//   function id() {
+//     counter = counter + 1;
+//     return counter + "_id";
+//   }
+
+//   const names = new Names(id);
+//   const testEnv = { ...env, names };
+//   const factory = new EpubFactory(testEnv);
+//   const epub = await factory.file("test.epub");
+//   async function worker(upload) {
+//     throw new Error("Uploads Failed!!!");
+//   }
+//   const iterator = epub.process({
+//     url: {
+//       base: "http://test.example.com/",
+//       media: "http://media.example.com/",
+//       link: "http://link.example.com/",
+//       style: "http://style.example.com/",
+//     },
+//     worker,
+//   });
+//   for await (const result of iterator) {
+//     // await writeFile(
+//     //   path.join(__dirname, "fixtures/output/", result.path),
+//     //   JSON.stringify(result.value, null, 2)
+//     // );
+//     test.same(
+//       result.value,
+//       JSON.parse(
+//         await readFile(path.join(__dirname, "fixtures/output/", result.path), {
+//           encoding: "utf8",
+//         })
+//       )
+//     );
+//   }
+// });
 
 async function setupFile() {
   let counter = 0;
