@@ -14,9 +14,7 @@ tap.test("dompurify - svg", async (test) => {
   const base = new Base(
     {
       base: "http://test.example.com/",
-      media: "http://media.example.com/",
-      link: "http://link.example.com/",
-      style: "http://style.example.com/",
+      upload: "http://upload.example.com/",
     },
     { names }
   );
@@ -47,9 +45,7 @@ tap.test("dompurify - html", async (test) => {
   const base = new Base(
     {
       base: "http://test.example.com/",
-      media: "http://media.example.com/",
-      link: "http://link.example.com/",
-      style: "http://style.example.com/",
+      upload: "http://upload.example.com/",
     },
     { names }
   );
@@ -80,9 +76,7 @@ tap.test("dompurify - xhtml", async (test) => {
   const base = new Base(
     {
       base: "http://test.example.com/",
-      media: "http://media.example.com/",
-      link: "http://link.example.com/",
-      style: "http://style.example.com/",
+      upload: "http://upload.example.com/",
     },
     { names }
   );
@@ -124,9 +118,7 @@ tap.test("dompurify - invalid xhtml", async (test) => {
   const base = new Base(
     {
       base: "http://test.example.com/",
-      media: "http://media.example.com/",
-      link: "http://link.example.com/",
-      style: "http://style.example.com/",
+      upload: "http://upload.example.com/",
     },
     { names }
   );

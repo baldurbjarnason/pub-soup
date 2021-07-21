@@ -22,7 +22,7 @@ function href(node, file) {
   ) {
     node.setAttribute(
       "href",
-      base.transform(node.getAttribute("href"), path, "media")
+      base.transform(node.getAttribute("href"), path, "upload")
     );
   }
   // then there is xlink:href on images
@@ -39,7 +39,7 @@ function href(node, file) {
       base.transform(
         node.getAttributeNS("http://www.w3.org/1999/xlink", "href"),
         path,
-        "media"
+        "upload"
       )
     );
   }

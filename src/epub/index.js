@@ -3,10 +3,11 @@ import { opf } from "./opf.js";
 import { markup } from "../parsers/markup.js";
 import PQueue from "p-queue";
 import { toc } from "./nav.js";
-import { css } from "../css.js";
+import { css, uploads } from "../css.js";
 import { purify } from "../parsers/dompurify.js";
 import { stringify } from "./stringify/stringify.js";
 import { toJSON } from "../metadata.js";
+import { renderCSS } from "./stringify/stylesheets.js";
 
 const JSTYPES = [
   "text/javascript",
@@ -46,6 +47,12 @@ export class EpubFactory extends ZipFactory {
 }
 
 export class Epub extends Zip {
+  constructor(directory, env) {
+    super(directory, env);
+    this.styles = [];
+    this.chapters = [];
+  }
+
   error(err) {
     this.emit("error", err);
   }
@@ -129,9 +136,6 @@ export class Epub extends Zip {
   }
 
   markup() {
-    if (!this.chapters) {
-      this.chapters = [];
-    }
     const chapterTasks = this.metadata.resources
       .filter((resource) => {
         return (
@@ -151,7 +155,11 @@ export class Epub extends Zip {
     const file = await this.getTextFile(resource);
     if (file.contentType === "text/css") {
       file.path = this.names.get(file.path);
-      file.value = await css(file.value, file.path, file);
+      const embed = Object.assign({}, file);
+      embed.value = await css(file.value, file.path, file);
+      embed.path = this.base.upload(embed.path);
+      this.styles = this.styles.concat(embed);
+      file.value = await uploads(file.value, file.path, file);
       return file;
     } else if (
       file.contentType === "text/html" ||
@@ -221,7 +229,7 @@ Epub.prototype.process = async function process({
   });
   queue.addAll(this.markup());
   const file = new File({
-    path: this.names.get("index.html"),
+    path: "index.html",
     base: this.base,
     contentType: "text/html",
     metadata: opfResult,
@@ -229,6 +237,8 @@ Epub.prototype.process = async function process({
   queue.addAll(this.upload({ worker }));
   await queue.onEmpty();
   const main = stringify(this);
+  console.log("rendering styles");
+  main.styles = await renderCSS(this);
   main.metadata = opfResult;
   file.value = main;
   return file;

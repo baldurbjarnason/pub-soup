@@ -9,34 +9,34 @@
   "links": [],
   "resources": [
     {
-      "url": "http://media.example.com/test.xhtml",
+      "url": "http://upload.example.com/test.xhtml",
       "rel": [],
       "encodingFormat": "application/xhtml+xml"
     },
     {
-      "url": "http://media.example.com/cover.xhtml",
+      "url": "http://upload.example.com/cover.xhtml",
       "rel": [],
       "encodingFormat": "application/xhtml+xml"
     },
     {
-      "url": "http://media.example.com/style.css",
+      "url": "http://upload.example.com/style.css",
       "rel": [],
       "encodingFormat": "text/css"
     },
     {
-      "url": "http://media.example.com/modernizr-1.6.min.js",
+      "url": "http://upload.example.com/modernizr-1.6.min.js",
       "rel": [],
       "encodingFormat": "text/javascript"
     },
     {
-      "url": "http://media.example.com/content.ncx",
+      "url": "http://upload.example.com/content.ncx",
       "rel": [
         "ncx"
       ],
       "encodingFormat": "application/x-dtbncx+xml"
     },
     {
-      "url": "http://media.example.com/cover.jpg",
+      "url": "http://upload.example.com/cover.jpg",
       "rel": [
         "cover"
       ],
@@ -48,13 +48,13 @@
         "alternate",
         "describedby"
       ],
-      "url": "http://media.example.com/content.opf",
+      "url": "http://upload.example.com/content.opf",
       "encodingFormat": "application/oebps-package+xml"
     }
   ],
   "readingOrder": [
     {
-      "url": "http://media.example.com/test.xhtml",
+      "url": "http://upload.example.com/test.xhtml",
       "rel": [],
       "encodingFormat": "application/xhtml+xml"
     }

@@ -25,9 +25,7 @@ tap.test("Zip factory url", async (test, done) => {
   const server = http.createServer((request, response) => {
     return handler(request, response);
   });
-  server.listen(3000, () => {
-    console.log("Running at http://localhost:3000");
-  });
+  server.listen(3000, () => {});
   const factory = new ZipFactory(env);
   const epub = await factory.url("http://localhost:3000/test.epub");
   test.ok(epub);

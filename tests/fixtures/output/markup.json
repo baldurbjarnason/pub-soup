@@ -1,12 +1,23 @@
 {
-  "styles": [],
+  "styles": [
+    {
+      "type": "LinkedResource",
+      "rel": [
+        "stylesheet"
+      ],
+      "path": "style.css",
+      "url": "http://upload.example.com/4_id.css",
+      "encodingFormat": "text/css"
+    }
+  ],
   "links": [
     {
       "type": "LinkedResource",
       "rel": [
         "stylesheet"
       ],
-      "url": "http://style.example.com/4_id.css",
+      "path": "style.css",
+      "url": "http://upload.example.com/4_id.css",
       "encodingFormat": "text/css"
     }
   ],

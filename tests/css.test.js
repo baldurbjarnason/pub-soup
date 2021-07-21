@@ -14,9 +14,9 @@ tap.test("css", async (test) => {
   const base = new Base(
     {
       base: "http://test.example.com/",
-      media: "http://media.example.com/",
+      upload: "http://upload.example.com/",
       link: "http://link.example.com/",
-      style: "http://style.example.com/",
+      style: "http://upload.example.com/",
     },
     { names }
   );
@@ -48,9 +48,9 @@ tap.test("css", async (test) => {
   const base = new Base(
     {
       base: "http://test.example.com/",
-      media: "http://media.example.com/",
+      upload: "http://upload.example.com/",
       link: "http://link.example.com/",
-      style: "http://style.example.com/",
+      style: "http://upload.example.com/",
     },
     { names }
   );
@@ -77,9 +77,9 @@ tap.test("css", async (test) => {
   const base = new Base(
     {
       base: "http://test.example.com/",
-      media: "http://media.example.com/",
+      upload: "http://upload.example.com/",
       link: "http://link.example.com/",
-      style: "http://style.example.com/",
+      style: "http://upload.example.com/",
     },
     { names }
   );

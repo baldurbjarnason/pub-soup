@@ -4,30 +4,24 @@ import tap from "tap";
 tap.test("base", async (test) => {
   const base = new Base();
   test.equal(base.href("/test"), "/test");
-  test.equal(base.media("/test"), "/test");
+  test.equal(base.upload("/test"), "/test");
   test.equal(base.link("/test"), "/test");
-  test.equal(base.style("/test"), "/test");
 });
 
 tap.test("base", async (test) => {
   const base = new Base({
     base: "http://test.example.com/",
-    media: "http://media.example.com/",
-    link: "http://link.example.com/",
-    style: "http://style.example.com/",
+    upload: "http://upload.example.com/",
   });
   test.equal(base.href("/test"), "http://test.example.com/test");
-  test.equal(base.media("/test"), "http://media.example.com/test");
-  test.equal(base.link("/test"), "http://link.example.com/test");
-  test.equal(base.style("/test"), "http://style.example.com/test");
+  test.equal(base.upload("/test"), "http://upload.example.com/test");
+  test.equal(base.link("/test"), "http://test.example.com/test");
 });
 
 tap.test("base - full", async (test) => {
   const base = new Base({
     base: "http://test.example.com/",
-    media: "http://media.example.com/",
-    link: "http://link.example.com/",
-    style: "http://style.example.com/",
+    upload: "http://upload.example.com/",
   });
   test.equal(
     base.full("relative/path/src.img", "chapter/path.xhtml"),
@@ -51,9 +45,7 @@ tap.test("base - id", async (test) => {
   const base = new Base(
     {
       base: "http://test.example.com/",
-      media: "http://media.example.com/",
-      link: "http://link.example.com/",
-      style: "http://style.example.com/",
+      upload: "http://upload.example.com/",
     },
     { names }
   );
@@ -71,9 +63,7 @@ tap.test("base - srcset", async (test) => {
   const base = new Base(
     {
       base: "http://test.example.com/",
-      media: "http://media.example.com/",
-      link: "http://link.example.com/",
-      style: "http://style.example.com/",
+      upload: "http://upload.example.com/",
     },
     { names }
   );
@@ -82,7 +72,7 @@ tap.test("base - srcset", async (test) => {
       "images/Moby-Dick_FE_title_page-hd.jpg 2x, images/Moby-Dick_FE_title_page-phone.jpg 100w, images/Moby-Dick_FE_title_page-phone-HD.jpg 100w 2x",
       "chapter/path.xhtml"
     ),
-    "http://media.example.com/1_id.jpg 2x, http://media.example.com/2_id.jpg 100w, http://media.example.com/3_id.jpg 100w 2x"
+    "http://upload.example.com/1_id.jpg 2x, http://upload.example.com/2_id.jpg 100w, http://upload.example.com/3_id.jpg 100w 2x"
   );
 });
 
@@ -98,9 +88,7 @@ tap.test("base - transform", async (test) => {
   const base = new Base(
     {
       base: "http://test.example.com/",
-      media: "http://media.example.com/",
-      link: "http://link.example.com/",
-      style: "http://style.example.com/",
+      upload: "http://upload.example.com/",
     },
     { names }
   );
@@ -117,12 +105,8 @@ tap.test("base - transform", async (test) => {
     "#1_id:heading"
   );
   test.equal(
-    base.transform("relative/path/src.img", "chapter/path.xhtml", "media"),
-    "http://media.example.com/2_id.img"
-  );
-  test.equal(
-    base.transform("relative/path/src.css", "chapter/path.xhtml", "style"),
-    "http://style.example.com/3_id.css"
+    base.transform("relative/path/src.img", "chapter/path.xhtml", "upload"),
+    "http://upload.example.com/2_id.img"
   );
   test.equal(
     base.transform("http://img.example.com/path/src.img", "chapter/path.xhtml"),
@@ -134,6 +118,6 @@ tap.test("base - transform", async (test) => {
       "chapter/path.xhtml",
       "link"
     ),
-    "#4_id:heading"
+    "#3_id:heading"
   );
 });

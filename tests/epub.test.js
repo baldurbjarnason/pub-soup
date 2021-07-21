@@ -3,7 +3,7 @@ import { once } from "events";
 import { Base, Names } from "../src/zip/index.js";
 import { env } from "../src/env.js";
 import tap from "tap";
-import { readFile } from "fs/promises";
+import { readFile, writeFile } from "fs/promises";
 import { fileURLToPath } from "url";
 import * as path from "path";
 const __filename = fileURLToPath(import.meta.url);
@@ -120,9 +120,7 @@ tap.test("Epub contents", async (test) => {
   epub.base = new Base(
     {
       base: "http://test.example.com/",
-      media: "http://media.example.com/",
-      link: "http://link.example.com/",
-      style: "http://style.example.com/",
+      upload: "http://upload.example.com/",
     },
     { names }
   );
@@ -275,18 +273,23 @@ tap.test("Epub process", async (test) => {
   const result = await epub.process({
     url: {
       base: "http://test.example.com/",
-      media: "http://media.example.com/",
-      link: "http://link.example.com/",
-      style: "http://style.example.com/",
+      upload: "http://upload.example.com/",
     },
     worker,
   });
+  // await writeFile(
+  //   path.join(__dirname, "fixtures/output/", result.path + ".json"),
+  //   JSON.stringify(result.value, null, 2)
+  // );
   test.same(
     result.value,
     JSON.parse(
-      await readFile(path.join(__dirname, "fixtures/output/", result.path), {
-        encoding: "utf8",
-      })
+      await readFile(
+        path.join(__dirname, "fixtures/output/", result.path + ".json"),
+        {
+          encoding: "utf8",
+        }
+      )
     )
   );
 });
@@ -309,9 +312,7 @@ tap.test("Epub process", async (test) => {
 //   const iterator = epub.process({
 //     url: {
 //       base: "http://test.example.com/",
-//       media: "http://media.example.com/",
-//       link: "http://link.example.com/",
-//       style: "http://style.example.com/",
+//       upload: "http://upload.example.com/",
 //     },
 //     worker,
 //   });
@@ -346,9 +347,7 @@ async function setupFile() {
   epub.base = new Base(
     {
       base: "http://test.example.com/",
-      media: "http://media.example.com/",
-      link: "http://link.example.com/",
-      style: "http://style.example.com/",
+      upload: "http://upload.example.com/",
     },
     { names }
   );

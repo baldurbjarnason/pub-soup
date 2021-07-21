@@ -33,6 +33,7 @@ export function renderImage(file) {
 
 export function renderStyles(styles) {
   return styles
+    .filter((style) => !style.url)
     .map((style) => {
       return `<style>${style}</style>
 `;
@@ -42,7 +43,7 @@ export function renderStyles(styles) {
 
 export function renderStylesheets(links) {
   return links
-    .filter((link) => link.rel.includes("stylesheet"))
+    .filter((link) => link.rel && link.rel.includes("stylesheet"))
     .map((style) => {
       return `<link rel="stylesheet" href="${style.url}">
 `;

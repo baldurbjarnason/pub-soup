@@ -1,8 +1,8 @@
 import {
   renderImage,
   renderMarkup,
-  renderStyles,
   renderStylesheets,
+  renderStyles,
 } from "./stringify-markup.js";
 import { render } from "./stringify-nav.js";
 import { embed } from "../../metadata.js";
@@ -40,7 +40,7 @@ ${JSON.stringify(embed(epub))}
   );
   for (const image of images) {
     const id = epub.names.id(image.url);
-    const href = epub.base.media(image.url);
+    const href = epub.base.upload(image.url);
     const file = {
       id,
       path: image.url,

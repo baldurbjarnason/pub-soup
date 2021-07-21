@@ -59,9 +59,26 @@ export async function markup(file) {
       node.removeAttribute("style");
     }
   }
-  for (const node of window.document.querySelectorAll("style")) {
+  for (const node of window.document.querySelectorAll(
+    "style,link[rel='stylesheet']"
+  )) {
     try {
-      styles = styles.concat(await css(node.textContent, id, file));
+      if (
+        node.tagName === "link" &&
+        testPath(node.getAttribute("href"), resourceURL)
+      ) {
+        const link = {
+          type: "LinkedResource",
+          rel: ["stylesheet"],
+          url: file.stylesheet(node.getAttribute("href")),
+          path: file.base.full(node.getAttribute("href")),
+          encodingFormat: "text/css",
+        };
+        links = links.concat(link);
+        styles = styles.concat(link);
+      } else {
+        styles = styles.concat(await css(node.textContent, id, file));
+      }
     } catch (err) {}
     node.remove();
   }
@@ -86,27 +103,6 @@ export async function markup(file) {
     }
   });
   DOMPurify.addHook("afterSanitizeAttributes", function (node) {
-    if (
-      node.tagName.toLowerCase() === "link" &&
-      node.hasAttribute("href") &&
-      node.getAttribute("rel") === "stylesheet" &&
-      !testPath(node.getAttribute("href"), resourceURL)
-    ) {
-      node.remove();
-    } else if (
-      node.tagName.toLowerCase() === "link" &&
-      node.hasAttribute("href") &&
-      node.getAttribute("rel") === "stylesheet" &&
-      testPath(node.getAttribute("href"), resourceURL)
-    ) {
-      links = links.concat({
-        type: "LinkedResource",
-        rel: ["stylesheet"],
-        url: file.stylesheet(node.getAttribute("href")),
-        encodingFormat: "text/css",
-      });
-      node.remove();
-    }
     attributes(node, file, path);
   });
   DOMPurify.addHook("afterSanitizeElements", function (node) {

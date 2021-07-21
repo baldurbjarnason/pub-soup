@@ -14,9 +14,7 @@ tap.test("metadata toJSON", async (test) => {
   const base = new Base(
     {
       base: "http://test.example.com/",
-      media: "http://media.example.com/",
-      link: "http://link.example.com/",
-      style: "http://style.example.com/",
+      upload: "http://upload.example.com/",
     },
     { names }
   );
@@ -27,7 +25,7 @@ tap.test("metadata toJSON", async (test) => {
   };
   const archive = { metadata, base, names };
   const result = toJSON(archive);
-  test.equal(result.resources[0].url, "http://media.example.com/1_id.html");
+  test.equal(result.resources[0].url, "http://upload.example.com/1_id.html");
 });
 tap.test("metadata embed", async (test) => {
   let counter = 0;
@@ -41,9 +39,7 @@ tap.test("metadata embed", async (test) => {
   const base = new Base(
     {
       base: "http://test.example.com/",
-      media: "http://media.example.com/",
-      link: "http://link.example.com/",
-      style: "http://style.example.com/",
+      upload: "http://upload.example.com/",
     },
     { names }
   );

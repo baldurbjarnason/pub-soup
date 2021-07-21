@@ -2,13 +2,11 @@ import { Names } from "./names.js";
 import srcset from "srcset";
 
 export class Base {
-  constructor({ media, link, style, base } = {}, { names = new Names() } = {}) {
+  constructor({ upload, base } = {}, { names = new Names() } = {}) {
     base = base || "http://www.example.com/";
     this.url = {
       base: base,
-      media: media || base,
-      link: link || base,
-      style: style || base,
+      upload: upload || base,
     };
     this.names = names;
   }
@@ -47,7 +45,7 @@ export class Base {
   srcset(set, fileBase) {
     const parsed = srcset.parse(set);
     for (const src of parsed) {
-      src.url = this.transform(src.url, fileBase, "media");
+      src.url = this.transform(src.url, fileBase, "upload");
     }
     return srcset.stringify(parsed);
   }
@@ -68,15 +66,11 @@ export class Base {
     }
   }
 
-  media(url) {
-    return this.serialize(new URL(url, this.url.media));
+  upload(url) {
+    return this.serialize(new URL(url, this.url.upload));
   }
 
   link(url) {
-    return this.serialize(new URL(url, this.url.link));
-  }
-
-  style(url) {
-    return this.serialize(new URL(url, this.url.style));
+    return this.serialize(new URL(url, this.url.base));
   }
 }

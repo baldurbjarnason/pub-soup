@@ -9,7 +9,7 @@ export class File {
   }
 
   src(path) {
-    return this.base.transform(path, this.path, "media");
+    return this.base.transform(path, this.path, "upload");
   }
 
   srcset(path) {
@@ -21,6 +21,6 @@ export class File {
   }
 
   stylesheet(path) {
-    return this.base.transform(path, this.path, "style");
+    return this.base.transform(path, this.path, "upload");
   }
 }

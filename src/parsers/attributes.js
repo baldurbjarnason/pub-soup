@@ -26,7 +26,7 @@ export function href(node, file) {
   const { base, path } = file;
   // There are two types of href attributes that remain: links (which become internal id refs) and SVG images
   if (node.hasAttribute("href") && !validDataUrl(node.getAttribute("href"))) {
-    const type = node.localName === "image" ? "media" : "link";
+    const type = node.localName === "image" ? "upload" : "link";
     node.setAttribute(
       "href",
       base.transform(node.getAttribute("href"), path, type)
@@ -37,7 +37,7 @@ export function href(node, file) {
     node.getAttributeNS("http://www.w3.org/1999/xlink", "href") &&
     !validDataUrl(node.getAttributeNS("http://www.w3.org/1999/xlink", "href"))
   ) {
-    const type = node.localName === "image" ? "media" : "link";
+    const type = node.localName === "image" ? "upload" : "link";
     node.setAttributeNS(
       "http://www.w3.org/1999/xlink",
       "href",

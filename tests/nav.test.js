@@ -104,9 +104,7 @@ tap.test("render ToC - epub2", async (test) => {
   const base = new Base(
     {
       base: "http://test.example.com/",
-      media: "http://media.example.com/",
-      link: "http://link.example.com/",
-      style: "http://style.example.com/",
+      upload: "http://upload.example.com/",
     },
     { names }
   );
