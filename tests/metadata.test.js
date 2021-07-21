@@ -27,7 +27,7 @@ tap.test("metadata toJSON", async (test) => {
   };
   const archive = { metadata, base, names };
   const result = toJSON(archive);
-  test.equal(result.resources[0].url, "http://media.example.com/file.html");
+  test.equal(result.resources[0].url, "http://media.example.com/1_id.html");
 });
 tap.test("metadata embed", async (test) => {
   let counter = 0;

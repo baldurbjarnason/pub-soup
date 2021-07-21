@@ -10,7 +10,13 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename).replace(process.cwd() + "/", "");
 
 tap.test("Epub opf", async (test) => {
-  const factory = new EpubFactory(env);
+  function id() {
+    return "id_";
+  }
+
+  const names = new Names(id);
+  const testEnv = { ...env, names };
+  const factory = new EpubFactory(testEnv);
   const epub = await factory.file("test.epub");
   test.ok(epub);
   epub.base = new epub.Base({ base: "http://test.example.com/" }, env);
@@ -29,45 +35,45 @@ tap.test("Epub opf", async (test) => {
     links: [],
     resources: [
       {
-        url: "http://test.example.com/test.xhtml",
+        url: "http://test.example.com/id_.xhtml",
         rel: [],
         encodingFormat: "application/xhtml+xml",
       },
       {
-        url: "http://test.example.com/cover.xhtml",
+        url: "http://test.example.com/id_.xhtml",
         rel: [],
         encodingFormat: "application/xhtml+xml",
       },
       {
-        url: "http://test.example.com/style.css",
+        url: "http://test.example.com/id_.css",
         rel: [],
         encodingFormat: "text/css",
       },
       {
-        url: "http://test.example.com/modernizr-1.6.min.js",
+        url: "http://test.example.com/id_.js",
         rel: [],
         encodingFormat: "text/javascript",
       },
       {
-        url: "http://test.example.com/content.ncx",
+        url: "http://test.example.com/id_.ncx",
         rel: ["ncx"],
         encodingFormat: "application/x-dtbncx+xml",
       },
       {
-        url: "http://test.example.com/cover.jpg",
+        url: "http://test.example.com/id_.jpg",
         rel: ["cover"],
         encodingFormat: "image/jpeg",
       },
       {
         type: "LinkedResource",
         rel: ["alternate", "describedby"],
-        url: "http://test.example.com/content.opf",
+        url: "http://test.example.com/id_.opf",
         encodingFormat: "application/oebps-package+xml",
       },
     ],
     readingOrder: [
       {
-        url: "http://test.example.com/test.xhtml",
+        url: "http://test.example.com/id_.xhtml",
         rel: [],
         encodingFormat: "application/xhtml+xml",
       },
@@ -134,7 +140,7 @@ tap.test("Epub contents", async (test) => {
     path: "content.ncx",
     base: epub.base,
     contentType: "application/json",
-    id: "2_id",
+    id: "6_id",
     rel: [],
   });
 });
@@ -216,6 +222,7 @@ tap.test("Epub  processTextFile css", async (test) => {
     url: "style.css",
     encodingFormat: "text/css",
   });
+  // await writeFile(path.join(__dirname, "fixtures/output/test.css"), file.value);
   test.equal(
     file.value,
     await readFile(path.join(__dirname, "fixtures/output/test.css"), {
@@ -265,7 +272,7 @@ tap.test("Epub process", async (test) => {
   async function worker(upload) {
     return upload;
   }
-  const iterator = epub.process({
+  const result = await epub.process({
     url: {
       base: "http://test.example.com/",
       media: "http://media.example.com/",
@@ -274,20 +281,14 @@ tap.test("Epub process", async (test) => {
     },
     worker,
   });
-  for await (const result of iterator) {
-    // await writeFile(
-    //   path.join(__dirname, "fixtures/output/", result.path),
-    //   JSON.stringify(result.value, null, 2)
-    // );
-    test.same(
-      result.value,
-      JSON.parse(
-        await readFile(path.join(__dirname, "fixtures/output/", result.path), {
-          encoding: "utf8",
-        })
-      )
-    );
-  }
+  test.same(
+    result.value,
+    JSON.parse(
+      await readFile(path.join(__dirname, "fixtures/output/", result.path), {
+        encoding: "utf8",
+      })
+    )
+  );
 });
 
 // tap.test("Epub process error", async (test) => {

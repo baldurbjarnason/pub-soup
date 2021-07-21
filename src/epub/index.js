@@ -72,7 +72,8 @@ export class Epub extends Zip {
   //
   // Extract start position. Meaningless in a single page?
   async opf(file) {
-    this.metadata = opf(file.value, file.path);
+    const result = opf(file.value, file.path);
+    this.metadata = result;
     return toJSON(this);
   }
 
@@ -199,19 +200,14 @@ export class Epub extends Zip {
   }
 }
 
-Epub.prototype.process = async function* process({
+Epub.prototype.process = async function process({
   url,
   concurrency = 8,
   worker = () => {},
 }) {
   this.base = new this.Base(url, this.env);
   const opfFile = await this.task("getOPF");
-  const opfResult = new File({
-    value: await this.task("opf", opfFile),
-    contentType: "application/json",
-    path: "index.json",
-  });
-  yield opfResult;
+  const opfResult = await this.task("opf", opfFile);
   await this.task("contents");
   const queue = new PQueue({ concurrency });
   let count = 0;
@@ -223,15 +219,17 @@ Epub.prototype.process = async function* process({
       pending: queue.pending,
     });
   });
-  await queue.addAll(this.markup());
-  const main = stringify(this);
+  queue.addAll(this.markup());
   const file = new File({
-    value: main,
     path: this.names.get("index.html"),
     base: this.base,
     contentType: "text/html",
+    metadata: opfResult,
   });
-  yield file;
   queue.addAll(this.upload({ worker }));
-  return queue.onEmpty();
+  await queue.onEmpty();
+  const main = stringify(this);
+  main.metadata = opfResult;
+  file.value = main;
+  return file;
 };
