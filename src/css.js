@@ -1,4 +1,5 @@
 import { purify } from "./postcss-purify/index.js";
+// import cssnano from "cssnano";
 import postcss from "postcss";
 import prefixer from "postcss-prefix-selector";
 import selectorParser from "postcss-selector-parser";
@@ -38,6 +39,7 @@ export async function css(cssString, cssURL, file) {
     purify(file),
     prefixer({ prefix: `[data-stylesheets~="${cssURL}"]` }),
     replaceRootsWithCustomElements(),
+    // cssnano({ preset: "default" }),
   ]).process(cssString, { from: file.path, to: file.path });
   return result.css;
 }

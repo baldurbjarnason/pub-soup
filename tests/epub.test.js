@@ -3,7 +3,7 @@ import { once } from "events";
 import { Base, Names } from "../src/zip/index.js";
 import { env } from "../src/env.js";
 import tap from "tap";
-import { readFile, writeFile } from "fs/promises";
+import { readFile } from "fs/promises";
 import { fileURLToPath } from "url";
 import * as path from "path";
 const __filename = fileURLToPath(import.meta.url);
