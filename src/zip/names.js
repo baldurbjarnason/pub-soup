@@ -1,9 +1,9 @@
 import { extname } from "path";
 
 export class Names {
-  constructor(nanoid = () => "_id") {
+  constructor(generateId = () => "_id") {
     this.map = new Map();
-    this.nanoid = nanoid;
+    this.generateId = generateId;
     this.get = this.getId;
   }
 
@@ -16,7 +16,7 @@ export class Names {
     const ext = extname(path);
     let name = this.map.get(path);
     if (!name) {
-      this.map.set(path, this.nanoid());
+      this.map.set(path, this.generateId(path));
       name = this.map.get(path);
     }
     if (id) {

@@ -6,7 +6,7 @@ import request from "request";
 export const env = {
   id: nanoid,
   request,
-  names: new Names(nanoid),
+  names: new Names(() => nanoid()),
   async file(path) {
     return unzipper.Open.file(path);
   },
