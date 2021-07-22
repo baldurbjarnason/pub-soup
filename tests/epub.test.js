@@ -235,6 +235,10 @@ tap.test("Epub markup", async (test) => {
   await tasks[0]();
   const file = epub.chapters[0];
   test.ok(file);
+  // await writeFile(
+  //   path.join(__dirname, "fixtures/output/markup.json"),
+  //   JSON.stringify(file, null, 2)
+  // );
   const output = JSON.parse(
     await readFile(path.join(__dirname, "fixtures/output/markup.json"), {
       encoding: "utf8",

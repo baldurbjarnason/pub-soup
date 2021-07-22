@@ -3,6 +3,7 @@ import { attributes } from "./attributes.js";
 import createDOMPurify from "dompurify";
 import { JSDOM } from "jsdom";
 import { count } from "@wordpress/wordcount";
+import { shiftHeading } from "./headings.js";
 
 // Support srcset
 const purifyConfig = {
@@ -90,6 +91,10 @@ export async function markup(file) {
   } else if (window.document.querySelector("title")) {
     title = window.document.querySelector("title").textContent;
   }
+  const headings = window.document.querySelectorAll("h1,h2,h3,h4,h5");
+  for (const heading of headings) {
+    shiftHeading(heading, window);
+  }
   const DOMPurify = createDOMPurify(window);
   // Based on sample from https://github.com/cure53/DOMPurify/tree/master/demos, same license as DOMPurify
 
@@ -115,7 +120,7 @@ export async function markup(file) {
   DOMPurify.sanitize(window.document.documentElement, purifyConfig);
   const soupBody = window.document.createElement("soup-body");
   cloneAttributes(soupBody, window.document.body);
-  soupBody.append(...window.document.body.children);
+  soupBody.append(...window.document.body.childNodes);
   return {
     styles,
     links,

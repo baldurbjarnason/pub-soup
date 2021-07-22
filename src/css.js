@@ -3,6 +3,9 @@ import { purify } from "./postcss-purify/index.js";
 import postcss from "postcss";
 import prefixer from "postcss-prefix-selector";
 import selectorParser from "postcss-selector-parser";
+import { shiftTagName } from "./parsers/headings.js";
+
+const headings = ["h1", "h2", "h3", "h4", "h5"];
 
 function processor(root) {
   root.walkTags((tagNode) => {
@@ -10,6 +13,10 @@ function processor(root) {
       tagNode.replaceWith(selectorParser.tag({ value: "soup-body" }));
     } else if (tagNode.value === "html") {
       tagNode.replaceWith(selectorParser.tag({ value: "soup-html" }));
+    } else if (headings.includes(tagNode.value.toLowerCase())) {
+      tagNode.replaceWith(
+        selectorParser.tag({ value: shiftTagName(tagNode.value) })
+      );
     }
   });
 }
