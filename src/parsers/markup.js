@@ -17,7 +17,7 @@ const purifyConfig = {
 
 export async function markup(file) {
   const { value, path, contentType = "text/html", id, rel = [] } = file;
-  const wordcount = count(value, "words", {});
+  const wordCount = count(value, "words", {});
   let styles = [];
   let links = [];
   const resourceURL = new URL(path, "https://example.com/");
@@ -125,7 +125,7 @@ export async function markup(file) {
     title,
     inLanguage,
     rel,
-    wordcount,
+    wordCount,
   };
 }
 

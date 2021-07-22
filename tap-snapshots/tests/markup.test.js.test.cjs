@@ -17,7 +17,7 @@ Object {
     "[data-stylesheets~=\\"1_id\\"] soup-body { background-color: red;}",
   ],
   "title": "Test",
-  "wordcount": 6,
+  "wordCount": 6,
 }
 `
 
@@ -33,7 +33,7 @@ Object {
     "[data-stylesheets~=\\"1_id\\"] soup-body { background-color: red;}",
   ],
   "title": "Test",
-  "wordcount": 11,
+  "wordCount": 11,
 }
 `
 
@@ -68,7 +68,7 @@ Object {
   "rel": Array [],
   "styles": Array [],
   "title": "SVG test",
-  "wordcount": 5,
+  "wordCount": 5,
 }
 `
 
@@ -103,6 +103,6 @@ Object {
     "",
   ],
   "title": "Test",
-  "wordcount": 13,
+  "wordCount": 13,
 }
 `
