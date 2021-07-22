@@ -50,7 +50,7 @@ tap.test("metadata embed", async (test) => {
   };
   const archive = { metadata, base, names };
   const result = embed(archive);
-  test.notOk(result.resources);
+  test.equal(result.resources[0].url, "#2_id");
   test.ok(result.url);
-  test.notOk(result.readingOrder);
+  test.equal(result.resources[0].url, "#2_id");
 });

@@ -2,6 +2,7 @@ import { css } from "../css.js";
 import { attributes } from "./attributes.js";
 import createDOMPurify from "dompurify";
 import { JSDOM } from "jsdom";
+import { count } from "@wordpress/wordcount";
 
 // Support srcset
 const purifyConfig = {
@@ -16,6 +17,7 @@ const purifyConfig = {
 
 export async function markup(file) {
   const { value, path, contentType = "text/html", id, rel = [] } = file;
+  const wordcount = count(value, "words", {});
   let styles = [];
   let links = [];
   const resourceURL = new URL(path, "https://example.com/");
@@ -123,6 +125,7 @@ export async function markup(file) {
     title,
     inLanguage,
     rel,
+    wordcount,
   };
 }
 

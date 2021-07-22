@@ -206,6 +206,29 @@ export class Epub extends Zip {
     });
     return uploads;
   }
+
+  async getWordCount() {
+    this.metadata.resources = this.metadata.resources.map((resource) => {
+      const markup = this.chapters.find(
+        (chapter) => chapter.path === resource.url
+      );
+      if (markup) {
+        resource.wordcount = markup.wordcount;
+      }
+      return resource;
+    });
+    this.metadata.wordcount = this.metadata.readingOrder.reduce(
+      (accumulator, current) => {
+        const { wordcount = 0 } = this.chapters.find(
+          (chapter) => chapter.path === current.url
+        );
+        return accumulator + wordcount;
+      },
+      0
+    );
+    // iterate over resources, get wordcounts where available
+    // iterate over readingOrder, reduce to wordcount
+  }
 }
 
 Epub.prototype.process = async function process({
@@ -236,6 +259,8 @@ Epub.prototype.process = async function process({
   });
   queue.addAll(this.upload({ worker }));
   await queue.onEmpty();
+  // get word counts
+  await this.task("getWordCount");
   const main = stringify(this);
   console.log("rendering styles");
   main.styles = await renderCSS(this);
