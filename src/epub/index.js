@@ -8,25 +8,7 @@ import { purify } from "../parsers/dompurify.js";
 import { stringify } from "./stringify/stringify.js";
 import { toJSON } from "../metadata.js";
 import { renderCSS } from "./stringify/stylesheets.js";
-
-const JSTYPES = [
-  "text/javascript",
-  "text/ecmascript",
-  "text/javascript1.0",
-  "text/javascript1.1",
-  "text/javascript1.2",
-  "text/javascript1.3",
-  "text/javascript1.4",
-  "text/javascript1.5",
-  "text/jscript",
-  "text/livescript",
-  "text/x-javascript",
-  "text/x-ecmascript",
-  "application/x-javascript",
-  "application/x-ecmascript",
-  "application/javascript",
-  "application/ecmascript",
-];
+import { JSTYPES } from "../parsers/js-types.js";
 
 export function isTextFile(type) {
   if (
@@ -259,10 +241,8 @@ Epub.prototype.process = async function process({
   });
   queue.addAll(this.upload({ worker }));
   await queue.onEmpty();
-  // get word counts
   await this.task("getWordCount");
   const main = stringify(this);
-  console.log("rendering styles");
   main.styles = await renderCSS(this);
   main.metadata = opfResult;
   file.value = main;

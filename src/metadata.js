@@ -1,3 +1,5 @@
+import { filterResources } from "./parsers/js-types.js";
+
 export function toJSON(archive) {
   const meta = archive.metadata;
   const resources = meta.resources.map((resource) => {
@@ -27,7 +29,7 @@ export function embed(archive) {
   return {
     ...archive.metadata,
     url,
-    resources,
-    readingOrder,
+    resources: filterResources(resources),
+    readingOrder: filterResources(readingOrder),
   };
 }
