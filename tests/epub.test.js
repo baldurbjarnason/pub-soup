@@ -3,7 +3,7 @@ import { once } from "events";
 import { Base, Names } from "../src/zip/index.js";
 import { env } from "../src/env.js";
 import tap from "tap";
-import { readFile } from "fs/promises";
+import { readFile, writeFile } from "fs/promises";
 import { fileURLToPath } from "url";
 import * as path from "path";
 const __filename = fileURLToPath(import.meta.url);
@@ -299,6 +299,85 @@ tap.test("Epub process", async (test) => {
         }
       )
     )
+  );
+});
+
+tap.test("Epub render", async (test) => {
+  let counter = 0;
+
+  function id() {
+    counter = counter + 1;
+    return counter + "_id";
+  }
+
+  const names = new Names(id);
+  const testEnv = { ...env, names };
+  const factory = new EpubFactory(testEnv);
+  const epub = await factory.file("test.epub");
+  async function worker(upload) {
+    return upload;
+  }
+  const result = await epub.render({
+    url: {
+      base: "http://test.example.com/",
+      upload: "http://upload.example.com/",
+    },
+    worker,
+  });
+  await writeFile(
+    path.join(__dirname, "fixtures/output/", "index.html"),
+    result
+  );
+  test.same(
+    result,
+    await readFile(path.join(__dirname, "fixtures/output/", "index.html"), {
+      encoding: "utf8",
+    })
+  );
+});
+tap.test("Epub render 2", async (test) => {
+  let counter = 0;
+
+  function id() {
+    counter = counter + 1;
+    return counter + "_id";
+  }
+
+  const names = new Names(id);
+  const testEnv = { ...env, names };
+  const factory = new EpubFactory(testEnv);
+  const epub = await factory.file("test.epub");
+  async function worker(upload) {
+    return upload;
+  }
+  const result = await epub.render(
+    {
+      url: {
+        base: "http://test.example.com/",
+        upload: "http://upload.example.com/",
+      },
+      worker,
+    },
+    {
+      description: "Test Epub file",
+      cover: "/cover.jpeg",
+      scriptHTML: "<script src='/script.js' module></script>",
+      canonical: "https://canonical.example.com/",
+      faviconMain: "https://www.example.com/favicon",
+      faviconSVG: "https://www.example.com/favicon",
+      manifestURL: "https://www.example.com/manifest",
+      appleIcon: "https://www.example.com/appleIcon",
+    }
+  );
+  await writeFile(
+    path.join(__dirname, "fixtures/output/", "index2.html"),
+    result
+  );
+  test.same(
+    result,
+    await readFile(path.join(__dirname, "fixtures/output/", "index2.html"), {
+      encoding: "utf8",
+    })
   );
 });
 

@@ -9,6 +9,7 @@ import { stringify } from "./stringify/stringify.js";
 import { toJSON } from "../metadata.js";
 import { renderCSS } from "./stringify/stylesheets.js";
 import { JSTYPES } from "../parsers/js-types.js";
+import { render } from "../templates/index.js";
 
 export function isTextFile(type) {
   if (
@@ -208,43 +209,44 @@ export class Epub extends Zip {
       },
       0
     );
-    // iterate over resources, get wordcounts where available
-    // iterate over readingOrder, reduce to wordcount
+  }
+
+  async render(config, data = {}) {
+    const file = await this.process(config);
+    const context = Object.assign({}, file, data);
+    context.metadata = file.value.metadata;
+    return render(context);
+  }
+
+  async process({ url, concurrency = 8, worker = () => {} }) {
+    this.base = new this.Base(url, this.env);
+    const opfFile = await this.task("getOPF");
+    const opfResult = await this.task("getMetadata", opfFile);
+    await this.task("contents");
+    const queue = new PQueue({ concurrency });
+    let count = 0;
+    queue.on("completed", () => {
+      count = count + 1;
+      this.emit("progress", {
+        completed: count,
+        total: this.total,
+        pending: queue.pending,
+      });
+    });
+    queue.addAll(this.markup());
+    const file = new File({
+      path: this.base.transform("index.html", "index.html", "upload"),
+      base: this.base,
+      contentType: "text/html",
+      metadata: opfResult,
+    });
+    queue.addAll(this.upload({ worker }));
+    await queue.onEmpty();
+    await this.task("getWordCount");
+    const main = stringify(this);
+    main.styles = await renderCSS(this);
+    main.metadata = opfResult;
+    file.value = main;
+    return file;
   }
 }
-
-Epub.prototype.process = async function process({
-  url,
-  concurrency = 8,
-  worker = () => {},
-}) {
-  this.base = new this.Base(url, this.env);
-  const opfFile = await this.task("getOPF");
-  const opfResult = await this.task("getMetadata", opfFile);
-  await this.task("contents");
-  const queue = new PQueue({ concurrency });
-  let count = 0;
-  queue.on("completed", () => {
-    count = count + 1;
-    this.emit("progress", {
-      completed: count,
-      total: this.total,
-      pending: queue.pending,
-    });
-  });
-  queue.addAll(this.markup());
-  const file = new File({
-    path: this.base.transform("index.html", "index.html", "upload"),
-    base: this.base,
-    contentType: "text/html",
-    metadata: opfResult,
-  });
-  queue.addAll(this.upload({ worker }));
-  await queue.onEmpty();
-  await this.task("getWordCount");
-  const main = stringify(this);
-  main.styles = await renderCSS(this);
-  main.metadata = opfResult;
-  file.value = main;
-  return file;
-};
