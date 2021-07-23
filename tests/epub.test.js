@@ -3,7 +3,7 @@ import { once } from "events";
 import { Base, Names } from "../src/zip/index.js";
 import { env } from "../src/env.js";
 import tap from "tap";
-import { readFile, writeFile } from "fs/promises";
+import { readFile } from "fs/promises";
 import { fileURLToPath } from "url";
 import * as path from "path";
 const __filename = fileURLToPath(import.meta.url);
@@ -324,10 +324,10 @@ tap.test("Epub render", async (test) => {
     },
     worker,
   });
-  await writeFile(
-    path.join(__dirname, "fixtures/output/", "index.html"),
-    result
-  );
+  // await writeFile(
+  //   path.join(__dirname, "fixtures/output/", "index.html"),
+  //   result
+  // );
   test.same(
     result,
     await readFile(path.join(__dirname, "fixtures/output/", "index.html"), {
@@ -369,10 +369,10 @@ tap.test("Epub render 2", async (test) => {
       appleIcon: "https://www.example.com/appleIcon",
     }
   );
-  await writeFile(
-    path.join(__dirname, "fixtures/output/", "index2.html"),
-    result
-  );
+  // await writeFile(
+  //   path.join(__dirname, "fixtures/output/", "index2.html"),
+  //   result
+  // );
   test.same(
     result,
     await readFile(path.join(__dirname, "fixtures/output/", "index2.html"), {
