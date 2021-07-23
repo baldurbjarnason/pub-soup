@@ -1,5 +1,6 @@
 import { Epub, EpubFactory } from "../src/epub/index.js";
-import { ZipFactory } from "../src/zip/index.js";
+// import { ZipFactory } from "../src/zip/index.js";
+import { Formats, formats } from "../index.js";
 import { env } from "../src/env.js";
 import tap from "tap";
 import * as td from "testdouble";
@@ -17,7 +18,7 @@ tap.test("Epub factory file", async (test) => {
   test.ok(file);
   const factory = new EpubFactory(env);
   test.type(factory.Archive, Epub);
-  const epub = await factory.file("test.epub");
+  const epub = await formats.file("application/epub+zip", "test.epub");
   test.ok(epub);
 });
 
@@ -26,8 +27,10 @@ tap.test("Zip factory url", async (test, done) => {
     return handler(request, response);
   });
   server.listen(3000, () => {});
-  const factory = new ZipFactory(env);
-  const epub = await factory.url("http://localhost:3000/test.epub");
+  const epub = await formats.url(
+    "application/epub+zip",
+    "http://localhost:3000/test.epub"
+  );
   test.ok(epub);
   const file = await epub.textFile("mimetype");
   test.equal(file, "application/epub+zip");
@@ -35,32 +38,29 @@ tap.test("Zip factory url", async (test, done) => {
 });
 
 tap.test("Zip factory buffer", async (test) => {
-  const factory = new ZipFactory(env);
   const buffer = await readFile(join(process.cwd(), "test.epub"));
-  const epub = await factory.buffer(buffer);
+  const epub = await formats.buffer("application/zip", buffer);
   test.ok(epub);
 });
 
 tap.test("Zip factory s3", async (test) => {
   const testEnv = td.object(env);
-  const factory = new ZipFactory(testEnv);
+  const formats = new Formats(testEnv);
   const s3Client = () => {};
   const config = {};
-  const epub = await factory.s3(s3Client, config);
+  const epub = await formats.s3("application/zip", s3Client, config);
   test.ok(epub);
   td.verify(testEnv.s3(s3Client, config));
 });
 
 tap.test("Zip textFile", async (test) => {
-  const factory = new ZipFactory(env);
-  const zip = await factory.file("test.epub");
+  const zip = await formats.file("application/zip", "test.epub");
   const file = await zip.textFile("mimetype");
   test.equal(file, "application/epub+zip");
 });
 
 tap.test("Zip dataFile", async (test) => {
-  const factory = new EpubFactory(env);
-  const epub = await factory.file("test.epub");
+  const epub = await formats.file("application/epub+zip", "test.epub");
   const file = await epub.dataFile("mimetype");
   test.equal(file.toString(), "application/epub+zip");
 });

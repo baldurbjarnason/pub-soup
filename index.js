@@ -1,6 +1,6 @@
 import { env } from "./src/env.js";
 import { EpubFactory } from "./src/epub/index.js";
-import { ZipFactory } from "./src/zip.js";
+import { ZipFactory } from "./src/zip/index.js";
 
 export class Formats {
   constructor(env) {
@@ -9,10 +9,6 @@ export class Formats {
       "application/zip": new ZipFactory(env),
       "application/epub+zip": new EpubFactory(env),
     };
-  }
-
-  use(mediaType, handler) {
-    this.formats[mediaType] = handler;
   }
 
   file(mediaType, path) {
