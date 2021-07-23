@@ -317,13 +317,16 @@ tap.test("Epub render", async (test) => {
   async function worker(upload) {
     return upload;
   }
-  const result = await epub.render({
-    url: {
-      base: "http://test.example.com/",
-      upload: "http://upload.example.com/",
+  const result = await epub.render(
+    {
+      url: {
+        base: "http://test.example.com/",
+        upload: "http://upload.example.com/",
+      },
+      worker,
     },
-    worker,
-  });
+    { stylesheets: ["style.css"] }
+  );
   // await writeFile(
   //   path.join(__dirname, "fixtures/output/", "index.html"),
   //   result

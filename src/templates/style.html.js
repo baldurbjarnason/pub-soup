@@ -5,9 +5,9 @@ export function style(context) {
   const { styles } = context.value;
   return (
     ifSafe(context.stylesHTML) ||
-    html` ${stylesheets
-      .map((url) => html`<link rel="stylesheet" href="${url}" />`)
-      .join("\n")}
+    html` ${stylesheets.map(
+      (url) => html`<link rel="stylesheet" href="${url}" />`
+    )}
     ${safe(styles)}`
   );
 }

@@ -24,7 +24,7 @@ function nonLinearAttributes(linear) {
 export function renderImage(file) {
   return `<soup-image id="${file.id}" data-title="${file.title}" data-path="${
     file.path
-  }"${nonLinearAttributes(true)} data-rel="${file.rel.join(" ")}">
+  }"${nonLinearAttributes(true)} data-rel="${file.rel.join(" ")}" hidden>
   <soup-html><img src="${file.href}" alt="${
     file.title
   }" loading="lazy"></soup-html>

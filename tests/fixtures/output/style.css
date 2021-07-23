@@ -1,0 +1,13 @@
+body {
+  font-size: 100%;
+}
+
+soup-chapter {
+  display: block;
+  outline: 1px solid #f0f0f0;
+  padding: 3rem 5vw;
+}
+
+soup-chapter[hidden], soup-image[hidden] {
+  display: none;
+}
