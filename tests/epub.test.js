@@ -28,7 +28,7 @@ tap.test("Epub opf", async (test) => {
     })
   );
   test.equal(opfFile.path, "content.opf");
-  const metadata = await epub.task("opf", opfFile);
+  const metadata = await epub.task("getMetadata", opfFile);
   test.same(metadata, {
     "@context": ["https://schema.org", "https://www.w3.org/ns/wp-context"],
     type: ["Book"],
@@ -99,7 +99,7 @@ tap.test("Epub opf", async (test) => {
   test.ok(epub);
   epub.base = new epub.Base({ base: "http://test.example.com/" }, env);
   const opfFile = await epub.task("getOPF");
-  await epub.task("opf", opfFile);
+  await epub.task("getMetadata", opfFile);
   test.equal(epub.total, 9);
   test.equal(epub.total, 9);
 });
@@ -125,7 +125,7 @@ tap.test("Epub contents", async (test) => {
     { names }
   );
   const opfFile = await epub.task("getOPF");
-  await epub.task("opf", opfFile);
+  await epub.task("getMetadata", opfFile);
   const contents = await epub.task("contents");
   test.same(contents, {
     value: {
@@ -289,7 +289,11 @@ tap.test("Epub process", async (test) => {
     result.value,
     JSON.parse(
       await readFile(
-        path.join(__dirname, "fixtures/output/", result.path + ".json"),
+        path.join(
+          __dirname,
+          "fixtures/output/",
+          path.basename(result.path) + ".json"
+        ),
         {
           encoding: "utf8",
         }
@@ -356,6 +360,6 @@ async function setupFile() {
     { names }
   );
   const opfFile = await epub.task("getOPF");
-  await epub.task("opf", opfFile);
+  await epub.task("getMetadata", opfFile);
   return epub;
 }

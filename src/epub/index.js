@@ -60,7 +60,7 @@ export class Epub extends Zip {
   // Convert original OPF to use new urls?
   //
   // Extract start position. Meaningless in a single page?
-  async opf(file) {
+  async getMetadata(file) {
     const result = opf(file.value, file.path);
     this.metadata = result;
     return toJSON(this);
@@ -220,7 +220,7 @@ Epub.prototype.process = async function process({
 }) {
   this.base = new this.Base(url, this.env);
   const opfFile = await this.task("getOPF");
-  const opfResult = await this.task("opf", opfFile);
+  const opfResult = await this.task("getMetadata", opfFile);
   await this.task("contents");
   const queue = new PQueue({ concurrency });
   let count = 0;
@@ -234,7 +234,7 @@ Epub.prototype.process = async function process({
   });
   queue.addAll(this.markup());
   const file = new File({
-    path: "index.html",
+    path: this.base.transform("index.html", "index.html", "upload"),
     base: this.base,
     contentType: "text/html",
     metadata: opfResult,
