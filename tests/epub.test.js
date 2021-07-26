@@ -126,7 +126,7 @@ tap.test("Epub contents", async (test) => {
   );
   const opfFile = await epub.task("getOPF");
   await epub.task("getMetadata", opfFile);
-  const contents = await epub.task("contents");
+  const contents = await epub.task("getContents");
   test.same(contents, {
     value: {
       type: "NCX",
@@ -138,7 +138,7 @@ tap.test("Epub contents", async (test) => {
     path: "content.ncx",
     base: epub.base,
     contentType: "application/json",
-    id: "6_id",
+    id: "7_id",
     rel: [],
   });
 });
@@ -282,7 +282,11 @@ tap.test("Epub process", async (test) => {
     worker,
   });
   // await writeFile(
-  //   path.join(__dirname, "fixtures/output/", result.path + ".json"),
+  //   path.join(
+  //     __dirname,
+  //     "fixtures/output/",
+  //     path.basename(result.path) + ".json"
+  //   ),
   //   JSON.stringify(result.value, null, 2)
   // );
   test.same(

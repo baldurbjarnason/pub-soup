@@ -45,15 +45,9 @@ export class Epub extends Zip {
   }
 
   async getOPF() {
-    const meta = await this.textFile("META-INF/container.xml");
-    const opfPath = meta.match(/full-path="([^"]+)"/)[1];
-    this.files[opfPath] = new File({
-      value: await this.textFile(opfPath),
-      path: opfPath,
-      base: this.base,
-      id: this.names.get(opfPath),
-    });
-    return this.files[opfPath];
+    const meta = await this.getTextFile({ url: "META-INF/container.xml" });
+    const opfPath = meta.value.match(/full-path="([^"]+)"/)[1];
+    return this.getTextFile({ url: opfPath });
   }
 
   // In multi-file sitations, the API consumer should dynamically add the main URL after the fact if it wants to use the multi-page version. (Which is broken because of CSS)
@@ -63,7 +57,7 @@ export class Epub extends Zip {
   // Extract start position. Meaningless in a single page?
   async getMetadata(file) {
     const result = opf(file.value, file.path);
-    this.metadata = result;
+    this._metadata = result;
     return toJSON(this);
   }
 
@@ -84,31 +78,48 @@ export class Epub extends Zip {
     return file;
   }
 
-  async contents() {
-    const resource = this.metadata.resources.find((resource) => {
+  async getBinaryFile(resource) {
+    let file;
+    if (this.files[resource.url]) {
+      file = this.files[resource.url];
+    } else {
+      file = new File({
+        value: await this.dataFile(resource.url),
+        path: resource.url,
+        contentType: resource.encodingFormat,
+        base: this.base,
+        id: this.names.id(resource.url),
+        rel: [].concat(resource.rel),
+      });
+    }
+    return file;
+  }
+
+  async getContents() {
+    const resource = this._metadata.resources.find((resource) => {
       return !resource.rel.includes("contents") && resource.rel.includes("ncx");
     });
     const file = await this.getTextFile(resource);
-    this.contents = new File({
+    this._contents = new File({
       value: toc(file.value, file.path),
       path: resource.url,
       contentType: "application/json",
       base: this.base,
       id: this.names.id(resource.url),
     });
-    return this.contents;
+    return this._contents;
   }
 
   get total() {
-    if (!this.htmlCount) {
-      this.htmlCount = this.metadata.resources.filter((resource) => {
+    if (!this._htmlCount) {
+      this._htmlCount = this._metadata.resources.filter((resource) => {
         return (
           resource.encodingFormat === "application/xhtml+xml" ||
           resource.encodingFormat === "text/html"
         );
       }).length;
     }
-    return this.htmlCount + this.metadata.resources.length;
+    return this._htmlCount + this._metadata.resources.length;
   }
 
   async processMarkup(resource) {
@@ -118,8 +129,18 @@ export class Epub extends Zip {
     return result;
   }
 
+  async getCover() {
+    if (!this._metadata) {
+      this._metadata = await this.getMetadata();
+    }
+    const coverResource = this._metadata.resources.find((resource) =>
+      resource.rel.includes("cover")
+    );
+    return this.processBinaryFile(coverResource.url);
+  }
+
   markup() {
-    const chapterTasks = this.metadata.resources
+    const chapterTasks = this._metadata.resources
       .filter((resource) => {
         return (
           resource.encodingFormat === "application/xhtml+xml" ||
@@ -159,14 +180,7 @@ export class Epub extends Zip {
   }
 
   async processBinaryFile(resource) {
-    const file = new File({
-      value: await this.dataFile(resource.url),
-      path: resource.url,
-      contentType: resource.encodingFormat,
-      base: this.base,
-      id: this.names.id(resource.url),
-      rel: [].concat(resource.rel),
-    });
+    const file = await this.getBinaryFile(resource);
     if (!JSTYPES.includes(file.contentType)) {
       file.path = this.names.get(file.path);
       return file;
@@ -174,7 +188,7 @@ export class Epub extends Zip {
   }
 
   upload({ worker }) {
-    const uploads = this.metadata.resources.map((resource) => {
+    const uploads = this._metadata.resources.map((resource) => {
       return async () => {
         let task;
         if (isTextFile(resource.encodingFormat)) {
@@ -191,7 +205,7 @@ export class Epub extends Zip {
   }
 
   async getWordCount() {
-    this.metadata.resources = this.metadata.resources.map((resource) => {
+    this._metadata.resources = this._metadata.resources.map((resource) => {
       const markup = this.chapters.find(
         (chapter) => chapter.path === resource.url
       );
@@ -200,7 +214,7 @@ export class Epub extends Zip {
       }
       return resource;
     });
-    this.metadata.wordcount = this.metadata.readingOrder.reduce(
+    this._metadata.wordcount = this._metadata.readingOrder.reduce(
       (accumulator, current) => {
         const { wordcount = 0 } = this.chapters.find(
           (chapter) => chapter.path === current.url
@@ -222,7 +236,7 @@ export class Epub extends Zip {
     this.base = new this.Base(url, this.env);
     const opfFile = await this.task("getOPF");
     const opfResult = await this.task("getMetadata", opfFile);
-    await this.task("contents");
+    await this.task("getContents");
     const queue = new PQueue({ concurrency });
     let count = 0;
     queue.on("completed", () => {

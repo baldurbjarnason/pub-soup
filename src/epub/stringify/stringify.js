@@ -17,11 +17,11 @@ ${JSON.stringify(embed(epub))}
   ];
   // Render nav
 
-  if (epub.contents) {
-    strings = strings.concat(render(epub.contents, epub));
+  if (epub._contents) {
+    strings = strings.concat(render(epub._contents, epub));
   }
-  // for each resource in epub.metadata.readingOrder, render markup file
-  const resources = epub.metadata.readingOrder.map((resource) => resource.url);
+  // for each resource in epub._metadata.readingOrder, render markup file
+  const resources = epub._metadata.readingOrder.map((resource) => resource.url);
   for (const resource of resources) {
     const chapter = epub.chapters.find((file) => file.path === resource);
     strings = strings.concat(renderMarkup(chapter));
@@ -35,7 +35,7 @@ ${JSON.stringify(embed(epub))}
     strings = strings.concat(renderMarkup(markup, false));
   }
   // render images from resources.
-  const images = epub.metadata.resources.filter((resource) =>
+  const images = epub._metadata.resources.filter((resource) =>
     resource.encodingFormat.includes("image")
   );
   for (const image of images) {
