@@ -28,7 +28,7 @@ tap.test("Epub opf", async (test) => {
     })
   );
   test.equal(opfFile.path, "content.opf");
-  const metadata = await epub.task("getMetadata", opfFile);
+  const metadata = await epub.task("getMetadata");
   test.same(metadata, {
     "@context": ["https://schema.org", "https://www.w3.org/ns/wp-context"],
     type: ["Book"],
@@ -97,9 +97,8 @@ tap.test("Epub opf", async (test) => {
   const factory = new EpubFactory(env);
   const epub = await factory.file("test.epub");
   test.ok(epub);
-  epub.base = new epub.Base({ base: "http://test.example.com/" }, env);
   const opfFile = await epub.task("getOPF");
-  await epub.task("getMetadata", opfFile);
+  await epub.task("getMetadata", { base: "http://test.example.com/" });
   test.equal(epub.total, 9);
   test.equal(epub.total, 9);
   test.equal(opfFile, await epub.task("getOPF"));
@@ -125,8 +124,7 @@ tap.test("Epub contents", async (test) => {
     },
     { names }
   );
-  const opfFile = await epub.task("getOPF");
-  await epub.task("getMetadata", opfFile);
+  await epub.task("getMetadata");
   const contents = await epub.task("getContents");
   test.same(contents, {
     value: {
@@ -422,7 +420,6 @@ async function setupFile() {
     },
     { names }
   );
-  const opfFile = await epub.task("getOPF");
-  await epub.task("getMetadata", opfFile);
+  await epub.task("getMetadata");
   return epub;
 }

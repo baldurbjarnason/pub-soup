@@ -55,9 +55,16 @@ export class Epub extends Zip {
   // Convert original OPF to use new urls?
   //
   // Extract start position. Meaningless in a single page?
-  async getMetadata() {
+  async getMetadata(base) {
     await this.setMetadata();
+    if (base) {
+      this.setupBase(base);
+    }
     return toJSON(this);
+  }
+
+  setupBase(base) {
+    this.base = new this.Base(base, this.env);
   }
 
   async setMetadata() {
