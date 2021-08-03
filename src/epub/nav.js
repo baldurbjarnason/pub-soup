@@ -16,6 +16,22 @@ export function toc(text, url) {
   }
 }
 
+function parseLandmarksHTML($) {
+  const landmarks = {};
+  $('nav[epub\\:type="landmarks"] a[epub\\:type]').each((i, element) => {
+    const node = $(element);
+    const term = node.attr("epub:type");
+    if (!landmarks[term]) {
+      landmarks[term] = [];
+    }
+    landmarks[term] = landmarks[term].concat({
+      url: node.attr("href"),
+      label: node.text(),
+    });
+  });
+  return landmarks;
+}
+
 function parseNavHTML($, url) {
   const toc = {
     type: "html",
@@ -57,6 +73,7 @@ function parseNavHTML($, url) {
     children.each((i, element) => parseListItem(i, element, child, $));
     item.children = item.children.concat(child);
   }
+  toc.landmarks = parseLandmarksHTML($);
   return toc;
 }
 

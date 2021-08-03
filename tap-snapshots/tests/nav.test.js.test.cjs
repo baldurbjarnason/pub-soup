@@ -107,6 +107,7 @@ Object {
     },
   ],
   "inLanguage": "html-lang",
+  "landmarks": Object {},
   "type": "html",
   "url": "https://example.com/fixtures/demo-epub/childrens-literature/EPUB/nav.xhtml",
 }
@@ -123,6 +124,7 @@ Object {
   ],
   "heading": "THE CONTENTS",
   "inLanguage": "en",
+  "landmarks": Object {},
   "type": "html",
   "url": "https://example.com/fixtures/demo-epub/childrens-literature/EPUB/nav.xhtml",
 }
@@ -291,6 +293,20 @@ Object {
   ],
   "heading": "THE CONTENTS",
   "inLanguage": "en",
+  "landmarks": Object {
+    "bodymatter": Array [
+      Object {
+        "label": "Begin Reading",
+        "url": "fixtures/demo-epub/childrens-literature/EPUB/s04.xhtml#pgepubid00498",
+      },
+    ],
+    "toc": Array [
+      Object {
+        "label": "Table of Contents",
+        "url": "fixtures/demo-epub/childrens-literature/EPUB/nav.xhtml#toc",
+      },
+    ],
+  },
   "type": "html",
   "url": "https://example.com/fixtures/demo-epub/childrens-literature/EPUB/nav.xhtml",
 }
