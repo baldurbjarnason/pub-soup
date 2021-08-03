@@ -55,10 +55,17 @@ export class Epub extends Zip {
   // Convert original OPF to use new urls?
   //
   // Extract start position. Meaningless in a single page?
-  async getMetadata(file) {
-    const result = opf(file.value, file.path);
-    this._metadata = result;
+  async getMetadata() {
+    await this.setMetadata();
     return toJSON(this);
+  }
+
+  async setMetadata() {
+    if (!this._metadata) {
+      const file = await this.task("getOPF");
+      const result = opf(file.value, file.path);
+      this._metadata = result;
+    }
   }
 
   async getTextFile(resource) {
@@ -133,12 +140,12 @@ export class Epub extends Zip {
 
   async getCover() {
     if (!this._metadata) {
-      this._metadata = await this.getMetadata();
+      await this.setMetadata();
     }
     const coverResource = this._metadata.resources.find((resource) =>
       resource.rel.includes("cover")
     );
-    return this.processBinaryFile(coverResource.url);
+    return this.processBinaryFile(coverResource);
   }
 
   markup() {
@@ -236,8 +243,7 @@ export class Epub extends Zip {
 
   async process({ url, concurrency = 8, worker = () => {} }) {
     this.base = new this.Base(url, this.env);
-    const opfFile = await this.task("getOPF");
-    const opfResult = await this.task("getMetadata", opfFile);
+    const opfResult = await this.task("getMetadata");
     await this.task("getContents");
     const queue = new PQueue({ concurrency });
     let count = 0;

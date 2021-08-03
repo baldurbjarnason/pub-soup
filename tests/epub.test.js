@@ -214,6 +214,20 @@ tap.test("Epub  processTextFile xhtml", async (test) => {
     })
   );
 });
+tap.test("Epub  cover", async (test) => {
+  const factory = new EpubFactory(env);
+  const epub = await factory.file("test.epub");
+  const file = await epub.getCover();
+  // await writeFile(
+  //   path.join(__dirname, "fixtures/output/cover.jpg"),
+  //   file.value
+  // );
+  const output = await readFile(
+    path.join(__dirname, "fixtures/output/cover.jpg")
+  );
+  test.equal(file.value.length, output.length);
+  test.equal(file, await epub.getCover());
+});
 
 tap.test("Epub  processTextFile css", async (test) => {
   const epub = await setupFile();
@@ -388,44 +402,6 @@ tap.test("Epub render 2", async (test) => {
     })
   );
 });
-
-// tap.test("Epub process error", async (test) => {
-//   let counter = 0;
-
-//   function id() {
-//     counter = counter + 1;
-//     return counter + "_id";
-//   }
-
-//   const names = new Names(id);
-//   const testEnv = { ...env, names };
-//   const factory = new EpubFactory(testEnv);
-//   const epub = await factory.file("test.epub");
-//   async function worker(upload) {
-//     throw new Error("Uploads Failed!!!");
-//   }
-//   const iterator = epub.process({
-//     url: {
-//       base: "http://test.example.com/",
-//       upload: "http://upload.example.com/",
-//     },
-//     worker,
-//   });
-//   for await (const result of iterator) {
-//     // await writeFile(
-//     //   path.join(__dirname, "fixtures/output/", result.path),
-//     //   JSON.stringify(result.value, null, 2)
-//     // );
-//     test.same(
-//       result.value,
-//       JSON.parse(
-//         await readFile(path.join(__dirname, "fixtures/output/", result.path), {
-//           encoding: "utf8",
-//         })
-//       )
-//     );
-//   }
-// });
 
 async function setupFile() {
   let counter = 0;
