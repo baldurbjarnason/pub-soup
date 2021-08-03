@@ -102,6 +102,7 @@ tap.test("Epub opf", async (test) => {
   await epub.task("getMetadata", opfFile);
   test.equal(epub.total, 9);
   test.equal(epub.total, 9);
+  test.equal(opfFile, await epub.task("getOPF"));
 });
 
 tap.test("Epub contents", async (test) => {

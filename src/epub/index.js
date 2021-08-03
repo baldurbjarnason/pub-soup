@@ -74,6 +74,7 @@ export class Epub extends Zip {
         id: this.names.id(resource.url),
         rel: [].concat(resource.rel),
       });
+      this.files[resource.url] = file;
     }
     return file;
   }
@@ -91,6 +92,7 @@ export class Epub extends Zip {
         id: this.names.id(resource.url),
         rel: [].concat(resource.rel),
       });
+      this.files[resource.url] = file;
     }
     return file;
   }
@@ -247,7 +249,7 @@ export class Epub extends Zip {
         pending: queue.pending,
       });
     });
-    queue.addAll(this.markup());
+    await queue.addAll(this.markup());
     const file = new File({
       path: this.base.transform("index.html", "index.html", "upload"),
       base: this.base,
