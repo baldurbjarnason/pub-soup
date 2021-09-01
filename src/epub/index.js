@@ -213,7 +213,7 @@ export class Epub extends Zip {
           task = this.task("processBinaryFile", resource);
         }
         return task.then((result) => {
-          if (result) return worker(result);
+          if (result) return worker(result, resource);
         });
       };
     });
