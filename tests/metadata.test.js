@@ -1,56 +1,15 @@
-import { embed, toJSON } from "../src/metadata.js";
-import { Base, Names } from "../src/zip/index.js";
+import { embed } from "../dist/lib/metadata.js";
 import tap from "tap";
 
-tap.test("metadata toJSON", async (test) => {
-  let counter = 0;
-
-  function id() {
-    counter = counter + 1;
-    return counter + "_id";
-  }
-
-  const names = new Names(id);
-  const base = new Base(
-    {
-      base: "http://test.example.com/",
-      upload: "http://upload.example.com/",
-    },
-    { names }
-  );
-  const _metadata = {
-    type: ["Book"],
-    resources: [{ url: "file.html" }],
-    readingOrder: [{ url: "file.html" }],
-  };
-  const archive = { _metadata, base, names };
-  const result = toJSON(archive);
-  test.equal(result.resources[0].url, "http://upload.example.com/1_id.html");
-});
 tap.test("metadata embed", async (test) => {
-  let counter = 0;
-
-  function id() {
-    counter = counter + 1;
-    return counter + "_id";
-  }
-
-  const names = new Names(id);
-  const base = new Base(
-    {
-      base: "http://test.example.com/",
-      upload: "http://upload.example.com/",
-    },
-    { names }
-  );
   const _metadata = {
     type: ["Book"],
     resources: [{ url: "file.html" }],
     readingOrder: [{ url: "file.html" }],
   };
-  const archive = { _metadata, base, names };
+  const archive = { _metadata };
   const result = embed(archive);
-  test.equal(result.resources[0].url, "#2_id");
-  test.ok(result.url);
-  test.equal(result.resources[0].url, "#2_id");
+  test.equal(result.resources[0].url, "#idZmlsZS5odG1s");
+  test.equal(result.url, "index.html");
+  test.equal(result.resources[0].url, "#idZmlsZS5odG1s");
 });

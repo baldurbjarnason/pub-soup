@@ -1,7 +1,7 @@
-import { Epub, EpubFactory } from "../src/epub/index.js";
+import { Epub, EpubFactory } from "../dist/lib/epub/index.js";
 // import { ZipFactory } from "../src/zip/index.js";
-import { Formats, formats } from "../index.js";
-import { env } from "../src/env.js";
+import { Formats, formats } from "../dist/index.js";
+import { env } from "../dist/lib/env.js";
 import tap from "tap";
 import * as td from "testdouble";
 import { readFile } from "fs/promises";
@@ -63,4 +63,25 @@ tap.test("Zip dataFile", async (test) => {
   const epub = await formats.file("application/epub+zip", "test.epub");
   const file = await epub.dataFile("mimetype");
   test.equal(file.toString(), "application/epub+zip");
+});
+
+tap.test("Zip file", async (test) => {
+  const zip = await formats.file("application/zip", "test.epub");
+  const file = await zip.file("META-INF/container.xml");
+  test.equal(
+    file.value,
+    `<?xml version="1.0"?>
+<container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">
+   <rootfiles>
+      <rootfile full-path="content.opf"
+      media-type="application/oebps-package+xml"/>
+   </rootfiles>
+</container>`
+  );
+});
+
+tap.test("Zip buffer file", async (test) => {
+  const epub = await formats.file("application/zip", "test.epub");
+  const file = await epub.file("mimetype");
+  test.equal(file.value.toString(), "application/epub+zip");
 });

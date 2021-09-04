@@ -313,71 +313,71 @@ Object {
 `
 
 exports[`tests/nav.test.js TAP render ToC - epub2 > render ToC - epub2 1`] = `
-<soup-chapter data-stylesheets="1_id" id="1_id" data-path="OEBPS/toc.ncx" data-title="THE CONTENTS"  data-linear="false" hidden data-rel="contents">
+<soup-chapter id="fileID" data-path="OEBPS/toc.ncx" data-title="Contents" lang="en" data-linear="false" hidden data-rel="contents">
   <soup-html><soup-body>
   <nav aria-labelledby="soup-toc-heading" lang="en" role="doc-toc">
     <h1 id="soup-toc-heading">THE CONTENTS</h1>
     <ol>
-      <li><a href="#2_id:pgepubid00492">SECTION IV FAIRY STORIES—MODERN FANTASTIC TALES</a>
+      <li><a href="#idT0VCUFMvZml4dHVyZXMvZGVtby1lcHViL2NoaWxkcmVucy1saXRlcmF0dXJlL0VQVUIvczA0LnhodG1s:cGdlcHViaWQwMDQ5Mg">SECTION IV FAIRY STORIES—MODERN FANTASTIC TALES</a>
     <ol>
-      <li><a href="#2_id:pgepubid00495">BIBLIOGRAPHY</a></li>
-      <li><a href="#2_id:pgepubid00498">INTRODUCTORY</a></li>
+      <li><a href="#idT0VCUFMvZml4dHVyZXMvZGVtby1lcHViL2NoaWxkcmVucy1saXRlcmF0dXJlL0VQVUIvczA0LnhodG1s:cGdlcHViaWQwMDQ5NQ">BIBLIOGRAPHY</a></li>
+      <li><a href="#idT0VCUFMvZml4dHVyZXMvZGVtby1lcHViL2NoaWxkcmVucy1saXRlcmF0dXJlL0VQVUIvczA0LnhodG1s:cGdlcHViaWQwMDQ5OA">INTRODUCTORY</a></li>
       <li><span data-soup-nav-label>Abram S. Isaacs</span>
       
     <ol>
-      <li><a href="#2_id:pgepubid00503">190 A FOUR-LEAVED CLOVER</a>
+      <li><a href="#idT0VCUFMvZml4dHVyZXMvZGVtby1lcHViL2NoaWxkcmVucy1saXRlcmF0dXJlL0VQVUIvczA0LnhodG1s:cGdlcHViaWQwMDUwMw">190 A FOUR-LEAVED CLOVER</a>
     <ol>
-      <li><a href="#2_id:pgepubid99001">I. The Rabbi and the Diadem</a></li>
-      <li><a href="#2_id:pgepubid99002">II. Friendship</a></li>
-      <li><a href="#2_id:pgepubid99003">III. True Charity</a></li>
-      <li><a href="#2_id:pgepubid99004">IV. An Eastern Garden</a></li>
+      <li><a href="#idT0VCUFMvZml4dHVyZXMvZGVtby1lcHViL2NoaWxkcmVucy1saXRlcmF0dXJlL0VQVUIvczA0LnhodG1s:cGdlcHViaWQ5OTAwMQ">I. The Rabbi and the Diadem</a></li>
+      <li><a href="#idT0VCUFMvZml4dHVyZXMvZGVtby1lcHViL2NoaWxkcmVucy1saXRlcmF0dXJlL0VQVUIvczA0LnhodG1s:cGdlcHViaWQ5OTAwMg">II. Friendship</a></li>
+      <li><a href="#idT0VCUFMvZml4dHVyZXMvZGVtby1lcHViL2NoaWxkcmVucy1saXRlcmF0dXJlL0VQVUIvczA0LnhodG1s:cGdlcHViaWQ5OTAwMw">III. True Charity</a></li>
+      <li><a href="#idT0VCUFMvZml4dHVyZXMvZGVtby1lcHViL2NoaWxkcmVucy1saXRlcmF0dXJlL0VQVUIvczA0LnhodG1s:cGdlcHViaWQ5OTAwNA">IV. An Eastern Garden</a></li>
     </ol></li>
     </ol></li>
       <li><span data-soup-nav-label>Samuel Taylor Coleridge</span>
       
     <ol>
-      <li><a href="#2_id:pgepubid00508">191 THE LORD HELPETH MAN AND BEAST</a></li>
+      <li><a href="#idT0VCUFMvZml4dHVyZXMvZGVtby1lcHViL2NoaWxkcmVucy1saXRlcmF0dXJlL0VQVUIvczA0LnhodG1s:cGdlcHViaWQwMDUwOA">191 THE LORD HELPETH MAN AND BEAST</a></li>
     </ol></li>
       <li><span data-soup-nav-label>Hans Christian Andersen</span>
       
     <ol>
-      <li><a href="#2_id:pgepubid00512">192 THE REAL PRINCESS</a></li>
-      <li><a href="#2_id:pgepubid00515">193 THE EMPEROR'S NEW CLOTHES</a></li>
-      <li><a href="#2_id:pgepubid00520">194 THE NIGHTINGALE</a></li>
-      <li><a href="#2_id:pgepubid00529">195 THE FIR TREE</a></li>
-      <li><a href="#2_id:pgepubid00536">196 THE TINDER-BOX</a></li>
-      <li><a href="#2_id:pgepubid00543">197 THE HARDY TIN SOLDIER</a></li>
-      <li><a href="#2_id:pgepubid00548">198 THE UGLY DUCKLING</a></li>
+      <li><a href="#idT0VCUFMvZml4dHVyZXMvZGVtby1lcHViL2NoaWxkcmVucy1saXRlcmF0dXJlL0VQVUIvczA0LnhodG1s:cGdlcHViaWQwMDUxMg">192 THE REAL PRINCESS</a></li>
+      <li><a href="#idT0VCUFMvZml4dHVyZXMvZGVtby1lcHViL2NoaWxkcmVucy1saXRlcmF0dXJlL0VQVUIvczA0LnhodG1s:cGdlcHViaWQwMDUxNQ">193 THE EMPEROR'S NEW CLOTHES</a></li>
+      <li><a href="#idT0VCUFMvZml4dHVyZXMvZGVtby1lcHViL2NoaWxkcmVucy1saXRlcmF0dXJlL0VQVUIvczA0LnhodG1s:cGdlcHViaWQwMDUyMA">194 THE NIGHTINGALE</a></li>
+      <li><a href="#idT0VCUFMvZml4dHVyZXMvZGVtby1lcHViL2NoaWxkcmVucy1saXRlcmF0dXJlL0VQVUIvczA0LnhodG1s:cGdlcHViaWQwMDUyOQ">195 THE FIR TREE</a></li>
+      <li><a href="#idT0VCUFMvZml4dHVyZXMvZGVtby1lcHViL2NoaWxkcmVucy1saXRlcmF0dXJlL0VQVUIvczA0LnhodG1s:cGdlcHViaWQwMDUzNg">196 THE TINDER-BOX</a></li>
+      <li><a href="#idT0VCUFMvZml4dHVyZXMvZGVtby1lcHViL2NoaWxkcmVucy1saXRlcmF0dXJlL0VQVUIvczA0LnhodG1s:cGdlcHViaWQwMDU0Mw">197 THE HARDY TIN SOLDIER</a></li>
+      <li><a href="#idT0VCUFMvZml4dHVyZXMvZGVtby1lcHViL2NoaWxkcmVucy1saXRlcmF0dXJlL0VQVUIvczA0LnhodG1s:cGdlcHViaWQwMDU0OA">198 THE UGLY DUCKLING</a></li>
     </ol></li>
       <li><span data-soup-nav-label>Frances Browne</span>
       
     <ol>
-      <li><a href="#2_id:pgepubid00556">199 THE STORY OF FAIRYFOOT</a></li>
+      <li><a href="#idT0VCUFMvZml4dHVyZXMvZGVtby1lcHViL2NoaWxkcmVucy1saXRlcmF0dXJlL0VQVUIvczA0LnhodG1s:cGdlcHViaWQwMDU1Ng">199 THE STORY OF FAIRYFOOT</a></li>
     </ol></li>
       <li><span data-soup-nav-label>Oscar Wilde</span>
       
     <ol>
-      <li><a href="#2_id:pgepubid00566">200 THE HAPPY PRINCE</a></li>
+      <li><a href="#idT0VCUFMvZml4dHVyZXMvZGVtby1lcHViL2NoaWxkcmVucy1saXRlcmF0dXJlL0VQVUIvczA0LnhodG1s:cGdlcHViaWQwMDU2Ng">200 THE HAPPY PRINCE</a></li>
     </ol></li>
       <li><span data-soup-nav-label>Raymond MacDonald Alden</span>
       
     <ol>
-      <li><a href="#2_id:pgepubid00574">201 THE KNIGHTS OF THE SILVER SHIELD</a></li>
+      <li><a href="#idT0VCUFMvZml4dHVyZXMvZGVtby1lcHViL2NoaWxkcmVucy1saXRlcmF0dXJlL0VQVUIvczA0LnhodG1s:cGdlcHViaWQwMDU3NA">201 THE KNIGHTS OF THE SILVER SHIELD</a></li>
     </ol></li>
       <li><span data-soup-nav-label>Jean Ingelow</span>
       
     <ol>
-      <li><a href="#2_id:pgepubid00580">202 THE PRINCE'S DREAM</a></li>
+      <li><a href="#idT0VCUFMvZml4dHVyZXMvZGVtby1lcHViL2NoaWxkcmVucy1saXRlcmF0dXJlL0VQVUIvczA0LnhodG1s:cGdlcHViaWQwMDU4MA">202 THE PRINCE'S DREAM</a></li>
     </ol></li>
       <li><span data-soup-nav-label>Frank R. Stockton</span>
       
     <ol>
-      <li><a href="#2_id:pgepubid00588">203 OLD PIPES AND THE DRYAD</a></li>
+      <li><a href="#idT0VCUFMvZml4dHVyZXMvZGVtby1lcHViL2NoaWxkcmVucy1saXRlcmF0dXJlL0VQVUIvczA0LnhodG1s:cGdlcHViaWQwMDU4OA">203 OLD PIPES AND THE DRYAD</a></li>
     </ol></li>
       <li><span data-soup-nav-label>John Ruskin</span>
       
     <ol>
-      <li><a href="#2_id:pgepubid00602">204 THE KING OF THE GOLDEN RIVER OR THE BLACK BROTHERS</a></li>
+      <li><a href="#idT0VCUFMvZml4dHVyZXMvZGVtby1lcHViL2NoaWxkcmVucy1saXRlcmF0dXJlL0VQVUIvczA0LnhodG1s:cGdlcHViaWQwMDYwMg">204 THE KING OF THE GOLDEN RIVER OR THE BLACK BROTHERS</a></li>
     </ol></li>
     </ol></li>
     </ol>

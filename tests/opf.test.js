@@ -1,4 +1,4 @@
-import { opf as parseOPF } from "../src/epub/opf.js";
+import { opf as parseOPF } from "../dist/lib/epub/opf.js";
 import tap from "tap";
 import { fileURLToPath } from "url";
 import * as fs from "fs";

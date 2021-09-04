@@ -1,10 +1,11 @@
-import { toc as parseToC } from "../src/epub/nav.js";
-import { render } from "../src/epub/stringify/stringify-nav.js";
-import { File, Base, Names } from "../src/zip/index.js";
+import { toc as parseToC } from "../dist/lib/epub/nav.js";
+import { renderNav } from "../dist/lib/epub/render/renderNav.js";
+// import { File, Base, Names } from "../src/zip/index.js";
 import { readFile } from "fs/promises";
 import * as path from "path";
 import tap from "tap";
 import { fileURLToPath } from "url";
+import { Resource } from "../dist/lib/resource.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename).replace(process.cwd() + "/", "");
 
@@ -21,6 +22,7 @@ tap.test("parseToC - epub2", async (test) => {
   );
   test.matchSnapshot(result, "parseToC - epub2");
 });
+
 tap.test("parseToC - epub3", async (test) => {
   const chapter = await readFile(
     path.join(
@@ -64,6 +66,7 @@ tap.test("parseToC - epub3 - 2", async (test) => {
   results = results.concat(result);
   test.matchSnapshot(result, "parseToC - epub3 - 2");
 });
+
 tap.test("parseToC - epub3 - 3", async (test) => {
   const result = await parseToC(
     `<?xml version="1.0" encoding="utf-8"?>
@@ -93,27 +96,15 @@ tap.test("parseToC - epub3 - 3", async (test) => {
 });
 
 tap.test("render ToC - epub2", async (test) => {
-  let counter = 0;
-
-  function id() {
-    counter = counter + 1;
-    return counter + "_id";
-  }
-
-  const names = new Names(id);
-  const base = new Base(
-    {
-      base: "http://test.example.com/",
-      upload: "http://upload.example.com/",
-    },
-    { names }
-  );
-  const file = new File({
+  const file = new Resource({
     value: results[0],
-    path: "OEBPS/toc.ncx",
-    base,
-    id: names.id("OEBPS/toc.ncx"),
+    url: "OEBPS/toc.ncx",
+    id: "fileID",
+    _meta: {
+      title: "Contents",
+    },
+    inLanguage: "en",
   });
-  const result = render(file, { metadata: { inLanguage: "en" } });
+  const result = renderNav(file, { metadata: { inLanguage: "en" } });
   test.matchSnapshot(result, "render ToC - epub2");
 });
