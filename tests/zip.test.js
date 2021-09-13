@@ -22,6 +22,25 @@ tap.test("Epub factory file", async (test) => {
   test.ok(epub);
 });
 
+function stream2buffer(stream) {
+  return new Promise((resolve, reject) => {
+    const _buf = [];
+
+    stream.on("data", (chunk) => _buf.push(chunk));
+    stream.on("end", () => resolve(Buffer.concat(_buf)));
+    stream.on("error", (err) => reject(err));
+  });
+}
+
+tap.test("Epub factory file - stream", async (test) => {
+  const expectedBuffer = Buffer.from("application/epub+zip");
+  const epub = await formats.file("application/epub+zip", "test.epub");
+  const bytes = await stream2buffer(epub.stream("mimetype"));
+  test.same(bytes, expectedBuffer);
+
+  test.ok(epub);
+});
+
 tap.test("Zip factory url", async (test, done) => {
   const server = http.createServer((request, response) => {
     return handler(request, response);

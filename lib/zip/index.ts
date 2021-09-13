@@ -61,6 +61,11 @@ export class Zip extends EventEmitter {
     return file;
   }
 
+  stream(name) {
+    const file = this.directory.files.find((d) => d.path === name);
+    return file.stream();
+  }
+
   async textFile(name) {
     const file = this.directory.files.find((d) => d.path === name);
     const content = await file.buffer();
