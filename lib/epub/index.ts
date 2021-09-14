@@ -6,7 +6,7 @@ import { purifyStyles } from "../css.js";
 import { purify } from "../parsers/purify.js";
 import { JSTYPES } from "../parsers/js-types.js";
 import { getMarkup, view, getContents } from "./view.js";
-import { Metadata } from "../metadata.js";
+import { Metadata, Publication } from "../metadata.js";
 
 export function isTextFile(type) {
   if (
@@ -28,7 +28,7 @@ export class EpubFactory extends ZipFactory {
 
 export class Epub extends Zip {
   wordCount: number;
-  _metadata: Metadata;
+  _metadata: Publication;
   constructor(directory, env) {
     super(directory, env);
   }
@@ -77,21 +77,20 @@ export class Epub extends Zip {
 
   async resource(path: string) {
     if (path === "mimetype") {
-      return {
+      return new Resource({
         url: "mimetype",
         encodingFormat: "text/plain",
-      };
+      });
     } else if (path === "META-INF/container.xml") {
-      return {
+      return new Resource({
         url: "META-INF/container.xml",
         encodingFormat: "application/xml",
-      };
+      });
     }
     const metadata = await this.metadata();
     const resource = metadata.resources.find(
       (resource) => resource.url === path
     );
-    if (!resource) return null;
     const encodingFormat = resource.encodingFormat;
     const id = getId(path);
     return new Resource({ encodingFormat, id, url: path });
@@ -109,9 +108,10 @@ export class Epub extends Zip {
     let file;
     if (this.files[path]) {
       file = this.files[path];
+    } else if (!this.directory.files.find((d) => d.path === path)) {
+      return null;
     } else {
       const resource = await this.resource(path);
-      if (!resource) return null;
       file = await this.getFileForResource(resource);
       if (file.encodingFormat === "text/css") {
         file.value = await purifyStyles(file.value, file);

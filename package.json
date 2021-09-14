@@ -9,8 +9,9 @@
     "lint": "healthier && prettier --write --plugin-search-dir=. '**/*.{js,json,css,yml,svelte}'",
     "prepublishOnly": "npm run lint",
     "test": "npm run build && c8 --all tap --no-cov --ts tests/*.test.js && c8 report --reporter=lcov",
-    "test-single": "c8 tap --no-cov --ts",
+    "test-single": "npm run build && c8 tap --no-cov --ts",
     "snapshots": "TAP_SNAPSHOT=1 npm run test --ts",
+    "snapshot-single": "TAP_SNAPSHOT=1 c8 tap --no-cov --ts",
     "build": "tsc"
   },
   "repository": {

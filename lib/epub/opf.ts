@@ -1,5 +1,5 @@
 import cheerio from "cheerio";
-import { Metadata } from "../metadata.js";
+import { Metadata, Publication, asPublication } from "../metadata.js";
 
 // This should be rewritten to use a proper xml parser.
 
@@ -10,7 +10,7 @@ const options = {
   decodeEntities: true,
 };
 
-export function opf(text, opfPath) {
+export function opf(text, opfPath): Publication {
   const $ = cheerio.load(text, options);
   const book: Metadata = {
     "@context": ["https://schema.org", "https://www.w3.org/ns/wp-context"],
@@ -71,7 +71,6 @@ export function opf(text, opfPath) {
     return item;
   });
   book.resources = book.resources.concat({
-    type: "LinkedResource",
     rel: ["alternate", "describedby"],
     url: opfPath,
     encodingFormat: "application/oebps-package+xml",
@@ -182,7 +181,7 @@ export function opf(text, opfPath) {
       .filter((contributor) => !knownRoles.includes(contributor.role))
       .map((creator) => creator.name)
   );
-  return book;
+  return asPublication(book);
 }
 
 function getPath(path, opfPath) {

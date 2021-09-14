@@ -32,7 +32,6 @@ export function href(node, resource: ResourceDescriptor) {
       const fullURL = new URL(full, "https://example.com/");
       const hash = new URL(href, fullURL).hash;
       const id = hash ? getId(full, hash.replace("#", "")) : getId(full);
-      console.log("this is the hash: ", hash);
       node.setAttribute("href", "#" + id);
     }
   } else if (

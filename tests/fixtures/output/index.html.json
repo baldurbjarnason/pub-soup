@@ -1,92 +1,10 @@
 {
-  "value": "<script type=\"application/ld+json\">\n{\"@context\":[\"https://schema.org\",\"https://www.w3.org/ns/wp-context\"],\"type\":[\"Book\"],\"links\":[],\"resources\":[{\"url\":\"#iddGVzdC54aHRtbA\",\"rel\":[],\"encodingFormat\":\"application/xhtml+xml\"},{\"url\":\"#idY292ZXIueGh0bWw\",\"rel\":[],\"encodingFormat\":\"application/xhtml+xml\"},{\"url\":\"#idc3R5bGUuY3Nz\",\"rel\":[],\"encodingFormat\":\"text/css\"},{\"url\":\"#idY29udGVudC5uY3g\",\"rel\":[\"ncx\"],\"encodingFormat\":\"application/x-dtbncx+xml\"},{\"url\":\"#idY292ZXIuanBn\",\"rel\":[\"cover\"],\"encodingFormat\":\"image/jpeg\"},{\"type\":\"LinkedResource\",\"rel\":[\"alternate\",\"describedby\"],\"url\":\"#idY29udGVudC5vcGY\",\"encodingFormat\":\"application/oebps-package+xml\"}],\"readingOrder\":[{\"url\":\"#iddGVzdC54aHRtbA\",\"rel\":[],\"encodingFormat\":\"application/xhtml+xml\"}],\"inLanguage\":\"en\",\"name\":\"ePub Experiment 1\",\"id\":\"tag:baldur.bjarnason@gmail.com,2010-09:test/1\",\"_epubVersion\":\"2.0\",\"creator\":[],\"publisher\":[\"Baldur Bjarnason\"],\"author\":[\"Baldur Bjarnason\"],\"translator\":[],\"illustrator\":[],\"editor\":[],\"colorist\":[],\"contributor\":[],\"url\":\"index.html\"}\n    </script>\n<soup-chapter id=\"idY29udGVudC5uY3g\" data-path=\"content.ncx\" data-title=\"Test 1\"  data-linear=\"false\" hidden data-rel=\"contents\">\n  <soup-html><soup-body>\n  <nav aria-labelledby=\"soup-toc-heading\" lang=\"undefined\" role=\"doc-toc\">\n    <h1 id=\"soup-toc-heading\">Test 1</h1>\n    <ol>\n      <li><a href=\"#iddGVzdC54aHRtbA\">This is a test</a></li>\n    </ol>\n  </nav></soup-body></soup-html>\n</soup-chapter>\n<soup-chapter id=\"iddGVzdC54aHRtbA\" data-path=\"test.xhtml\" data-title=\"Modernizr tests for the following features:\"  data-rel=\"\">\n  <soup-html><soup-body xmlns=\"http://www.w3.org/1999/xhtml\" id=\"iddGVzdC54aHRtbA:dGl0bGVwYWdl\">\n\n<div id=\"iddGVzdC54aHRtbA:Ym9vaw\">\n\t<h2>Modernizr tests for the following features:</h2>\n\t\t\t<ul id=\"iddGVzdC54aHRtbA:ZmVhdHVyZXM\"> \n\t\t\t\t<li class=\"fontface\">@font-face</li> \n\t\t\t\t<li class=\"canvas\">Canvas</li> \n\t\t\t\t<li class=\"canvastext\">Canvas Text</li> \n\t\t\t\t<li class=\"audio\">HTML5 Audio</li> \n\t\t\t\t<li class=\"video\">HTML5 Video</li> \n\t\t\t\t<li class=\"rgba\">rgba()</li> \n\t\t\t\t<li class=\"hsla\">hsla()</li> \n\t\t\t\t<li class=\"borderimage\">border-image:</li> \n\t\t\t\t<li class=\"borderradius\">border-radius:</li> \n\t\t\t\t<li class=\"boxshadow\">box-shadow:</li> \n\t\t\t\t<li class=\"textshadow\">text-shadow:</li> \n\t\t\t\t<li class=\"opacity\">opacity:</li> \n\t\t\t\t<li class=\"multiplebgs\">Multiple backgrounds</li> \n\t\t\t\t<li class=\"flexbox\">Flexible Box Model</li> \n\t\t\t\t<li class=\"cssanimations\">CSS Animations</li> \n\t\t\t\t<li class=\"csscolumns\">CSS Columns</li> \n\t\t\t\t<li class=\"cssgradients\">CSS Gradients</li> \n\t\t\t\t<li class=\"cssreflections\">CSS Reflections</li> \n\t\t\t\t<li class=\"csstransforms\">CSS 2D Transforms</li> \n\t\t\t\t<li class=\"csstransforms3d\">CSS 3D Transforms</li> \n\t\t\t\t<li class=\"csstransitions\">CSS Transitions</li> \n\t\t\t\t<li class=\"geolocation\">Geolocation API</li> \n\t\t\t\t<li class=\"localstorage\">localStorage</li> \n\t\t\t\t<li class=\"sessionstorage\">sessionStorage</li> \n\t\t\t\t<li class=\"svg\">SVG</li> \n\t\t\t\t<li class=\"smil\">SMIL</li> \n\t\t\t\t<li class=\"svgclippaths\">SVG Clipping</li> \n\t\t\t\t<li class=\"inlinesvg\">Inline SVG</li> \n\t\t\t\t<li class=\"draganddrop\">Drag and Drop</li> \n\t\t\t\t<li class=\"hashchange\">hashchange</li> \n\t\t\t\t<li class=\"postmessage\">X-window Messaging</li> \n\t\t\t\t<li class=\"history\">History Management</li> \n\t\t\t\t<li class=\"applicationcache\">applicationCache</li> \n\t\t\t\t<li class=\"touch\">Touch events</li> \n\t\t\t\t<li class=\"websockets\">Web Sockets</li> \n\t\t\t\t<li class=\"webworkers\">Web Workers</li> \n\t\t\t\t<li class=\"websqldatabase\">Web SQL Database</li> \n\t\t\t\t<li class=\"webgl\">WebGL</li> \n\t\t\t\t<li class=\"indexeddb\">IndexedDB</li> \n\t\t\t\t<li class=\"inputtypes\">Input Types<sup>†</sup></li> \n\t\t\t\t<li class=\"input\">Input Attributes<sup>‡</sup></li> \n\t\t\t</ul> \n\t\n</div>\n\n</soup-body></soup-html>\n</soup-chapter>\n<soup-chapter id=\"idY292ZXIueGh0bWw\" data-path=\"cover.xhtml\" data-title=\"Cover\"  data-linear=\"false\" hidden data-rel=\"\">\n  <soup-html><soup-body xmlns=\"http://www.w3.org/1999/xhtml\">\n<div id=\"idY292ZXIueGh0bWw:Y292ZXItaW1hZ2U\">\n<img loading=\"lazy\" src=\"cover.jpg\" alt=\"This is an ePub experiment\" />\n</div>\n</soup-body></soup-html>\n</soup-chapter>\n<soup-image id=\"idY292ZXIuanBn\" data-title=\"Image 1\" data-path=\"cover.jpg\" data-rel=\"cover\" hidden>\n  <soup-html><img src=\"cover.jpg\" alt=\"Image 1\" loading=\"lazy\"></soup-html>\n</soup-image>",
+  "type": [
+    "LinkedResource"
+  ],
+  "value": "<script type=\"application/ld+json\">\n{\"@context\":[\"https://schema.org\",\"https://www.w3.org/ns/wp-context\"],\"type\":[\"Book\"],\"links\":[],\"resources\":[{\"type\":[\"LinkedResource\"],\"url\":\"#iddGVzdC54aHRtbA\",\"encodingFormat\":\"application/xhtml+xml\",\"rel\":[]},{\"type\":[\"LinkedResource\"],\"url\":\"#idY292ZXIueGh0bWw\",\"encodingFormat\":\"application/xhtml+xml\",\"rel\":[]},{\"type\":[\"LinkedResource\"],\"url\":\"#idc3R5bGUuY3Nz\",\"encodingFormat\":\"text/css\",\"rel\":[]},{\"type\":[\"LinkedResource\"],\"url\":\"#idY29udGVudC5uY3g\",\"encodingFormat\":\"application/x-dtbncx+xml\",\"rel\":[\"ncx\"]},{\"type\":[\"LinkedResource\"],\"url\":\"#idY292ZXIuanBn\",\"encodingFormat\":\"image/jpeg\",\"rel\":[\"cover\"]},{\"type\":[\"LinkedResource\"],\"url\":\"#idY29udGVudC5vcGY\",\"encodingFormat\":\"application/oebps-package+xml\",\"rel\":[\"alternate\",\"describedby\"]}],\"readingOrder\":[{\"type\":[\"LinkedResource\"],\"url\":\"#iddGVzdC54aHRtbA\",\"encodingFormat\":\"application/xhtml+xml\",\"rel\":[]}],\"inLanguage\":\"en\",\"name\":{\"value\":\"ePub Experiment 1\",\"language\":\"en\"},\"id\":\"tag:baldur.bjarnason@gmail.com,2010-09:test/1\",\"creator\":[],\"publisher\":[{\"type\":[\"Person\"],\"name\":{\"language\":\"en\",\"value\":\"Baldur Bjarnason\"}}],\"author\":[{\"type\":[\"Person\"],\"name\":{\"language\":\"en\",\"value\":\"Baldur Bjarnason\"}}],\"translator\":[],\"illustrator\":[],\"editor\":[],\"colorist\":[],\"contributor\":[]}\n    </script>\n<soup-chapter id=\"idY29udGVudC5uY3g\" data-path=\"content.ncx\" data-title=\"Test 1\"  data-linear=\"false\" hidden data-rel=\"contents\">\n  <soup-html><soup-body>\n  <nav aria-labelledby=\"soup-toc-heading\" lang=\"undefined\" role=\"doc-toc\">\n    <h1 id=\"soup-toc-heading\">Test 1</h1>\n    <ol>\n      <li><a href=\"#iddGVzdC54aHRtbA\">This is a test</a></li>\n    </ol>\n  </nav></soup-body></soup-html>\n</soup-chapter>\n<soup-chapter id=\"iddGVzdC54aHRtbA\" data-path=\"test.xhtml\" data-title=\"Modernizr tests for the following features:\"  data-rel=\"\">\n  <soup-html><soup-body xmlns=\"http://www.w3.org/1999/xhtml\" id=\"iddGVzdC54aHRtbA:dGl0bGVwYWdl\">\n\n<div id=\"iddGVzdC54aHRtbA:Ym9vaw\">\n\t<h2>Modernizr tests for the following features:</h2>\n\t\t\t<ul id=\"iddGVzdC54aHRtbA:ZmVhdHVyZXM\"> \n\t\t\t\t<li class=\"fontface\">@font-face</li> \n\t\t\t\t<li class=\"canvas\">Canvas</li> \n\t\t\t\t<li class=\"canvastext\">Canvas Text</li> \n\t\t\t\t<li class=\"audio\">HTML5 Audio</li> \n\t\t\t\t<li class=\"video\">HTML5 Video</li> \n\t\t\t\t<li class=\"rgba\">rgba()</li> \n\t\t\t\t<li class=\"hsla\">hsla()</li> \n\t\t\t\t<li class=\"borderimage\">border-image:</li> \n\t\t\t\t<li class=\"borderradius\">border-radius:</li> \n\t\t\t\t<li class=\"boxshadow\">box-shadow:</li> \n\t\t\t\t<li class=\"textshadow\">text-shadow:</li> \n\t\t\t\t<li class=\"opacity\">opacity:</li> \n\t\t\t\t<li class=\"multiplebgs\">Multiple backgrounds</li> \n\t\t\t\t<li class=\"flexbox\">Flexible Box Model</li> \n\t\t\t\t<li class=\"cssanimations\">CSS Animations</li> \n\t\t\t\t<li class=\"csscolumns\">CSS Columns</li> \n\t\t\t\t<li class=\"cssgradients\">CSS Gradients</li> \n\t\t\t\t<li class=\"cssreflections\">CSS Reflections</li> \n\t\t\t\t<li class=\"csstransforms\">CSS 2D Transforms</li> \n\t\t\t\t<li class=\"csstransforms3d\">CSS 3D Transforms</li> \n\t\t\t\t<li class=\"csstransitions\">CSS Transitions</li> \n\t\t\t\t<li class=\"geolocation\">Geolocation API</li> \n\t\t\t\t<li class=\"localstorage\">localStorage</li> \n\t\t\t\t<li class=\"sessionstorage\">sessionStorage</li> \n\t\t\t\t<li class=\"svg\">SVG</li> \n\t\t\t\t<li class=\"smil\">SMIL</li> \n\t\t\t\t<li class=\"svgclippaths\">SVG Clipping</li> \n\t\t\t\t<li class=\"inlinesvg\">Inline SVG</li> \n\t\t\t\t<li class=\"draganddrop\">Drag and Drop</li> \n\t\t\t\t<li class=\"hashchange\">hashchange</li> \n\t\t\t\t<li class=\"postmessage\">X-window Messaging</li> \n\t\t\t\t<li class=\"history\">History Management</li> \n\t\t\t\t<li class=\"applicationcache\">applicationCache</li> \n\t\t\t\t<li class=\"touch\">Touch events</li> \n\t\t\t\t<li class=\"websockets\">Web Sockets</li> \n\t\t\t\t<li class=\"webworkers\">Web Workers</li> \n\t\t\t\t<li class=\"websqldatabase\">Web SQL Database</li> \n\t\t\t\t<li class=\"webgl\">WebGL</li> \n\t\t\t\t<li class=\"indexeddb\">IndexedDB</li> \n\t\t\t\t<li class=\"inputtypes\">Input Types<sup>†</sup></li> \n\t\t\t\t<li class=\"input\">Input Attributes<sup>‡</sup></li> \n\t\t\t</ul> \n\t\n</div>\n\n</soup-body></soup-html>\n</soup-chapter>\n<soup-chapter id=\"idY292ZXIueGh0bWw\" data-path=\"cover.xhtml\" data-title=\"Cover\"  data-linear=\"false\" hidden data-rel=\"\">\n  <soup-html><soup-body xmlns=\"http://www.w3.org/1999/xhtml\">\n<div id=\"idY292ZXIueGh0bWw:Y292ZXItaW1hZ2U\">\n<img loading=\"lazy\" src=\"cover.jpg\" alt=\"This is an ePub experiment\" />\n</div>\n</soup-body></soup-html>\n</soup-chapter>\n<soup-image id=\"idY292ZXIuanBn\" data-title=\"Image 1\" data-path=\"cover.jpg\" data-rel=\"cover\" hidden>\n  <soup-html><img src=\"cover.jpg\" alt=\"Image 1\" loading=\"lazy\"></soup-html>\n</soup-image>",
   "url": "index.html",
   "encodingFormat": "text/html",
   "rel": [],
-  "_meta": {
-    "publication": {
-      "@context": [
-        "https://schema.org",
-        "https://www.w3.org/ns/wp-context"
-      ],
-      "type": [
-        "Book"
-      ],
-      "links": [],
-      "resources": [
-        {
-          "url": "test.xhtml",
-          "rel": [],
-          "encodingFormat": "application/xhtml+xml"
-        },
-        {
-          "url": "cover.xhtml",
-          "rel": [],
-          "encodingFormat": "application/xhtml+xml"
-        },
-        {
-          "url": "style.css",
-          "rel": [],
-          "encodingFormat": "text/css"
-        },
-        {
-          "url": "modernizr-1.6.min.js",
-          "rel": [],
-          "encodingFormat": "text/javascript"
-        },
-        {
-          "url": "content.ncx",
-          "rel": [
-            "ncx"
-          ],
-          "encodingFormat": "application/x-dtbncx+xml"
-        },
-        {
-          "url": "cover.jpg",
-          "rel": [
-            "cover"
-          ],
-          "encodingFormat": "image/jpeg",
-          "id": "idY292ZXIuanBn",
-          "_meta": {
-            "title": "Image 1"
-          }
-        },
-        {
-          "type": "LinkedResource",
-          "rel": [
-            "alternate",
-            "describedby"
-          ],
-          "url": "content.opf",
-          "encodingFormat": "application/oebps-package+xml"
-        }
-      ],
-      "readingOrder": [
-        {
-          "url": "test.xhtml",
-          "rel": [],
-          "encodingFormat": "application/xhtml+xml"
-        }
-      ],
-      "inLanguage": "en",
-      "name": "ePub Experiment 1",
-      "id": "tag:baldur.bjarnason@gmail.com,2010-09:test/1",
-      "_epubVersion": "2.0",
-      "creator": [],
-      "publisher": [
-        "Baldur Bjarnason"
-      ],
-      "author": [
-        "Baldur Bjarnason"
-      ],
-      "translator": [],
-      "illustrator": [],
-      "editor": [],
-      "colorist": [],
-      "contributor": []
-    },
-    "wordCount": 96,
-    "styles": "<style>\n [id=\"iddGVzdC54aHRtbA\"] .fontface li.fontface:after,\r        [id=\"iddGVzdC54aHRtbA\"] .audio li.audio:after,\r        [id=\"iddGVzdC54aHRtbA\"] .video li.video:after,\r        [id=\"iddGVzdC54aHRtbA\"] .geolocation li.geolocation:after,\r        [id=\"iddGVzdC54aHRtbA\"] .canvas li.canvas:after,\r        [id=\"iddGVzdC54aHRtbA\"] .canvastext li.canvastext:after,\r        [id=\"iddGVzdC54aHRtbA\"] .rgba li.rgba:after,\r        [id=\"iddGVzdC54aHRtbA\"] .hsla li.hsla:after,\r        [id=\"iddGVzdC54aHRtbA\"] .multiplebgs li.multiplebgs:after,\r        [id=\"iddGVzdC54aHRtbA\"] .borderimage li.borderimage:after,\r        [id=\"iddGVzdC54aHRtbA\"] .borderradius li.borderradius:after,\r        [id=\"iddGVzdC54aHRtbA\"] .boxshadow li.boxshadow:after,\r        [id=\"iddGVzdC54aHRtbA\"] .opacity li.opacity:after,\r        [id=\"iddGVzdC54aHRtbA\"] .cssanimations li.cssanimations:after,\r        [id=\"iddGVzdC54aHRtbA\"] .csscolumns li.csscolumns:after,\r        [id=\"iddGVzdC54aHRtbA\"] .cssgradients li.cssgradients:after,\r        [id=\"iddGVzdC54aHRtbA\"] .cssreflections li.cssreflections:after,\r        [id=\"iddGVzdC54aHRtbA\"] .csstransforms li.csstransforms:after,\r        [id=\"iddGVzdC54aHRtbA\"] .csstransforms3d li.csstransforms3d:after,\r        [id=\"iddGVzdC54aHRtbA\"] .csstransitions li.csstransitions:after,\r        [id=\"iddGVzdC54aHRtbA\"] .localstorage li.localstorage:after,\r        [id=\"iddGVzdC54aHRtbA\"] .sessionstorage li.sessionstorage:after,\r        [id=\"iddGVzdC54aHRtbA\"] .webworkers li.webworkers:after,\r        [id=\"iddGVzdC54aHRtbA\"] .applicationcache li.applicationcache:after,\r        [id=\"iddGVzdC54aHRtbA\"] .svg li.svg:after,\r        [id=\"iddGVzdC54aHRtbA\"] .smil li.smil:after,\r        [id=\"iddGVzdC54aHRtbA\"] .svgclippaths li.svgclippaths:after,\r        [id=\"iddGVzdC54aHRtbA\"] .hashchange li.hashchange:after,\r        [id=\"iddGVzdC54aHRtbA\"] .websqldatabase li.websqldatabase:after,\r        [id=\"iddGVzdC54aHRtbA\"] .indexeddb li.indexeddb:after,\r        [id=\"iddGVzdC54aHRtbA\"] .websockets li.websockets:after,\r        [id=\"iddGVzdC54aHRtbA\"] .draganddrop li.draganddrop:after,\r        [id=\"iddGVzdC54aHRtbA\"] .history li.history:after,\r        [id=\"iddGVzdC54aHRtbA\"] .postmessage li.postmessage:after,\r        [id=\"iddGVzdC54aHRtbA\"] .inlinesvg li.inlinesvg:after,\r        [id=\"iddGVzdC54aHRtbA\"] .webgl li.webgl:after,\r        [id=\"iddGVzdC54aHRtbA\"] .touch li.touch:after,\r        [id=\"iddGVzdC54aHRtbA\"] .flexbox li.flexbox:after,\r        [id=\"iddGVzdC54aHRtbA\"] .textshadow li.textshadow:after\r    {   color: #8cee23;\r        content: ' ✓'; }\r    </style>\n<style>\n [id=\"idY292ZXIueGh0bWw\"] img {max-width: 100%;}\n </style>"
-  }
+  "inLanguage": "en"
 }

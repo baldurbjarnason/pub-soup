@@ -18,6 +18,7 @@ tap.test("parseOPF - epub2", async (test) => {
     bookMeta,
     "demo-epub/pg55456-images/OEBPS/content.opf"
   );
+  delete result._meta;
   test.matchSnapshot(result, "parseOPF - epub2");
 });
 tap.test("parseOPF - epub3", async (test) => {
@@ -32,5 +33,6 @@ tap.test("parseOPF - epub3", async (test) => {
     bookMeta,
     "demo-epub/childrens-literature/EPUB/package.opf"
   );
+  delete result._meta;
   test.matchSnapshot(result, "parseOPF - epub3");
 });

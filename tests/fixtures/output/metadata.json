@@ -1,0 +1,117 @@
+{"@context": [
+"https://schema.org",
+"https://www.w3.org/ns/wp-context"],
+  "id": "tag:baldur.bjarnason@gmail.com,2010-09:test/1",
+  "type": [
+    "Book"
+  ],
+  "inLanguage": "en",
+  "resources": [
+    {
+      "type": [
+        "LinkedResource"
+      ],
+      "url": "test.xhtml",
+      "encodingFormat": "application/xhtml+xml",
+      "rel": []
+    },
+    {
+      "type": [
+        "LinkedResource"
+      ],
+      "url": "cover.xhtml",
+      "encodingFormat": "application/xhtml+xml",
+      "rel": []
+    },
+    {
+      "type": [
+        "LinkedResource"
+      ],
+      "url": "style.css",
+      "encodingFormat": "text/css",
+      "rel": []
+    },
+    {
+      "type": [
+        "LinkedResource"
+      ],
+      "url": "modernizr-1.6.min.js",
+      "encodingFormat": "text/javascript",
+      "rel": []
+    },
+    {
+      "type": [
+        "LinkedResource"
+      ],
+      "url": "content.ncx",
+      "encodingFormat": "application/x-dtbncx+xml",
+      "rel": [
+        "ncx"
+      ]
+    },
+    {
+      "type": [
+        "LinkedResource"
+      ],
+      "url": "cover.jpg",
+      "encodingFormat": "image/jpeg",
+      "rel": [
+        "cover"
+      ]
+    },
+    {
+      "type": [
+        "LinkedResource"
+      ],
+      "url": "content.opf",
+      "encodingFormat": "application/oebps-package+xml",
+      "rel": [
+        "alternate",
+        "describedby"
+      ]
+    }
+  ],
+  "readingOrder": [
+    {
+      "type": [
+        "LinkedResource"
+      ],
+      "url": "test.xhtml",
+      "encodingFormat": "application/xhtml+xml",
+      "rel": []
+    }
+  ],
+  "links": [],
+  "creator": [],
+  "author": [
+    {
+      "type": [
+        "Person"
+      ],
+      "name": {
+        "language": "en",
+        "value": "Baldur Bjarnason"
+      }
+    }
+  ],
+  "translator": [],
+  "colorist": [],
+  "publisher": [
+    {
+      "type": [
+        "Person"
+      ],
+      "name": {
+        "language": "en",
+        "value": "Baldur Bjarnason"
+      }
+    }
+  ],
+  "illustrator": [],
+  "contributor": [],
+  "editor": [],
+  "name": {
+    "value": "ePub Experiment 1",
+    "language": "en"
+  }
+}

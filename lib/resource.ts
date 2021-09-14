@@ -1,5 +1,8 @@
+import { path } from "./base.js";
+import mime from "mime";
+
 export class Resource implements ResourceDescriptor {
-  type?: string;
+  type = ["LinkedResource"];
   value?: Buffer | string;
   url: string;
   encodingFormat: string;
@@ -10,7 +13,6 @@ export class Resource implements ResourceDescriptor {
     [key: string]: any;
   };
   constructor({
-    type,
     value,
     url,
     encodingFormat,
@@ -19,7 +21,6 @@ export class Resource implements ResourceDescriptor {
     _meta,
     inLanguage,
   }: ResourceDescriptor) {
-    this.type = type;
     this.value = value;
     this.url = url;
     this.encodingFormat = encodingFormat;
@@ -28,11 +29,16 @@ export class Resource implements ResourceDescriptor {
     this._meta = _meta;
     this.inLanguage = inLanguage;
   }
+  toJSON() {
+    const json = { ...this };
+    delete json.id;
+    delete json._meta;
+    return json;
+  }
 }
 
 export interface ResourceDescriptor {
   value?: Buffer | string;
-  type?: string;
   url: string;
   encodingFormat: string;
   id?: string;
@@ -41,4 +47,20 @@ export interface ResourceDescriptor {
   _meta?: {
     [key: string]: any;
   };
+}
+
+export function asResource(resource, base = "index.html"): Resource {
+  let updated;
+  if (resource && resource.url && resource.encodingFormat) {
+    updated = new Resource(resource);
+  } else if (resource.url && !resource.encodingFormat) {
+    const encodingFormat = mime.getType(resource.url);
+    updated = new Resource({ ...resource, encodingFormat });
+  } else if (typeof resource === "string") {
+    const encodingFormat = mime.getType(resource);
+    updated = new Resource({ url: path(resource, base), encodingFormat });
+  } else {
+    throw new Error("Resource expected, but got " + typeof resource);
+  }
+  return updated;
 }

@@ -18,7 +18,9 @@ Resource {
   "id": "fileId",
   "inLanguage": "en",
   "rel": Array [],
-  "type": undefined,
+  "type": Array [
+    "LinkedResource",
+  ],
   "url": "chapter/path/page.html",
   "value": String(
     <soup-body class="HTML">
@@ -40,7 +42,9 @@ Resource {
   "id": "fileId",
   "inLanguage": null,
   "rel": Array [],
-  "type": undefined,
+  "type": Array [
+    "LinkedResource",
+  ],
   "url": "chapter/path/page.html",
   "value": String(
     <soup-body>
@@ -63,7 +67,9 @@ Resource {
   "id": "fileId",
   "inLanguage": null,
   "rel": Array [],
-  "type": undefined,
+  "type": Array [
+    "LinkedResource",
+  ],
   "url": "chapter/path/svg.xhtml",
   "value": "<svg xmlns:xlink=\\"http://www.w3.org/1999/xlink\\" xmlns=\\"http://www.w3.org/2000/svg\\" height=\\"20\\" width=\\"38\\" style=\\"background-color: red;\\"><path fill=\\"#000\\" fill-rule=\\"nonzero\\" d=\\"M0 10c0 .546.414.983.932.983h33.887l-6.954 7.337a1.015 1.015 0 0 0 0 1.39.892.892 0 0 0 1.317 0l8.545-9.015a1.023 1.023 0 0 0 0-1.39L29.182.29a.892.892 0 0 0-1.317 0 1.015 1.015 0 0 0 0 1.39l6.954 7.337H.932C.414 9.017 0 9.454 0 10z\\"/><a xlink:href=\\"#idY2hhcHRlci9wYXRoL3N2Zy54aHRtbA:bGlua2llcw\\"><image width=\\"100\\" height=\\"100\\" xlink:href=\\"path/to/img.jpg\\"/></a><a xlink:href=\\"#idY2hhcHRlci9wYXRoL3JlbGF0aXZlL3BhdGgvdG8vY2hhcHRlci54aHRtbA\\"><image width=\\"100\\" height=\\"100\\" xlink:href=\\"path/to/img.jpg\\"/></a></svg>",
 }
@@ -91,7 +97,9 @@ Resource {
   "id": "fileId",
   "inLanguage": "en",
   "rel": Array [],
-  "type": undefined,
+  "type": Array [
+    "LinkedResource",
+  ],
   "url": "chapter/path/page.html",
   "value": String(
     <soup-body xmlns="http://www.w3.org/1999/xhtml">

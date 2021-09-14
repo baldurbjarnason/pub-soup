@@ -66,6 +66,7 @@ export async function view(epub, { concurrency = 4 } = {}) {
       wordCount: epub.wordCount,
       styles: await renderCSS(epub, main.styles, { concurrency }),
     },
+    inLanguage: epub._metadata.inLanguage,
     url: "index.html",
     encodingFormat: "text/html",
     value: main.body,

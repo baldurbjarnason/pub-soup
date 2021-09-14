@@ -1,6 +1,6 @@
 import { renderImage, renderMarkup } from "./renderMarkup.js";
 import { renderNav } from "./renderNav.js";
-import { embed } from "../../metadata.js";
+// import { embed } from "../../metadata.js";
 import { getId } from "../../id.js";
 
 // This needs to embed the metadata
@@ -8,7 +8,7 @@ import { getId } from "../../id.js";
 export function render(epub, { metadata, contents, chapters }) {
   let strings = [
     `<script type="application/ld+json">
-${JSON.stringify(embed(epub))}
+${JSON.stringify(metadata.embed())}
     </script>`,
   ];
   // Render nav
