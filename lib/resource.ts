@@ -1,6 +1,8 @@
 import { path } from "./base.js";
 import mime from "mime";
 
+const loadingFormats = ["application/xhtml+xml", "text/html", "text/css"];
+
 export class Resource implements ResourceDescriptor {
   type = ["LinkedResource"];
   value?: Buffer | string;
@@ -34,6 +36,12 @@ export class Resource implements ResourceDescriptor {
     delete json.id;
     delete json._meta;
     return json;
+  }
+  attachment() {
+    return !(
+      this.encodingFormat.includes("image") ||
+      loadingFormats.includes(this.encodingFormat)
+    );
   }
 }
 
