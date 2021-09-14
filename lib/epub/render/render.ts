@@ -32,9 +32,7 @@ ${JSON.stringify(metadata.embed())}
   const images = metadata.images();
   for (const image of images) {
     image.id = getId(image.url);
-    image._meta = {
-      title: `Image ${images.indexOf(image) + 1}`,
-    };
+    image.name = `Image ${images.indexOf(image) + 1}`;
     strings = strings.concat(renderImage(image));
   }
 

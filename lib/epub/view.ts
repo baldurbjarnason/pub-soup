@@ -27,6 +27,7 @@ export async function getContents(epub, metadata) {
   file._meta = {
     title: file.value.heading,
   };
+  file.name = file.value.heading;
   return file;
 }
 

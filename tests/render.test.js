@@ -13,10 +13,10 @@ const resource = new Resource({
   url: "cover.xhtml",
   encodingFormat: "application/xhtml+xml",
   id: "iddGVzdC54aHRtbA",
+  name: "Cover",
   rel: [],
   _meta: {
     styles: ["body { oeb-column-number:1; }"],
-    title: "Cover",
     wordCount: 85,
   },
   inLanguage: "en",

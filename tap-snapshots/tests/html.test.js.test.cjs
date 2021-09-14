@@ -11,12 +11,12 @@ Resource {
     "styles": Array [
       "[id=\\"fileId\\"] soup-body { background-color: red;}",
     ],
-    "title": "Test",
     "wordCount": 6,
   },
   "encodingFormat": "text/html",
   "id": "fileId",
   "inLanguage": "en",
+  "name": "Test",
   "rel": Array [],
   "type": Array [
     "LinkedResource",
@@ -35,12 +35,12 @@ Resource {
     "styles": Array [
       "[id=\\"fileId\\"] soup-body { background-color: red;}",
     ],
-    "title": "Test",
     "wordCount": 11,
   },
   "encodingFormat": "text/html",
   "id": "fileId",
   "inLanguage": null,
+  "name": "Test",
   "rel": Array [],
   "type": Array [
     "LinkedResource",
@@ -60,7 +60,6 @@ exports[`tests/html.test.js TAP markup - svg > markup svg 1`] = `
 Resource {
   "_meta": Object {
     "styles": Array [],
-    "title": "",
     "wordCount": 0,
   },
   "encodingFormat": "text/html",
@@ -90,12 +89,12 @@ Resource {
       },
       "",
     ],
-    "title": "Test",
     "wordCount": 14,
   },
   "encodingFormat": "text/html",
   "id": "fileId",
   "inLanguage": "en",
+  "name": "Test",
   "rel": Array [],
   "type": Array [
     "LinkedResource",

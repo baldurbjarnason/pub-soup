@@ -129,10 +129,11 @@ export async function markup(resource: ResourceDescriptor) {
     markupValue = window.document.documentElement.outerHTML;
   }
   return new Resource({
-    _meta: { styles, title, wordCount },
+    _meta: { styles, wordCount },
     url,
     value: markupValue,
     id,
+    name: title,
     inLanguage,
     rel,
     encodingFormat: "text/html",

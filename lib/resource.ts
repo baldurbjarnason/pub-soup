@@ -11,6 +11,7 @@ export class Resource implements ResourceDescriptor {
   id?: string;
   rel?: string[];
   inLanguage?: string;
+  name?: string;
   _meta?: {
     [key: string]: any;
   };
@@ -21,6 +22,7 @@ export class Resource implements ResourceDescriptor {
     id,
     rel = [],
     _meta,
+    name,
     inLanguage,
   }: ResourceDescriptor) {
     this.value = value;
@@ -29,6 +31,9 @@ export class Resource implements ResourceDescriptor {
     this.id = id;
     this.rel = rel;
     this._meta = _meta;
+    if (name) {
+      this.name = name;
+    }
     this.inLanguage = inLanguage;
   }
   toJSON() {
@@ -51,6 +56,7 @@ export interface ResourceDescriptor {
   encodingFormat: string;
   id?: string;
   rel?: string[];
+  name?: string;
   inLanguage?: string;
   _meta?: {
     [key: string]: any;

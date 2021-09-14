@@ -100,9 +100,7 @@ tap.test("render ToC - epub2", async (test) => {
     value: results[0],
     url: "OEBPS/toc.ncx",
     id: "fileID",
-    _meta: {
-      title: "Contents",
-    },
+    name: "Contents",
     inLanguage: "en",
   });
   const result = renderNav(file, { metadata: { inLanguage: "en" } });

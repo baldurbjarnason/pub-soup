@@ -97,6 +97,7 @@ tap.test("Epub contents", async (test) => {
     id: "idY29udGVudC5uY3g",
     encodingFormat: "application/json",
     rel: ["ncx"],
+    name: "Test 1",
     _meta: {
       title: "Test 1",
     },

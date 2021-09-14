@@ -3,7 +3,7 @@ import { ResourceDescriptor } from "../../resource.js";
 export function renderMarkup(markup: ResourceDescriptor, linear = true) {
   return `<soup-chapter id="${markup.id}" data-path="${
     markup.url
-  }" data-title="${markup._meta.title}" ${
+  }" data-title="${markup.name}" ${
     (markup.inLanguage && `lang="${markup.inLanguage}"`) || ""
   }${nonLinearAttributes(linear)} data-rel="${markup.rel.join(" ")}">
   <soup-html>${markup.value}</soup-html>
@@ -19,13 +19,11 @@ function nonLinearAttributes(linear) {
 }
 
 export function renderImage(file: ResourceDescriptor) {
-  return `<soup-image id="${file.id}" data-title="${
-    file._meta.title
-  }" data-path="${file.url}"${nonLinearAttributes(
-    true
-  )} data-rel="${file.rel.join(" ")}" hidden>
+  return `<soup-image id="${file.id}" data-title="${file.name}" data-path="${
+    file.url
+  }"${nonLinearAttributes(true)} data-rel="${file.rel.join(" ")}" hidden>
   <soup-html><img src="${file.url}" alt="${
-    file._meta.title
+    file.name
   }" loading="lazy"></soup-html>
 </soup-image>`;
 }
