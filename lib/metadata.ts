@@ -79,7 +79,7 @@ export class Publication {
         (resource: unknown) => {
           const result = asResource(resource, this.inLanguage);
           if (property !== "links") {
-            this.#resourceMap.set(result.url, resource);
+            this.#resourceMap.set(result.url, result);
           }
           return result;
         }

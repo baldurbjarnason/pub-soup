@@ -12,7 +12,8 @@ export function isTextFile(type) {
   if (
     type.includes("text") ||
     type.includes("xml") ||
-    type.includes("script")
+    type.includes("script") ||
+    type === "application/json"
   ) {
     return true;
   } else {
