@@ -58,12 +58,12 @@ export class Publication {
   _epubVersion?: string;
   dateModified?: Date;
   datePublished?: Date;
-  _meta?: { [s: string]: any };
+  #meta?: { [s: string]: any };
   #resourceMap = new Map();
 
   constructor(descriptor) {
     const { inLanguage = "en" } = descriptor;
-    this._meta = { ...descriptor };
+    this.#meta = { ...descriptor };
     this.id = descriptor.id;
     this.type = asArray(descriptor.type);
     this.inLanguage = inLanguage;
@@ -102,7 +102,7 @@ export class Publication {
   }
 
   get(property) {
-    return this._meta[property];
+    return this.#meta[property];
   }
 
   resource(path) {
@@ -134,9 +134,9 @@ export class Publication {
   }
 
   toJSON() {
-    const json = { ...this._meta, ...this };
+    const json = { ...this.#meta, ...this };
     delete json._epubVersion;
-    delete json._meta;
+    // delete json._meta;
     return json;
   }
 

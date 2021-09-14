@@ -8,62 +8,6 @@
 exports[`tests/metadata.test.js TAP Publication parse > Publication parse testManifest1 1`] = `
 Publication {
   "_epubVersion": undefined,
-  "_meta": Object {
-    "@context": Array [
-      "https://schema.org",
-      "https://www.w3.org/ns/wp-context",
-    ],
-    "author": "Herman Melville",
-    "dateModified": "2018-02-10T17:00:00Z",
-    "readingOrder": Array [
-      "html/title.html",
-      "html/copyright.html",
-      "html/introduction.html",
-      "html/epigraph.html",
-      "html/c001.html",
-      "html/c002.html",
-      "html/c003.html",
-      "html/c004.html",
-      "html/c005.html",
-      "html/c006.html",
-    ],
-    "resources": Array [
-      "css/mobydick.css",
-      Object {
-        "encodingFormat": "image/jpeg",
-        "rel": "cover",
-        "type": "LinkedResource",
-        "url": "images/cover.jpg",
-      },
-      Object {
-        "rel": "contents",
-        "type": "LinkedResource",
-        "url": "html/toc.html",
-      },
-      Object {
-        "encodingFormat": "application/vnd.ms-opentype",
-        "type": "LinkedResource",
-        "url": "fonts/Literata.otf",
-      },
-      Object {
-        "encodingFormat": "application/vnd.ms-opentype",
-        "type": "LinkedResource",
-        "url": "fonts/Literata-Bold.otf",
-      },
-      Object {
-        "encodingFormat": "application/vnd.ms-opentype",
-        "type": "LinkedResource",
-        "url": "fonts/Literata-BoldItalic.otf",
-      },
-      Object {
-        "encodingFormat": "application/vnd.ms-opentype",
-        "type": "LinkedResource",
-        "url": "fonts/Literata-Italic.otf",
-      },
-    ],
-    "type": "Book",
-    "url": "https://publisher.example.org/mobydick",
-  },
   "author": Array [
     Person {
       "_meta": Object {},
