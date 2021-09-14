@@ -9,9 +9,11 @@ import * as path from "path";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename).replace(process.cwd() + "/", "");
 
+const EPUB = "tests/fixtures/test.epub";
+
 tap.test("Epub opf", async (test) => {
   const factory = new EpubFactory(env);
-  const epub = await factory.file("test.epub");
+  const epub = await factory.file(EPUB);
   test.ok(epub);
   const opfFile = await epub.opf();
   test.equal(
@@ -39,7 +41,7 @@ tap.test("Epub opf", async (test) => {
 
 tap.test("Epub opf 2", async (test) => {
   const factory = new EpubFactory(env);
-  const epub = await factory.file("test.epub");
+  const epub = await factory.file(EPUB);
   test.ok(epub);
   const opfFile = await epub.opf();
   test.equal(
@@ -79,7 +81,7 @@ tap.test("Epub opf 2", async (test) => {
 
 tap.test("Epub contents", async (test) => {
   const factory = new EpubFactory(env);
-  const epub = await factory.file("test.epub");
+  const epub = await factory.file(EPUB);
   test.ok(epub);
   const contents = await epub.contents();
   test.same(contents, {
@@ -104,7 +106,7 @@ tap.test("Epub contents", async (test) => {
 
 tap.test("Epub textFile", async (test) => {
   const factory = new EpubFactory(env);
-  const zip = await factory.file("test.epub");
+  const zip = await factory.file(EPUB);
   const file = await zip.getFileForResource({
     url: "mimetype",
     encodingFormat: "text/plain",
@@ -114,7 +116,7 @@ tap.test("Epub textFile", async (test) => {
 
 // tap.test("Epub error", async (test) => {
 //   const factory = new EpubFactory(env);
-//   const zip = await factory.file("test.epub");
+//   const zip = await factory.file(EPUB);
 //   process.nextTick(() => {
 //     zip.error(new Error("test"));
 //   });
@@ -131,41 +133,41 @@ tap.test("Epub isTextFile", async (test) => {
 
 // tap.test("Epub processTextFile simple", async (test) => {
 //   const factory = new EpubFactory(env);
-//   const zip = await factory.file("test.epub");
+//   const zip = await factory.file(EPUB);
 //   const file = await zip.processTextFile({ url: "mimetype" });
 //   test.equal(file.value, "application/epub+zip");
 // });
 
 tap.test("Epub file js", async (test) => {
   const factory = new EpubFactory(env);
-  const zip = await factory.file("test.epub");
+  const zip = await factory.file(EPUB);
   const file = await zip.file("modernizr-1.6.min.js");
   test.notOk(file);
 });
 tap.test("Epub file nonexistent", async (test) => {
   const factory = new EpubFactory(env);
-  const zip = await factory.file("test.epub");
+  const zip = await factory.file(EPUB);
   const file = await zip.file("bloopbloop.fingle");
   test.notOk(file);
 });
 
 tap.test("Epub markup not a chapter", async (test) => {
   const factory = new EpubFactory(env);
-  const zip = await factory.file("test.epub");
+  const zip = await factory.file(EPUB);
   const file = await zip.markup("cover.jpg");
   test.notOk(file);
 });
 
 tap.test("Epub file binary simple", async (test) => {
   const factory = new EpubFactory(env);
-  const zip = await factory.file("test.epub");
+  const zip = await factory.file(EPUB);
   const file = await zip.file("mimetype");
   test.equal(file.value.toString(), "application/epub+zip");
 });
 
 // tap.test("Epub processBinaryFile js", async (test) => {
 //   const factory = new EpubFactory(env);
-//   const zip = await factory.file("test.epub");
+//   const zip = await factory.file(EPUB);
 //   const file = await zip.processBinaryFile({
 //     url: "modernizr-1.6.min.js",
 //     encodingFormat: "application/javascript",
@@ -175,7 +177,7 @@ tap.test("Epub file binary simple", async (test) => {
 
 tap.test("Epub  file xhtml", async (test) => {
   const factory = new EpubFactory(env);
-  const epub = await factory.file("test.epub");
+  const epub = await factory.file(EPUB);
   const file = await epub.file("test.xhtml");
   test.equal(
     file.value,
@@ -187,7 +189,7 @@ tap.test("Epub  file xhtml", async (test) => {
 
 tap.test("Epub  cover", async (test) => {
   const factory = new EpubFactory(env);
-  const epub = await factory.file("test.epub");
+  const epub = await factory.file(EPUB);
   const file = await epub.cover();
   // await writeFile(
   //   path.join(__dirname, "fixtures/output/cover.jpg"),
@@ -202,7 +204,7 @@ tap.test("Epub  cover", async (test) => {
 
 tap.test("Epub  processTextFile css", async (test) => {
   const factory = new EpubFactory(env);
-  const epub = await factory.file("test.epub");
+  const epub = await factory.file(EPUB);
   const file = await epub.file("style.css");
   // await writeFile(path.join(__dirname, "fixtures/output/test.css"), file.value);
   test.equal(
@@ -215,7 +217,7 @@ tap.test("Epub  processTextFile css", async (test) => {
 
 tap.test("Epub markup", async (test) => {
   const factory = new EpubFactory(env);
-  const epub = await factory.file("test.epub");
+  const epub = await factory.file(EPUB);
   const file = await epub.markup("test.xhtml");
   test.ok(file);
   // console.log(file);
@@ -245,7 +247,7 @@ tap.test("Epub markup", async (test) => {
 
 tap.test("Epub process", async (test) => {
   const factory = new EpubFactory(env);
-  const epub = await factory.file("test.epub");
+  const epub = await factory.file(EPUB);
   const result = await epub.view();
   // await writeFile(
   //   path.join(
@@ -282,7 +284,7 @@ tap.test("Epub process", async (test) => {
 //   const names = new Names(id);
 //   const testEnv = { ...env, names };
 //   const factory = new EpubFactory(testEnv);
-//   const epub = await factory.file("test.epub");
+//   const epub = await factory.file(EPUB);
 //   async function worker(upload) {
 //     return upload;
 //   }
@@ -318,7 +320,7 @@ tap.test("Epub process", async (test) => {
 //   const names = new Names(id);
 //   const testEnv = { ...env, names };
 //   const factory = new EpubFactory(testEnv);
-//   const epub = await factory.file("test.epub");
+//   const epub = await factory.file(EPUB);
 //   async function worker(upload) {
 //     return upload;
 //   }
@@ -364,7 +366,7 @@ tap.test("Epub process", async (test) => {
 //   const names = new Names(id);
 //   const testEnv = { ...env, names };
 //   const factory = new EpubFactory(testEnv);
-//   const epub = await factory.file("test.epub");
+//   const epub = await factory.file(EPUB);
 //   epub.base = new Base(
 //     {
 //       base: "http://test.example.com/",

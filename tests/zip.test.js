@@ -13,12 +13,14 @@ tap.afterEach(() => {
   td.reset();
 });
 
+const EPUB = "tests/fixtures/test.epub";
+
 tap.test("Epub factory file", async (test) => {
   const file = new Epub({}, env);
   test.ok(file);
   const factory = new EpubFactory(env);
   test.type(factory.Archive, Epub);
-  const epub = await formats.file("application/epub+zip", "test.epub");
+  const epub = await formats.file("application/epub+zip", EPUB);
   test.ok(epub);
 });
 
@@ -34,7 +36,7 @@ function stream2buffer(stream) {
 
 tap.test("Zip file - stream", async (test) => {
   const expectedBuffer = Buffer.from("application/epub+zip");
-  const epub = await formats.file("application/zip", "test.epub");
+  const epub = await formats.file("application/zip", EPUB);
   const bytes = await stream2buffer(epub.stream("mimetype"));
   test.same(bytes, expectedBuffer);
 
@@ -42,12 +44,12 @@ tap.test("Zip file - stream", async (test) => {
 });
 
 tap.test("Zip file - file nonexistent", async (test) => {
-  const epub = await formats.file("application/zip", "test.epub");
+  const epub = await formats.file("application/zip", EPUB);
   const result = await epub.file("kowabunga.dude");
   test.notOk(result);
 });
 tap.test("Zip file - stream nonexistent", async (test) => {
-  const epub = await formats.file("application/zip", "test.epub");
+  const epub = await formats.file("application/zip", EPUB);
   test.notOk(epub.stream("kowabunga.dude"));
 });
 
@@ -58,7 +60,7 @@ tap.test("Zip factory url", async (test, done) => {
   server.listen(3000, () => {});
   const epub = await formats.url(
     "application/epub+zip",
-    "http://localhost:3000/test.epub"
+    "http://localhost:3000/tests/fixtures/test.epub"
   );
   test.ok(epub);
   const file = await epub.textFile("mimetype");
@@ -67,7 +69,7 @@ tap.test("Zip factory url", async (test, done) => {
 });
 
 tap.test("Zip factory buffer", async (test) => {
-  const buffer = await readFile(join(process.cwd(), "test.epub"));
+  const buffer = await readFile(join(process.cwd(), EPUB));
   const epub = await formats.buffer("application/zip", buffer);
   test.ok(epub);
 });
@@ -83,19 +85,19 @@ tap.test("Zip factory s3", async (test) => {
 });
 
 tap.test("Zip textFile", async (test) => {
-  const zip = await formats.file("application/zip", "test.epub");
+  const zip = await formats.file("application/zip", EPUB);
   const file = await zip.textFile("mimetype");
   test.equal(file, "application/epub+zip");
 });
 
 tap.test("Zip dataFile", async (test) => {
-  const epub = await formats.file("application/epub+zip", "test.epub");
+  const epub = await formats.file("application/epub+zip", EPUB);
   const file = await epub.dataFile("mimetype");
   test.equal(file.toString(), "application/epub+zip");
 });
 
 tap.test("Zip file", async (test) => {
-  const zip = await formats.file("application/zip", "test.epub");
+  const zip = await formats.file("application/zip", EPUB);
   const file = await zip.file("META-INF/container.xml");
   test.equal(
     file.value,
@@ -110,7 +112,7 @@ tap.test("Zip file", async (test) => {
 });
 
 tap.test("Zip buffer file", async (test) => {
-  const epub = await formats.file("application/zip", "test.epub");
+  const epub = await formats.file("application/zip", EPUB);
   const file = await epub.file("mimetype");
   test.equal(file.value.toString(), "application/epub+zip");
 });
