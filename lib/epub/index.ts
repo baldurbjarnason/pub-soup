@@ -88,9 +88,7 @@ export class Epub extends Zip {
       });
     }
     const metadata = await this.metadata();
-    const resource = metadata.resources.find(
-      (resource) => resource.url === path
-    );
+    const resource = metadata.resource(path);
     const encodingFormat = resource.encodingFormat;
     const id = getId(path);
     return new Resource({ encodingFormat, id, url: path });
@@ -98,9 +96,7 @@ export class Epub extends Zip {
 
   async cover() {
     const metadata = await this.metadata();
-    const coverResource = metadata.resources.find((resource) =>
-      resource.rel.includes("cover")
-    );
+    const coverResource = metadata.cover();
     return this.file(coverResource.url);
   }
 

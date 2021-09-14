@@ -37,6 +37,7 @@ const personProperties = [
   "contributor",
   "editor",
 ];
+const chapterFormats = ["application/xhtml+xml", "text/html", "image/svg+xml"];
 
 export class Publication {
   resources: Resource[];
@@ -58,6 +59,7 @@ export class Publication {
   dateModified?: Date;
   datePublished?: Date;
   _meta?: { [s: string]: any };
+  #resourceMap = new Map();
 
   constructor(descriptor) {
     const { inLanguage = "en" } = descriptor;
@@ -75,7 +77,11 @@ export class Publication {
     for (const property of resourceProperties) {
       this[property] = asArray(descriptor[property]).map(
         (resource: unknown) => {
-          return asResource(resource, this.inLanguage);
+          const result = asResource(resource, this.inLanguage);
+          if (property !== "links") {
+            this.#resourceMap.set(result.url, resource);
+          }
+          return result;
         }
       );
     }
@@ -99,26 +105,49 @@ export class Publication {
     return this._meta[property];
   }
 
+  resource(path) {
+    return this.#resourceMap.get(path);
+  }
+
+  relation(rel) {
+    const resources = Array.from(this.#resourceMap.values());
+    return resources.filter((resource) => asArray(resource.rel).includes(rel));
+  }
+
+  chapters() {
+    const resources = Array.from(this.#resourceMap.values());
+    return resources.filter((resource) =>
+      chapterFormats.includes(resource.encodingFormat)
+    );
+  }
+
+  images() {
+    const resources = Array.from(this.#resourceMap.values());
+    return resources.filter((resource) =>
+      resource.encodingFormat.includes("image")
+    );
+  }
+
+  cover() {
+    const covers = this.relation("cover");
+    return covers.find((resource) => resource.encodingFormat.includes("image"));
+  }
+
   toJSON() {
     const json = { ...this._meta, ...this };
     delete json._epubVersion;
     delete json._meta;
     return json;
   }
+
   embed() {
-    const chapterFormats = [
-      "application/xhtml+xml",
-      "text/html",
-      "image/svg+xml",
-    ];
-    const resources = filterResources(this.resources).map((resource) => {
-      if (chapterFormats.includes(resource.encodingFormat)) {
-        const url = "#" + getId(resource.url);
-        return new Resource({ ...resource, url });
-      } else {
-        return resource;
-      }
-    });
+    const resources = filterResources(this.resources)
+      .map((resource) => {
+        if (!chapterFormats.includes(resource.encodingFormat)) {
+          return resource;
+        }
+      })
+      .filter((resource) => resource);
     const links = filterResources(this.links).map((resource) => {
       const full = new URL(resource.url, "https://example.com/");
       if (full.hostname === "example.com") {
@@ -149,25 +178,6 @@ export function asPublication(publication): Publication {
     throw new Error("Invalid metadata for publication");
   }
 }
-
-// export function embed(archive) {
-//   const resources = archive._metadata.resources.map((resource) => {
-//     resource = Object.assign({}, resource);
-//     resource.url = "#" + getId(resource.url);
-//     return resource;
-//   });
-//   const readingOrder = archive._metadata.readingOrder.map((resource) => {
-//     resource = Object.assign({}, resource);
-//     resource.url = "#" + getId(resource.url);
-//     return resource;
-//   });
-//   return {
-//     ...archive._metadata,
-//     url: "index.html",
-//     resources: filterResources(resources),
-//     readingOrder: filterResources(readingOrder),
-//   };
-// }
 
 export function asArray(x: unknown): any[] {
   if (Array.isArray(x)) {

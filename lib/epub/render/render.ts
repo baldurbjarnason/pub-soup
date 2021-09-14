@@ -29,9 +29,7 @@ ${JSON.stringify(metadata.embed())}
     strings = strings.concat(renderMarkup(markup, false));
   }
   // render images from resources.
-  const images = metadata.resources.filter((resource) =>
-    resource.encodingFormat.includes("image")
-  );
+  const images = metadata.images();
   for (const image of images) {
     image.id = getId(image.url);
     image._meta = {

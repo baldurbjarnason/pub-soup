@@ -4,7 +4,7 @@ import tap from "tap";
 tap.test("metadata embed", async (test) => {
   const _metadata = {
     type: ["Book"],
-    resources: [{ url: "file.html" }],
+    resources: [{ url: "file.html" }, { url: "image.jpeg" }],
     readingOrder: [{ url: "file.html" }],
     links: [
       { url: "https://www.example.com/important-external" },
@@ -13,7 +13,8 @@ tap.test("metadata embed", async (test) => {
   };
   const publication = new Publication(_metadata);
   const result = publication.embed();
-  test.equal(result.resources[0].url, "#idZmlsZS5odG1s");
+  // Should not include fragment identified resources in resources.
+  test.equal(result.resources[0].url, "image.jpeg");
   // Should not include readingOrder if you're embedding in a single HTML file.
   test.notOk(result.readingOrder);
   test.equal(result.links[0].url, "https://www.example.com/important-external");

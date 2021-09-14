@@ -12,14 +12,15 @@ export async function getMarkup(epub, filename) {
   if (chapterFormats.includes(file.encodingFormat)) {
     return markup(file);
   } else {
+    // We need to also support audio, video, and bitmap image chapters.
     return null;
   }
 }
 
 export async function getContents(epub, metadata) {
-  const resource = metadata.resources.find((resource) => {
-    return !resource.rel.includes("contents") && resource.rel.includes("ncx");
-  });
+  const [contents] = metadata.relation("contents");
+  const [ncx] = metadata.relation("ncx");
+  const resource = contents || ncx;
   const file = await epub.getFileForResource(resource);
   file.value = toc(file.value, file.url);
   file.encodingFormat = "application/json";
@@ -33,19 +34,15 @@ export async function view(epub, { concurrency = 4 } = {}) {
   const metadata = await epub.metadata();
   epub.wordCount = 0;
   let chapters = [];
-  const chapterTasks = metadata.resources
-    .filter((resource) => {
-      return chapterFormats.includes(resource.encodingFormat);
-    })
-    .map((resource) => {
-      return async () => {
-        const result = await epub.markup(resource.url);
-        if (result._meta.wordCount) {
-          epub.wordCount = epub.wordCount + result._meta.wordCount;
-        }
-        chapters = chapters.concat(result);
-      };
-    });
+  const chapterTasks = metadata.chapters().map((resource) => {
+    return async () => {
+      const result = await epub.markup(resource.url);
+      if (result._meta.wordCount) {
+        epub.wordCount = epub.wordCount + result._meta.wordCount;
+      }
+      chapters = chapters.concat(result);
+    };
+  });
 
   const queue = new PQueue({ concurrency });
   let count = 0;
