@@ -106,9 +106,18 @@ export class Publication {
     return json;
   }
   embed() {
+    const chapterFormats = [
+      "application/xhtml+xml",
+      "text/html",
+      "image/svg+xml",
+    ];
     const resources = filterResources(this.resources).map((resource) => {
-      const url = "#" + getId(resource.url);
-      return new Resource({ ...resource, url });
+      if (chapterFormats.includes(resource.encodingFormat)) {
+        const url = "#" + getId(resource.url);
+        return new Resource({ ...resource, url });
+      } else {
+        return resource;
+      }
     });
     const links = filterResources(this.links).map((resource) => {
       const full = new URL(resource.url, "https://example.com/");
@@ -119,12 +128,8 @@ export class Publication {
         return new Resource(resource);
       }
     });
-    const readingOrder = filterResources(this.readingOrder).map((resource) => {
-      const url = "#" + getId(resource.url);
-      return new Resource({ ...resource, url });
-    });
     const json = this.toJSON();
-    return { ...json, resources, links, readingOrder };
+    return { ...json, resources, links, readingOrder: undefined };
   }
 }
 

@@ -14,7 +14,8 @@ tap.test("metadata embed", async (test) => {
   const publication = new Publication(_metadata);
   const result = publication.embed();
   test.equal(result.resources[0].url, "#idZmlsZS5odG1s");
-  test.equal(result.readingOrder[0].url, "#idZmlsZS5odG1s");
+  // Should not include readingOrder if you're embedding in a single HTML file.
+  test.notOk(result.readingOrder);
   test.equal(result.links[0].url, "https://www.example.com/important-external");
   test.equal(result.links[1].url, "#idaW1wb3J0YW50L2V4dGVybmFs");
 });

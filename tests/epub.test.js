@@ -2,7 +2,7 @@ import { EpubFactory, isTextFile } from "../dist/lib/epub/index.js";
 // import { once } from "events";
 import { env } from "../dist/lib/env.js";
 import tap from "tap";
-import { readFile } from "fs/promises";
+import { readFile, writeFile } from "fs/promises";
 import { fileURLToPath } from "url";
 import * as path from "path";
 // import { Resource } from "../dist/lib/resource.js";
