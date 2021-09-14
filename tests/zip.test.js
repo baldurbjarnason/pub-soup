@@ -32,13 +32,23 @@ function stream2buffer(stream) {
   });
 }
 
-tap.test("Epub factory file - stream", async (test) => {
+tap.test("Zip file - stream", async (test) => {
   const expectedBuffer = Buffer.from("application/epub+zip");
-  const epub = await formats.file("application/epub+zip", "test.epub");
+  const epub = await formats.file("application/zip", "test.epub");
   const bytes = await stream2buffer(epub.stream("mimetype"));
   test.same(bytes, expectedBuffer);
 
   test.ok(epub);
+});
+
+tap.test("Zip file - file nonexistent", async (test) => {
+  const epub = await formats.file("application/zip", "test.epub");
+  const result = await epub.file("kowabunga.dude");
+  test.notOk(result);
+});
+tap.test("Zip file - stream nonexistent", async (test) => {
+  const epub = await formats.file("application/zip", "test.epub");
+  test.notOk(epub.stream("kowabunga.dude"));
 });
 
 tap.test("Zip factory url", async (test, done) => {

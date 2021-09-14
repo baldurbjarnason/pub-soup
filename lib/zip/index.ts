@@ -52,6 +52,7 @@ export class Zip extends EventEmitter {
   }
 
   async file(path) {
+    if (!this.directory.files.find((d) => d.path === path)) return null;
     const file = await this.resource(path);
     if (isTextFile(file.encodingFormat)) {
       file.value = await this.textFile(path);
@@ -61,8 +62,9 @@ export class Zip extends EventEmitter {
     return file;
   }
 
-  stream(name) {
-    const file = this.directory.files.find((d) => d.path === name);
+  stream(path) {
+    if (!this.directory.files.find((d) => d.path === path)) return null;
+    const file = this.directory.files.find((d) => d.path === path);
     return file.stream();
   }
 
