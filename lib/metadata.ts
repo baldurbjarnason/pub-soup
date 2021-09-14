@@ -25,7 +25,7 @@ export interface Metadata {
   datePublished?: string;
 }
 
-const resourceProperties = ["resources", "readingOrder", "links"];
+export const resourceProperties = ["resources", "readingOrder", "links"];
 const personProperties = [
   "creator",
   "author",
@@ -61,7 +61,7 @@ export class Publication {
 
   constructor(descriptor) {
     const { inLanguage = "en" } = descriptor;
-    this._meta = descriptor;
+    this._meta = { ...descriptor };
     this.id = descriptor.id;
     this.type = asArray(descriptor.type);
     this.inLanguage = inLanguage;
@@ -164,7 +164,7 @@ export function asPublication(publication): Publication {
 //   };
 // }
 
-function asArray(x: unknown): any[] {
+export function asArray(x: unknown): any[] {
   if (Array.isArray(x)) {
     return x;
   } else if (!x) {

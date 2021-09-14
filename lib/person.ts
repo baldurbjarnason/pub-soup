@@ -25,7 +25,7 @@ export class Person {
     ) {
       this.name = name;
     }
-    this._meta = meta as MetaDescriptor;
+    this._meta = { ...meta } as MetaDescriptor;
   }
   get(property) {
     return this._meta[property];

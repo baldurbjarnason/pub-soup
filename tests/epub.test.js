@@ -1,11 +1,11 @@
 import { EpubFactory, isTextFile } from "../dist/lib/epub/index.js";
-import { once } from "events";
+// import { once } from "events";
 import { env } from "../dist/lib/env.js";
 import tap from "tap";
-import { readFile, writeFile } from "fs/promises";
+import { readFile } from "fs/promises";
 import { fileURLToPath } from "url";
 import * as path from "path";
-import { Resource } from "../dist/lib/resource.js";
+// import { Resource } from "../dist/lib/resource.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename).replace(process.cwd() + "/", "");
 
@@ -247,14 +247,14 @@ tap.test("Epub process", async (test) => {
   const factory = new EpubFactory(env);
   const epub = await factory.file("test.epub");
   const result = await epub.view();
-  await writeFile(
-    path.join(
-      __dirname,
-      "fixtures/output/",
-      path.basename(result.url) + ".json"
-    ),
-    JSON.stringify(result, null, 2)
-  );
+  // await writeFile(
+  //   path.join(
+  //     __dirname,
+  //     "fixtures/output/",
+  //     path.basename(result.url) + ".json"
+  //   ),
+  //   JSON.stringify(result, null, 2)
+  // );
   console.log(result.url);
   const resource = JSON.parse(
     await readFile(

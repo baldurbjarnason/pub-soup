@@ -1,4 +1,4 @@
-import { asPerson, Person } from "../dist/lib/person.js";
+import { asPerson } from "../dist/lib/person.js";
 import tap from "tap";
 
 tap.test("invalid person", async (test) => {
