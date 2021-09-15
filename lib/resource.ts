@@ -27,7 +27,7 @@ export class Resource implements ResourceDescriptor {
   }: ResourceDescriptor) {
     this.value = value;
     this.url = url;
-    this.encodingFormat = encodingFormat;
+    this.encodingFormat = encodingFormat.toLowerCase();
     this.id = id;
     this.rel = rel;
     this._meta = _meta;
@@ -44,7 +44,7 @@ export class Resource implements ResourceDescriptor {
   }
   attachment() {
     return !(
-      this.encodingFormat.includes("image") ||
+      this.encodingFormat?.startsWith("image/") ||
       loadingFormats.includes(this.encodingFormat)
     );
   }

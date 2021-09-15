@@ -51,6 +51,10 @@ export class Zip extends EventEmitter {
     return new Resource({ encodingFormat, id, url });
   }
 
+  // Add a metadata method that creates a list of resources by mapping files and then sorting it by name.
+  // If all the files are images or images and plain text files, then those are the reading order
+  // If there are HTML files present, then those are the reading order.
+
   async file(path) {
     if (!this.directory.files.find((d) => d.path === path)) return null;
     const file = await this.resource(path);
@@ -82,9 +86,11 @@ export class Zip extends EventEmitter {
 
 function isTextFile(type) {
   if (
-    type?.includes("text") ||
+    type?.startsWith("text/") ||
     type?.includes("xml") ||
-    type?.includes("script")
+    type?.startsWith("script/") ||
+    type === "application/json" ||
+    type === "application/ld+json"
   ) {
     return true;
   } else {
