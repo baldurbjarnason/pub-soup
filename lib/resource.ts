@@ -12,7 +12,7 @@ export class Resource implements ResourceDescriptor {
   rel?: string[];
   inLanguage?: string;
   name?: string;
-  _meta?: {
+  #meta?: {
     [key: string]: any;
   };
   constructor({
@@ -27,10 +27,10 @@ export class Resource implements ResourceDescriptor {
   }: ResourceDescriptor) {
     this.value = value;
     this.url = url;
-    this.encodingFormat = encodingFormat.toLowerCase();
+    this.encodingFormat = encodingFormat?.toLowerCase();
     this.id = id;
     this.rel = rel;
-    this._meta = _meta;
+    this.#meta = _meta;
     if (name) {
       this.name = name;
     }
@@ -39,7 +39,6 @@ export class Resource implements ResourceDescriptor {
   toJSON() {
     const json = { ...this };
     delete json.id;
-    delete json._meta;
     return json;
   }
   attachment() {
@@ -47,6 +46,12 @@ export class Resource implements ResourceDescriptor {
       this.encodingFormat?.startsWith("image/") ||
       loadingFormats.includes(this.encodingFormat)
     );
+  }
+  wordCount() {
+    return this.#meta?.wordCount;
+  }
+  styles() {
+    return this.#meta?.styles;
   }
 }
 

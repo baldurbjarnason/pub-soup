@@ -1,6 +1,8 @@
 import { Publication, asPublication } from "../dist/lib/metadata.js";
 import tap from "tap";
 
+tap.formatSnapshot = (obj) => JSON.stringify(obj, null, 2);
+
 tap.test("metadata embed", async (test) => {
   const _metadata = {
     type: ["Book"],

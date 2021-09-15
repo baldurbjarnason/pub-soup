@@ -11,6 +11,7 @@ const __dirname = path.dirname(__filename).replace(process.cwd() + "/", "");
 
 let results = [];
 
+tap.formatSnapshot = (obj) => JSON.stringify(obj, null, 2);
 tap.test("parseToC - epub2", async (test) => {
   const chapter = await readFile(
     path.join(__dirname, "./fixtures/demo-epub/pg55456-images/OEBPS/toc.ncx"),

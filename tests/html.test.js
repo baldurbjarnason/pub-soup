@@ -10,6 +10,8 @@ import tap from "tap";
 
 let results = [];
 
+tap.formatSnapshot = (obj) => JSON.stringify(obj, null, 2);
+
 tap.test("markup - svg", async (test) => {
   const file = new Resource({
     value: `<svg style="position: fixed; background-color: red;" width="38" height="20" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M0 10c0 .546.414.983.932.983h33.887l-6.954 7.337a1.015 1.015 0 0 0 0 1.39.892.892 0 0 0 1.317 0l8.545-9.015a1.023 1.023 0 0 0 0-1.39L29.182.29a.892.892 0 0 0-1.317 0 1.015 1.015 0 0 0 0 1.39l6.954 7.337H.932C.414 9.017 0 9.454 0 10z" fill-rule="nonzero" fill="#000" style="}background-color: red;}" /><a xlink:href="#linkies"><image xlink:href="path/to/img.jpg" height="100" width="100" /></a><a xlink:href="relative/path/to/chapter.xhtml"><image xlink:href="path/to/img.jpg" height="100" width="100" /></a><image href="http://example.com/path/to/second-img.jpg" height="100" width="100" /></svg>`,
@@ -20,6 +22,8 @@ tap.test("markup - svg", async (test) => {
   const result = await markup(file);
   results = results.concat(result);
   test.matchSnapshot(result, "markup svg");
+  test.matchSnapshot(result.styles(), "markup svg styles");
+  test.matchSnapshot(result.wordCount(), "markup svg wordCount");
 });
 
 tap.test("markup - html", async (test) => {
@@ -61,6 +65,8 @@ tap.test("markup - xhtml", async (test) => {
   const result = await markup(file);
   results = results.concat(result);
   test.matchSnapshot(result, "markup xhtml");
+  test.matchSnapshot(result.styles(), "markup xhtml styles");
+  test.matchSnapshot(result.wordCount(), "markup xhtml wordCount");
 });
 
 tap.test("markup - invalid xhtml", async (test) => {
@@ -80,6 +86,8 @@ tap.test("markup - invalid xhtml", async (test) => {
   const result = await markup(file);
   results = results.concat(result);
   test.matchSnapshot(result, "markup invalid xhtml");
+  test.matchSnapshot(result.styles(), "markup invalid xhtml styles");
+  test.matchSnapshot(result.wordCount(), "markup invalid xhtml wordCount");
 });
 
 // tap.test("markup - render svg", async (test) => {

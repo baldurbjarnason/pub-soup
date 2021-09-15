@@ -6,6 +6,7 @@ import * as path from "path";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename).replace(process.cwd() + "/", "");
 
+tap.formatSnapshot = (obj) => JSON.stringify(obj, null, 2);
 tap.test("parseOPF - epub2", async (test) => {
   const bookMeta = fs.readFileSync(
     path.join(

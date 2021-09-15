@@ -6,241 +6,175 @@
  */
 'use strict'
 exports[`tests/metadata.test.js TAP Publication parse > Publication parse testManifest1 1`] = `
-Publication {
-  "_epubVersion": undefined,
-  "author": Array [
-    Person {
-      "_meta": Object {},
-      "name": Object {
-        "language": "en",
-        "value": "Herman Melville",
-      },
-      "type": Array [
-        "Person",
-      ],
-    },
+{
+  "@context": [
+    "https://schema.org",
+    "https://www.w3.org/ns/wp-context"
   ],
-  "colorist": Array [],
-  "contributor": Array [],
-  "creator": Array [],
-  "dateModified": 2018-02-10T17:00:00.000Z,
-  "editor": Array [],
-  "id": undefined,
-  "illustrator": Array [],
-  "inLanguage": "en",
-  "links": Array [],
-  "publisher": Array [],
-  "readingOrder": Array [
-    Resource {
-      "_meta": undefined,
-      "encodingFormat": "text/html",
-      "id": undefined,
-      "inLanguage": undefined,
-      "rel": Array [],
-      "type": Array [
-        "LinkedResource",
+  "type": [
+    "Book"
+  ],
+  "url": "https://publisher.example.org/mobydick",
+  "author": [
+    {
+      "type": [
+        "Person"
+      ],
+      "name": {
+        "language": "en",
+        "value": "Herman Melville"
+      }
+    }
+  ],
+  "dateModified": "2018-02-10T17:00:00.000Z",
+  "readingOrder": [
+    {
+      "type": [
+        "LinkedResource"
       ],
       "url": "html/title.html",
-      "value": undefined,
-    },
-    Resource {
-      "_meta": undefined,
       "encodingFormat": "text/html",
-      "id": undefined,
-      "inLanguage": undefined,
-      "rel": Array [],
-      "type": Array [
-        "LinkedResource",
+      "rel": []
+    },
+    {
+      "type": [
+        "LinkedResource"
       ],
       "url": "html/copyright.html",
-      "value": undefined,
-    },
-    Resource {
-      "_meta": undefined,
       "encodingFormat": "text/html",
-      "id": undefined,
-      "inLanguage": undefined,
-      "rel": Array [],
-      "type": Array [
-        "LinkedResource",
+      "rel": []
+    },
+    {
+      "type": [
+        "LinkedResource"
       ],
       "url": "html/introduction.html",
-      "value": undefined,
-    },
-    Resource {
-      "_meta": undefined,
       "encodingFormat": "text/html",
-      "id": undefined,
-      "inLanguage": undefined,
-      "rel": Array [],
-      "type": Array [
-        "LinkedResource",
+      "rel": []
+    },
+    {
+      "type": [
+        "LinkedResource"
       ],
       "url": "html/epigraph.html",
-      "value": undefined,
-    },
-    Resource {
-      "_meta": undefined,
       "encodingFormat": "text/html",
-      "id": undefined,
-      "inLanguage": undefined,
-      "rel": Array [],
-      "type": Array [
-        "LinkedResource",
+      "rel": []
+    },
+    {
+      "type": [
+        "LinkedResource"
       ],
       "url": "html/c001.html",
-      "value": undefined,
-    },
-    Resource {
-      "_meta": undefined,
       "encodingFormat": "text/html",
-      "id": undefined,
-      "inLanguage": undefined,
-      "rel": Array [],
-      "type": Array [
-        "LinkedResource",
+      "rel": []
+    },
+    {
+      "type": [
+        "LinkedResource"
       ],
       "url": "html/c002.html",
-      "value": undefined,
-    },
-    Resource {
-      "_meta": undefined,
       "encodingFormat": "text/html",
-      "id": undefined,
-      "inLanguage": undefined,
-      "rel": Array [],
-      "type": Array [
-        "LinkedResource",
+      "rel": []
+    },
+    {
+      "type": [
+        "LinkedResource"
       ],
       "url": "html/c003.html",
-      "value": undefined,
-    },
-    Resource {
-      "_meta": undefined,
       "encodingFormat": "text/html",
-      "id": undefined,
-      "inLanguage": undefined,
-      "rel": Array [],
-      "type": Array [
-        "LinkedResource",
+      "rel": []
+    },
+    {
+      "type": [
+        "LinkedResource"
       ],
       "url": "html/c004.html",
-      "value": undefined,
-    },
-    Resource {
-      "_meta": undefined,
       "encodingFormat": "text/html",
-      "id": undefined,
-      "inLanguage": undefined,
-      "rel": Array [],
-      "type": Array [
-        "LinkedResource",
+      "rel": []
+    },
+    {
+      "type": [
+        "LinkedResource"
       ],
       "url": "html/c005.html",
-      "value": undefined,
-    },
-    Resource {
-      "_meta": undefined,
       "encodingFormat": "text/html",
-      "id": undefined,
-      "inLanguage": undefined,
-      "rel": Array [],
-      "type": Array [
-        "LinkedResource",
+      "rel": []
+    },
+    {
+      "type": [
+        "LinkedResource"
       ],
       "url": "html/c006.html",
-      "value": undefined,
-    },
+      "encodingFormat": "text/html",
+      "rel": []
+    }
   ],
-  "resources": Array [
-    Resource {
-      "_meta": undefined,
-      "encodingFormat": "text/css",
-      "id": undefined,
-      "inLanguage": undefined,
-      "rel": Array [],
-      "type": Array [
-        "LinkedResource",
+  "resources": [
+    {
+      "type": [
+        "LinkedResource"
       ],
       "url": "css/mobydick.css",
-      "value": undefined,
+      "encodingFormat": "text/css",
+      "rel": []
     },
-    Resource {
-      "_meta": undefined,
-      "encodingFormat": "image/jpeg",
-      "id": undefined,
-      "inLanguage": undefined,
-      "rel": "cover",
-      "type": Array [
-        "LinkedResource",
+    {
+      "type": [
+        "LinkedResource"
       ],
       "url": "images/cover.jpg",
-      "value": undefined,
+      "encodingFormat": "image/jpeg",
+      "rel": "cover"
     },
-    Resource {
-      "_meta": undefined,
-      "encodingFormat": "text/html",
-      "id": undefined,
-      "inLanguage": undefined,
-      "rel": "contents",
-      "type": Array [
-        "LinkedResource",
+    {
+      "type": [
+        "LinkedResource"
       ],
       "url": "html/toc.html",
-      "value": undefined,
+      "encodingFormat": "text/html",
+      "rel": "contents"
     },
-    Resource {
-      "_meta": undefined,
-      "encodingFormat": "application/vnd.ms-opentype",
-      "id": undefined,
-      "inLanguage": undefined,
-      "rel": Array [],
-      "type": Array [
-        "LinkedResource",
+    {
+      "type": [
+        "LinkedResource"
       ],
       "url": "fonts/Literata.otf",
-      "value": undefined,
-    },
-    Resource {
-      "_meta": undefined,
       "encodingFormat": "application/vnd.ms-opentype",
-      "id": undefined,
-      "inLanguage": undefined,
-      "rel": Array [],
-      "type": Array [
-        "LinkedResource",
+      "rel": []
+    },
+    {
+      "type": [
+        "LinkedResource"
       ],
       "url": "fonts/Literata-Bold.otf",
-      "value": undefined,
-    },
-    Resource {
-      "_meta": undefined,
       "encodingFormat": "application/vnd.ms-opentype",
-      "id": undefined,
-      "inLanguage": undefined,
-      "rel": Array [],
-      "type": Array [
-        "LinkedResource",
+      "rel": []
+    },
+    {
+      "type": [
+        "LinkedResource"
       ],
       "url": "fonts/Literata-BoldItalic.otf",
-      "value": undefined,
-    },
-    Resource {
-      "_meta": undefined,
       "encodingFormat": "application/vnd.ms-opentype",
-      "id": undefined,
-      "inLanguage": undefined,
-      "rel": Array [],
-      "type": Array [
-        "LinkedResource",
+      "rel": []
+    },
+    {
+      "type": [
+        "LinkedResource"
       ],
       "url": "fonts/Literata-Italic.otf",
-      "value": undefined,
-    },
+      "encodingFormat": "application/vnd.ms-opentype",
+      "rel": []
+    }
   ],
-  "translator": Array [],
-  "type": Array [
-    "Book",
-  ],
+  "inLanguage": "en",
+  "links": [],
+  "creator": [],
+  "translator": [],
+  "colorist": [],
+  "publisher": [],
+  "illustrator": [],
+  "contributor": [],
+  "editor": []
 }
 `

@@ -38,8 +38,8 @@ export async function view(epub, { concurrency = 4 } = {}) {
   const chapterTasks = metadata.chapters().map((resource) => {
     return async () => {
       const result = await epub.markup(resource.url);
-      if (result._meta.wordCount) {
-        epub.wordCount = epub.wordCount + result._meta.wordCount;
+      if (result.wordCount()) {
+        epub.wordCount = epub.wordCount + result.wordCount();
       }
       chapters = chapters.concat(result);
     };

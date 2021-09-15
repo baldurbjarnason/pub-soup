@@ -40,7 +40,7 @@ ${JSON.stringify(metadata.embed())}
   // Each chapter needs all of its CSS scoped to it.
   const styles = chapters
     .map((markup) => {
-      return markup._meta.styles;
+      return markup.styles();
     })
     .flat();
   return { body: strings.join("\n"), styles };
