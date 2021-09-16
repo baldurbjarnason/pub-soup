@@ -117,6 +117,11 @@ tap.test("Zip buffer file", async (test) => {
   test.equal(file.value.toString(), "application/epub+zip");
 });
 
+tap.test("Zip resource should check if file exists", async (test) => {
+  const epub = await formats.file("application/zip", EPUB);
+  const file = await epub.file("bling-blong.booble");
+  test.notOk(file);
+});
 tap.test("Zip file - generated metadata", async (test) => {
   const zip = await formats.file(
     "application/zip",

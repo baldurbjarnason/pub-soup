@@ -74,8 +74,8 @@ export class Zip extends EventEmitter {
   }
 
   async resource(url: string) {
-    const encodingFormat = mime.getType(url);
-    return new Resource({ encodingFormat, url });
+    const metadata = await this.metadata();
+    return metadata.resource(url);
   }
 
   async getFileForResource(resource: ResourceDescriptor) {

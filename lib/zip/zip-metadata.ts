@@ -7,7 +7,8 @@ export function extractZipMeta(zip) {
   // Should check if there is a publication.json or content.opf and process those instead if available.
   const url = zip.url;
   const resources = directory.files.map((file) => {
-    const encodingFormat = mime.getType(file.path);
+    const encodingFormat =
+      mime.getType(file.path) || "application/octet-stream";
     return new Resource({ encodingFormat, url: file.path });
   });
   const html = resources.filter(
