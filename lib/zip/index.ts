@@ -6,6 +6,8 @@ import { Resource, ResourceDescriptor } from "../resource.js";
 import { purifyStyles } from "../css.js";
 import { purify } from "../parsers/purify.js";
 import { JSTYPES } from "../parsers/js-types.js";
+import { Publication } from "../metadata.js";
+import { extractZipMeta } from "./zip-metadata.js";
 
 export class ZipFactory {
   env: Env;
@@ -18,19 +20,30 @@ export class ZipFactory {
   }
 
   async file(path) {
-    return new this.Archive(await this.env.file(path), this.env);
+    const archive = new this.Archive(await this.env.file(path), this.env);
+    archive.url = path;
+    return archive;
   }
 
   async url(path) {
-    return new this.Archive(await this.env.url(path), this.env);
+    const archive = new this.Archive(await this.env.url(path), this.env);
+    archive.url = path;
+    return archive;
   }
 
   async s3(s3Client, config) {
-    return new this.Archive(await this.env.s3(s3Client, config), this.env);
+    const archive = new this.Archive(
+      await this.env.s3(s3Client, config),
+      this.env
+    );
+    archive.url = config.key;
+    return archive;
   }
 
-  async buffer(data) {
-    return new this.Archive(await this.env.buffer(data), this.env);
+  async buffer(data, path?) {
+    const archive = new this.Archive(await this.env.buffer(data), this.env);
+    archive.url = path;
+    return archive;
   }
 }
 
@@ -40,11 +53,23 @@ export class Zip extends EventEmitter {
   files: {
     [key: string]: ResourceDescriptor;
   };
+  _metadata: Publication;
+  url?: string;
   constructor(directory, env) {
     super();
     this.directory = directory;
     this.files = {};
     this.env = env;
+  }
+  async metadata() {
+    await this.ensureMetadata();
+    return this._metadata;
+  }
+
+  async ensureMetadata() {
+    if (!this._metadata) {
+      this._metadata = await extractZipMeta(this);
+    }
   }
 
   async resource(url: string) {
@@ -115,6 +140,17 @@ export class Zip extends EventEmitter {
   async dataFile(name) {
     const file = this.directory.files.find((d) => d.path === name);
     return file.buffer();
+  }
+
+  async cover() {
+    const metadata = await this.metadata();
+    const coverResource = metadata.cover();
+    return this.file(coverResource.url);
+  }
+  async image() {
+    const metadata = await this.metadata();
+    const imageResource = metadata.image();
+    return this.getFileForResource(imageResource);
   }
 }
 

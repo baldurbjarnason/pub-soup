@@ -116,3 +116,39 @@ tap.test("Zip buffer file", async (test) => {
   const file = await epub.file("mimetype");
   test.equal(file.value.toString(), "application/epub+zip");
 });
+
+tap.test("Zip file - generated metadata", async (test) => {
+  const zip = await formats.file(
+    "application/zip",
+    "tests/fixtures/embedded.lpf"
+  );
+  const publication = await zip.metadata();
+  test.equal(publication.readingOrder[0].url, "index.html");
+});
+
+tap.test("Zip file - generated metadata for cover", async (test) => {
+  const zip = await formats.file(
+    "application/zip",
+    "tests/fixtures/embedded.lpf"
+  );
+  const cover = await zip.cover();
+  test.equal(cover.url, "cover.jpg");
+});
+
+tap.test("Zip file - first image in zip", async (test) => {
+  const zip = await formats.file(
+    "application/zip",
+    "tests/fixtures/embedded.lpf"
+  );
+  const image = await zip.image();
+  test.equal(image.url, "cover.jpg");
+});
+
+tap.test("Zip file - generated metadata - images", async (test) => {
+  const zip = await formats.file(
+    "application/zip",
+    "tests/fixtures/images.zip"
+  );
+  const publication = await zip.metadata();
+  test.equal(publication.readingOrder[0].url, "page1.jpg");
+});

@@ -26,7 +26,6 @@ export class EpubFactory extends ZipFactory {
 
 export class Epub extends Zip {
   wordCount: number;
-  _metadata: Publication;
   constructor(directory, env) {
     super(directory, env);
   }
@@ -39,11 +38,6 @@ export class Epub extends Zip {
       encodingFormat: "application/oebps-package+xml",
     });
   }
-  async metadata() {
-    await this.ensureMetadata();
-    return this._metadata;
-  }
-
   async ensureMetadata() {
     if (!this._metadata) {
       const file = await this.opf();
@@ -68,13 +62,6 @@ export class Epub extends Zip {
     const resource = metadata.resource(path);
     return resource;
   }
-
-  async cover() {
-    const metadata = await this.metadata();
-    const coverResource = metadata.cover();
-    return this.file(coverResource.url);
-  }
-
   markup(filename) {
     return getMarkup(this, filename);
   }

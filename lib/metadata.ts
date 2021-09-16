@@ -25,7 +25,7 @@ export interface Metadata {
   datePublished?: string;
 }
 
-export const resourceProperties = ["resources", "readingOrder", "links"];
+export const resourceProperties = ["readingOrder", "resources", "links"];
 const personProperties = [
   "creator",
   "author",
@@ -126,6 +126,9 @@ export class Publication {
     return resources.filter((resource) =>
       resource.encodingFormat.includes("image")
     );
+  }
+  image() {
+    return this.images()[0];
   }
 
   cover() {

@@ -58,11 +58,11 @@ export async function view(epub, { concurrency = 4 } = {}) {
   const main = await render(epub, { metadata, chapters, contents });
   const resource = new Resource({
     _meta: {
-      publication: epub._metadata,
+      publication: metadata,
       wordCount: epub.wordCount,
       styles: await renderCSS(epub, main.styles, { concurrency }),
     },
-    inLanguage: epub._metadata.inLanguage,
+    inLanguage: metadata.inLanguage,
     url: "index.html",
     encodingFormat: "text/html",
     value: main.body,
