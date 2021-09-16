@@ -29,7 +29,7 @@ export class Epub extends Zip {
   async opf() {
     const meta = await this.file("META-INF/container.xml");
     const opfPath = meta.value.match(/full-path="([^"]+)"/)[1];
-    return this.getFileForResource({
+    return this.fileForResource({
       url: opfPath,
       encodingFormat: "application/oebps-package+xml",
     });

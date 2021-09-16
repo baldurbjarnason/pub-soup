@@ -105,7 +105,7 @@ tap.test("Epub contents", async (test) => {
 tap.test("Epub textFile", async (test) => {
   const factory = new EpubFactory(env);
   const zip = await factory.file(EPUB);
-  const file = await zip.getFileForResource({
+  const file = await zip.fileForResource({
     url: "mimetype",
     encodingFormat: "text/plain",
   });

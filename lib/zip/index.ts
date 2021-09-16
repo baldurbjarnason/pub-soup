@@ -78,7 +78,7 @@ export class Zip extends EventEmitter {
     return metadata.resource(url);
   }
 
-  async getFileForResource(resource: ResourceDescriptor) {
+  async fileForResource(resource: ResourceDescriptor) {
     let file;
     if (this.files[resource.url]) {
       file = this.files[resource.url];
@@ -121,7 +121,7 @@ export class Zip extends EventEmitter {
       return null;
     } else {
       const resource = await this.resource(path);
-      file = await this.getFileForResource(resource);
+      file = await this.fileForResource(resource);
     }
     return file;
   }
@@ -151,7 +151,7 @@ export class Zip extends EventEmitter {
   async image() {
     const metadata = await this.metadata();
     const imageResource = metadata.image();
-    return this.getFileForResource(imageResource);
+    return this.fileForResource(imageResource);
   }
   markup(filename) {
     return getMarkup(this, filename);

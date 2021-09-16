@@ -14,7 +14,7 @@ export async function renderCSS(
       if (typeof style === "string") {
         return style;
       } else {
-        const file = await epub.getFileForResource(style);
+        const file = await epub.fileForResource(style);
         return chapterStyles(file.value, style.get("chapterId"), style);
       }
     },
