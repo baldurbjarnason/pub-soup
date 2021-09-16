@@ -126,9 +126,9 @@ export class Zip extends EventEmitter {
     return file;
   }
 
-  stream(path) {
-    if (!this.directory.files.find((d) => d.path === path)) return null;
-    const file = this.directory.files.find((d) => d.path === path);
+  streamForResource({ url }) {
+    if (!this.directory.files.find((d) => d.path === url)) return null;
+    const file = this.directory.files.find((d) => d.path === url);
     return file.stream();
   }
 

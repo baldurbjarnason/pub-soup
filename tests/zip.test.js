@@ -37,7 +37,9 @@ function stream2buffer(stream) {
 tap.test("Zip file - stream", async (test) => {
   const expectedBuffer = Buffer.from("application/epub+zip");
   const epub = await formats.file("application/zip", EPUB);
-  const bytes = await stream2buffer(epub.stream("mimetype"));
+  const bytes = await stream2buffer(
+    epub.streamForResource({ url: "mimetype" })
+  );
   test.same(bytes, expectedBuffer);
 
   test.ok(epub);
@@ -50,7 +52,7 @@ tap.test("Zip file - file nonexistent", async (test) => {
 });
 tap.test("Zip file - stream nonexistent", async (test) => {
   const epub = await formats.file("application/zip", EPUB);
-  test.notOk(epub.stream("kowabunga.dude"));
+  test.notOk(epub.streamForResource({ url: "kowabunga.dude" }));
 });
 
 tap.test("Zip factory url", async (test, done) => {
