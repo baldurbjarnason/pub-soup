@@ -1,11 +1,12 @@
 import { chapterStyles } from "../css.js";
 import { attributes } from "./attributes.js";
 import createDOMPurify from "dompurify";
-import { JSDOM } from "jsdom";
+import { JSDOM, VirtualConsole } from "jsdom";
 import { count } from "@wordpress/wordcount";
 import { shiftHeading } from "./headings.js";
 import { ResourceDescriptor, Resource } from "../resource.js";
 import { path } from "../base.js";
+const virtualConsole = new VirtualConsole();
 
 // Support srcset
 const purifyConfig = {
@@ -25,11 +26,13 @@ export async function markup(resource: Resource) {
   let dom;
   try {
     dom = new JSDOM(value, {
+      virtualConsole,
       contentType: encodingFormat,
       url: "http://localhost",
     });
   } catch (err) {
     dom = new JSDOM(value, {
+      virtualConsole,
       contentType: "text/html",
       url: "http://localhost",
     });

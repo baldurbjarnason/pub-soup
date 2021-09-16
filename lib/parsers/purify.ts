@@ -1,7 +1,8 @@
 import { purifyStyles } from "../css.js";
 import createDOMPurify from "dompurify";
-import { JSDOM } from "jsdom";
+import { JSDOM, VirtualConsole } from "jsdom";
 import { ResourceDescriptor, Resource } from "../resource.js";
+const virtualConsole = new VirtualConsole();
 
 const purifyConfig = {
   KEEP_CONTENT: false,
@@ -22,12 +23,14 @@ export async function purify(resource: Resource) {
   let dom;
   try {
     dom = new JSDOM(value, {
+      virtualConsole,
       contentType: encodingFormat,
       url: "http://localhost",
     });
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     dom = new JSDOM(value, {
+      virtualConsole,
       contentType: "text/html",
       url: "http://localhost",
     });
