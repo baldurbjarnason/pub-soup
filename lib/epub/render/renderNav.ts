@@ -1,25 +1,19 @@
 import { renderMarkup } from "./renderMarkup.js";
 import { path } from "../../base.js";
-import { ResourceDescriptor } from "../../resource.js";
+import { Resource } from "../../resource.js";
 import { getId } from "../../id.js";
 
-export function renderNav(file: ResourceDescriptor) {
+export function renderNav(file: Resource) {
   const nav = file.value as any;
   const lang = file.inLanguage;
-  const content = `<soup-body>
+  file.value = `<soup-body>
   <nav aria-labelledby="soup-toc-heading" lang="${lang}" role="doc-toc">
     <h1 id="soup-toc-heading">${nav.heading}</h1>
     <ol>${nav.children.map((child) => renderChild(child, file)).join("")}
     </ol>
   </nav></soup-body>`;
-  return renderMarkup(
-    {
-      ...file,
-      value: content,
-      rel: ["contents"],
-    },
-    false
-  );
+
+  return renderMarkup(file, false);
 }
 
 function renderChild(child, file) {

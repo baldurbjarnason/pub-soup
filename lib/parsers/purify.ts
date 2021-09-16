@@ -1,7 +1,7 @@
 import { purifyStyles } from "../css.js";
 import createDOMPurify from "dompurify";
 import { JSDOM } from "jsdom";
-import { ResourceDescriptor } from "../resource.js";
+import { ResourceDescriptor, Resource } from "../resource.js";
 
 const purifyConfig = {
   KEEP_CONTENT: false,
@@ -15,8 +15,9 @@ const purifyConfig = {
 };
 
 // In theory this should work for SVG images as well.
-export async function purify(resource: ResourceDescriptor) {
-  const { value, url, encodingFormat = "text/html", id } = resource;
+export async function purify(resource: Resource) {
+  const { value, url, encodingFormat = "text/html" } = resource;
+  const id = resource.id();
   let links = [id];
   let dom;
   try {

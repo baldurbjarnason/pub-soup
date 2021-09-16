@@ -31,7 +31,6 @@ ${JSON.stringify(metadata.embed())}
   // render images from resources.
   const images = metadata.images();
   for (const image of images) {
-    image.id = getId(image.url);
     image.name = `Image ${images.indexOf(image) + 1}`;
     strings = strings.concat(renderImage(image));
   }

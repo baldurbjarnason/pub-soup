@@ -24,10 +24,8 @@ export async function getContents(epub, metadata) {
   const file = await epub.getFileForResource(resource);
   file.value = toc(file.value, file.url);
   file.encodingFormat = "application/json";
-  file._meta = {
-    title: file.value.heading,
-  };
   file.name = file.value.heading;
+  file.rel = file.rel.concat("contents");
   return file;
 }
 

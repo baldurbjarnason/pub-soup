@@ -313,7 +313,7 @@ exports[`tests/nav.test.js TAP parseToC - epub3 > parseToC - epub3 1`] = `
 `
 
 exports[`tests/nav.test.js TAP render ToC - epub2 > render ToC - epub2 1`] = `
-<soup-chapter id="fileID" data-path="OEBPS/toc.ncx" data-title="Contents" lang="en" data-linear="false" hidden data-rel="contents">
+<soup-chapter id="idT0VCUFMvdG9jLm5jeA" data-path="OEBPS/toc.ncx" data-title="Contents" lang="en" data-linear="false" hidden data-rel="">
   <soup-html><soup-body>
   <nav aria-labelledby="soup-toc-heading" lang="en" role="doc-toc">
     <h1 id="soup-toc-heading">THE CONTENTS</h1>

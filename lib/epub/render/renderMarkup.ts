@@ -1,7 +1,7 @@
-import { ResourceDescriptor } from "../../resource.js";
+import { Resource, ResourceDescriptor } from "../../resource.js";
 
-export function renderMarkup(markup: ResourceDescriptor, linear = true) {
-  return `<soup-chapter id="${markup.id}" data-path="${
+export function renderMarkup(markup: Resource, linear = true) {
+  return `<soup-chapter id="${markup.id()}" data-path="${
     markup.url
   }" data-title="${markup.name}" ${
     (markup.inLanguage && `lang="${markup.inLanguage}"`) || ""
@@ -18,8 +18,8 @@ function nonLinearAttributes(linear) {
   }
 }
 
-export function renderImage(file: ResourceDescriptor) {
-  return `<soup-image id="${file.id}" data-title="${file.name}" data-path="${
+export function renderImage(file: Resource) {
+  return `<soup-image id="${file.id()}" data-title="${file.name}" data-path="${
     file.url
   }"${nonLinearAttributes(true)} data-rel="${file.rel.join(" ")}" hidden>
   <soup-html><img src="${file.url}" alt="${

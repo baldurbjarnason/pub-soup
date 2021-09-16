@@ -4,7 +4,7 @@ import postcss from "postcss";
 import prefixer from "postcss-prefix-selector";
 import selectorParser from "postcss-selector-parser";
 import { shiftTagName } from "./parsers/headings.js";
-import { ResourceDescriptor } from "./resource.js";
+import { Resource, ResourceDescriptor } from "./resource.js";
 
 const headings = ["h1", "h2", "h3", "h4", "h5"];
 
@@ -42,11 +42,7 @@ export async function purifyStyles(cssString, resource: ResourceDescriptor) {
   return result.css;
 }
 
-export async function chapterStyles(
-  cssString,
-  chapterID,
-  resource: ResourceDescriptor
-) {
+export async function chapterStyles(cssString, chapterID, resource: Resource) {
   const result = await postcss([
     purify(resource),
     // We use the attribute selector for ids here so we still have the option to use ID selectors to override publisher styles

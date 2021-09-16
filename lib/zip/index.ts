@@ -3,7 +3,9 @@ import EventEmitter from "events";
 import { CentralDirectory } from "unzipper";
 import mime from "mime";
 import { Resource, ResourceDescriptor } from "../resource.js";
-import { getId } from "../id.js";
+import { purifyStyles } from "../css.js";
+import { purify } from "../parsers/purify.js";
+import { JSTYPES } from "../parsers/js-types.js";
 
 export class ZipFactory {
   env: Env;
@@ -47,8 +49,38 @@ export class Zip extends EventEmitter {
 
   async resource(url: string) {
     const encodingFormat = mime.getType(url);
-    const id = getId(url);
-    return new Resource({ encodingFormat, id, url });
+    return new Resource({ encodingFormat, url });
+  }
+
+  async getFileForResource(resource: ResourceDescriptor) {
+    let file;
+    if (this.files[resource.url]) {
+      file = this.files[resource.url];
+    } else {
+      file = new Resource({
+        url: resource.url,
+        encodingFormat: resource.encodingFormat,
+        rel: [].concat(resource.rel),
+      });
+      if (isTextFile(resource.encodingFormat)) {
+        file.value = await this.textFile(resource.url);
+      } else {
+        file.value = await this.dataFile(resource.url);
+      }
+      if (file.encodingFormat === "text/css") {
+        file.value = await purifyStyles(file.value, file);
+      } else if (
+        file.encodingFormat === "text/html" ||
+        file.encodingFormat === "application/xhtml+xml" ||
+        file.encodingFormat === "image/svg+xml"
+      ) {
+        file.value = await purify(file);
+      } else if (JSTYPES.includes(file.encodingFormat)) {
+        return null;
+      }
+      this.files[resource.url] = file;
+    }
+    return file;
   }
 
   // Add a metadata method that creates a list of resources by mapping files and then sorting it by name.
@@ -56,12 +88,14 @@ export class Zip extends EventEmitter {
   // If there are HTML files present, then those are the reading order.
 
   async file(path) {
-    if (!this.directory.files.find((d) => d.path === path)) return null;
-    const file = await this.resource(path);
-    if (isTextFile(file.encodingFormat)) {
-      file.value = await this.textFile(path);
+    let file;
+    if (this.files[path]) {
+      file = this.files[path];
+    } else if (!this.directory.files.find((d) => d.path === path)) {
+      return null;
     } else {
-      file.value = await this.dataFile(path);
+      const resource = await this.resource(path);
+      file = await this.getFileForResource(resource);
     }
     return file;
   }

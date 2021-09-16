@@ -35,7 +35,7 @@ exports[`tests/html.test.js TAP markup - invalid xhtml > markup invalid xhtml 1`
 
 exports[`tests/html.test.js TAP markup - invalid xhtml > markup invalid xhtml styles 1`] = `
 [
-  "[id=\\"fileId\\"] soup-body { background-color: red;}"
+  "[id=\\"idY2hhcHRlci9wYXRoL3BhZ2UuaHRtbA\\"] soup-body { background-color: red;}"
 ]
 `
 
@@ -81,13 +81,14 @@ exports[`tests/html.test.js TAP markup - xhtml > markup xhtml 1`] = `
 exports[`tests/html.test.js TAP markup - xhtml > markup xhtml styles 1`] = `
 [
   {
-    "type": "LinkedResource",
-    "rel": [
-      "stylesheet"
+    "type": [
+      "LinkedResource"
     ],
     "url": "chapter/path/safe.css",
-    "id": "fileId",
-    "encodingFormat": "text/css"
+    "encodingFormat": "text/css",
+    "rel": [
+      "stylesheet"
+    ]
   },
   ""
 ]

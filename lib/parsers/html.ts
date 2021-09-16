@@ -18,8 +18,9 @@ const purifyConfig = {
   FORBID_ATTR: ["action", "background", "poster"],
 };
 
-export async function markup(resource: ResourceDescriptor) {
-  const { value, url, encodingFormat = "text/html", id, rel = [] } = resource;
+export async function markup(resource: Resource) {
+  const { value, url, encodingFormat = "text/html", rel = [] } = resource;
+  const id = resource.id();
   const wordCount = count(value as string, "words", {});
   let dom;
   try {
@@ -70,13 +71,12 @@ export async function markup(resource: ResourceDescriptor) {
         node.tagName === "link" &&
         path(node.getAttribute("href"), resource.url)
       ) {
-        const link = {
-          type: "LinkedResource",
+        const link = new Resource({
+          _meta: { chapterId: id },
           rel: ["stylesheet"],
           url: path(node.getAttribute("href"), url),
-          id,
           encodingFormat: "text/css",
-        };
+        });
         styles = styles.concat(link);
       } else {
         styles = styles.concat(
@@ -132,7 +132,6 @@ export async function markup(resource: ResourceDescriptor) {
     _meta: { styles, wordCount },
     url,
     value: markupValue,
-    id,
     name: title,
     inLanguage,
     rel,

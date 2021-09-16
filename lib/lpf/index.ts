@@ -66,7 +66,6 @@ export class Lpf extends Epub {
     const metadata = await this.metadata();
     const resource = metadata.resource(path);
     const encodingFormat = resource.encodingFormat;
-    const id = getId(path);
-    return new Resource({ encodingFormat, id, url: path });
+    return new Resource({ encodingFormat, url: path });
   }
 }

@@ -1,11 +1,11 @@
 import { chapterStyles } from "../../css.js";
 import { Epub } from "../index.js";
 import pMap from "p-map";
-import { ResourceDescriptor } from "../../resource.js";
+import { ResourceDescriptor, Resource } from "../../resource.js";
 
 export async function renderCSS(
   epub: Epub,
-  styles: Array<ResourceDescriptor | string>,
+  styles: Array<Resource | string>,
   { concurrency }
 ) {
   const processed = await pMap(
@@ -15,7 +15,7 @@ export async function renderCSS(
         return style;
       } else {
         const file = await epub.getFileForResource(style);
-        return chapterStyles(file.value, style.id, style);
+        return chapterStyles(file.value, style.get("chapterId"), style);
       }
     },
     { concurrency }

@@ -1,5 +1,6 @@
 import { path } from "./base.js";
 import mime from "mime";
+import { getId } from "./id.js";
 
 const loadingFormats = ["application/xhtml+xml", "text/html", "text/css"];
 
@@ -8,7 +9,7 @@ export class Resource implements ResourceDescriptor {
   value?: Buffer | string;
   url: string;
   encodingFormat: string;
-  id?: string;
+  #id?: string;
   rel?: string[];
   inLanguage?: string;
   name?: string;
@@ -19,7 +20,6 @@ export class Resource implements ResourceDescriptor {
     value,
     url,
     encodingFormat,
-    id,
     rel = [],
     _meta,
     name,
@@ -28,7 +28,7 @@ export class Resource implements ResourceDescriptor {
     this.value = value;
     this.url = url;
     this.encodingFormat = encodingFormat?.toLowerCase();
-    this.id = id;
+    this.#id = getId(url);
     this.rel = rel;
     this.#meta = _meta;
     if (name) {
@@ -36,10 +36,13 @@ export class Resource implements ResourceDescriptor {
     }
     this.inLanguage = inLanguage;
   }
-  toJSON() {
-    const json = { ...this };
-    delete json.id;
-    return json;
+
+  get(property) {
+    return this.#meta[property];
+  }
+
+  id() {
+    return this.#id;
   }
   attachment() {
     return !(
@@ -59,7 +62,7 @@ export interface ResourceDescriptor {
   value?: Buffer | string;
   url: string;
   encodingFormat: string;
-  id?: string;
+  originalId?: string;
   rel?: string[];
   name?: string;
   inLanguage?: string;

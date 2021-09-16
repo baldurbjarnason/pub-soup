@@ -96,11 +96,8 @@ tap.test("Epub contents", async (test) => {
     url: "content.ncx",
     id: "idY29udGVudC5uY3g",
     encodingFormat: "application/json",
-    rel: ["ncx"],
+    rel: ["ncx", "contents"],
     name: "Test 1",
-    _meta: {
-      title: "Test 1",
-    },
     inLanguage: undefined,
   });
 });
@@ -231,7 +228,7 @@ tap.test("Epub markup", async (test) => {
       encoding: "utf8",
     })
   );
-  test.same(file.toJSON(), output);
+  test.same(file, output);
 });
 
 // tap.test("Epub uploads", async (test) => {
@@ -258,7 +255,6 @@ tap.test("Epub process", async (test) => {
   //   ),
   //   JSON.stringify(result, null, 2)
   // );
-  console.log(result.url);
   const resource = JSON.parse(
     await readFile(
       path.join(
@@ -271,7 +267,7 @@ tap.test("Epub process", async (test) => {
       }
     )
   );
-  test.same(result.toJSON(), resource);
+  test.same(result, resource);
 });
 
 // tap.test("Epub render", async (test) => {

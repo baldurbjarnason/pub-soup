@@ -53,7 +53,7 @@ export function opf(text, opfPath): Publication {
       return {
         url: getPath(node.attr("href"), opfPath),
         rel,
-        id,
+        originalId: id,
         encodingFormat: node.attr("media-type"),
       };
     })
@@ -62,14 +62,10 @@ export function opf(text, opfPath): Publication {
     .map((index, ref) => {
       const node = $(ref);
       return book.resources.find((item) => {
-        return item.id === node.attr("idref");
+        return item.originalId === node.attr("idref");
       });
     })
     .toArray();
-  book.resources = book.resources.map((item) => {
-    delete item.id;
-    return item;
-  });
   book.resources = book.resources.concat({
     rel: ["alternate", "describedby"],
     url: opfPath,
