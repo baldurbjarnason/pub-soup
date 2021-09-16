@@ -1,5 +1,5 @@
 import { chapterStyles } from "../../css.js";
-import { Epub } from "../index.js";
+import { Epub } from "../../epub/index.js";
 import pMap from "p-map";
 import { ResourceDescriptor, Resource } from "../../resource.js";
 

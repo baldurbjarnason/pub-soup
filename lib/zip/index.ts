@@ -8,6 +8,7 @@ import { purify } from "../parsers/purify.js";
 import { JSTYPES } from "../parsers/js-types.js";
 import { Publication } from "../metadata.js";
 import { extractZipMeta } from "./zip-metadata.js";
+import { getMarkup, view, getContents } from "../view/index.js";
 
 export class ZipFactory {
   env: Env;
@@ -151,6 +152,15 @@ export class Zip extends EventEmitter {
     const metadata = await this.metadata();
     const imageResource = metadata.image();
     return this.getFileForResource(imageResource);
+  }
+  markup(filename) {
+    return getMarkup(this, filename);
+  }
+  async contents() {
+    return getContents(this, await this.metadata());
+  }
+  async view(config) {
+    return view(this, config);
   }
 }
 

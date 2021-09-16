@@ -1,9 +1,6 @@
 import { Zip, ZipFactory } from "../zip/index.js";
-import { Resource, ResourceDescriptor } from "../resource.js";
-import { getId } from "../id.js";
+import { Resource } from "../resource.js";
 import { opf } from "./opf.js";
-import { getMarkup, view, getContents } from "./view.js";
-import { Metadata, Publication } from "../metadata.js";
 
 export function isTextFile(type) {
   if (
@@ -61,14 +58,5 @@ export class Epub extends Zip {
     const metadata = await this.metadata();
     const resource = metadata.resource(path);
     return resource;
-  }
-  markup(filename) {
-    return getMarkup(this, filename);
-  }
-  async contents() {
-    return getContents(this, await this.metadata());
-  }
-  async view(config) {
-    return view(this, config);
   }
 }

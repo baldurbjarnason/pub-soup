@@ -2,8 +2,8 @@ import { Resource } from "../resource.js";
 import { markup } from "../parsers/html.js";
 import PQueue from "p-queue";
 import { render } from "./render/render.js";
-import { renderCSS } from "./render/renderCSS.js";
 import { toc } from "./nav.js";
+import { renderCSS } from "./render/renderCSS.js";
 
 const chapterFormats = ["application/xhtml+xml", "text/html", "image/svg+xml"];
 

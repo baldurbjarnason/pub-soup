@@ -1,5 +1,5 @@
-import { toc as parseToC } from "../dist/lib/epub/nav.js";
-import { renderNav } from "../dist/lib/epub/render/renderNav.js";
+import { toc as parseToC } from "../dist/lib/view/nav.js";
+import { renderNav } from "../dist/lib/view/render/renderNav.js";
 // import { File, Base, Names } from "../src/zip/index.js";
 import { readFile } from "fs/promises";
 import * as path from "path";

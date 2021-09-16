@@ -4,6 +4,7 @@ import { Resource } from "../../lib/resource.js";
 
 export function extractZipMeta(zip) {
   const directory = zip.directory;
+  // Should check if there is a publication.json or content.opf and process those instead if available.
   const url = zip.url;
   const resources = directory.files.map((file) => {
     const encodingFormat = mime.getType(file.path);

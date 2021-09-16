@@ -1,7 +1,6 @@
 import { ZipFactory } from "../zip/index.js";
 import { Resource } from "../resource.js";
 import { Epub } from "../epub/index.js";
-import { getId } from "../id.js";
 import { extractMeta, normalise } from "./extractMeta.js";
 
 export class LpfFactory extends ZipFactory {

@@ -1,4 +1,4 @@
-import { renderMarkup } from "../dist/lib/epub/render/renderMarkup.js";
+import { renderMarkup } from "../dist/lib/view/render/renderMarkup.js";
 import tap from "tap";
 import { Resource } from "../dist/lib/resource.js";
 
