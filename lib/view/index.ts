@@ -31,13 +31,13 @@ export async function getContents(epub, metadata) {
 
 export async function view(epub, { concurrency = 4 } = {}) {
   const metadata = await epub.metadata();
-  epub.wordCount = 0;
+  let wordCount = 0;
   let chapters = [];
   const chapterTasks = metadata.chapters().map((resource) => {
     return async () => {
       const result = await epub.markup(resource.url);
       if (result.wordCount()) {
-        epub.wordCount = epub.wordCount + result.wordCount();
+        wordCount = wordCount + result.wordCount();
       }
       chapters = chapters.concat(result);
     };
@@ -59,7 +59,7 @@ export async function view(epub, { concurrency = 4 } = {}) {
   const resource = new Resource({
     _meta: {
       publication: metadata,
-      wordCount: epub.wordCount,
+      wordCount,
       styles: await renderCSS(epub, main.styles, { concurrency }),
     },
     inLanguage: metadata.inLanguage,

@@ -22,7 +22,6 @@ export class EpubFactory extends ZipFactory {
 }
 
 export class Epub extends Zip {
-  wordCount: number;
   constructor(directory, env) {
     super(directory, env);
   }
