@@ -40,11 +40,50 @@ tap.test("Zip file - stream", async (test) => {
   const expectedBuffer = Buffer.from("application/epub+zip");
   const epub = await formats.file("application/zip", EPUB);
   const bytes = await stream2buffer(
-    epub.streamForResource({ url: "mimetype" })
+    await epub.streamForResource({ url: "mimetype" })
   );
   test.same(bytes, expectedBuffer);
 
   test.ok(epub);
+});
+
+tap.test("Zip file - stream html", async (test) => {
+  const epub = await formats.file(
+    "application/zip",
+    "tests/fixtures/stream.zip"
+  );
+  const bytes = await stream2buffer(await epub.stream("index.html"));
+  test.ok(bytes.length !== 0);
+});
+
+tap.test("Zip file - stream css", async (test) => {
+  const expectedBuffer = Buffer.from("body {background-color: red}");
+  const epub = await formats.file(
+    "application/zip",
+    "tests/fixtures/stream.zip"
+  );
+  const bytes = await stream2buffer(
+    await epub.streamForResource({
+      url: "test.css",
+      encodingFormat: "text/css",
+    })
+  );
+  test.same(bytes, expectedBuffer);
+
+  test.ok(epub);
+});
+
+tap.test("Zip file - stream javascript", async (test) => {
+  const epub = await formats.file(
+    "application/zip",
+    "tests/fixtures/stream.zip"
+  );
+  test.notOk(
+    await epub.streamForResource({
+      url: "test.js",
+      encodingFormat: "text/javascript",
+    })
+  );
 });
 
 tap.test("Zip file - file nonexistent", async (test) => {
@@ -54,7 +93,7 @@ tap.test("Zip file - file nonexistent", async (test) => {
 });
 tap.test("Zip file - stream nonexistent", async (test) => {
   const epub = await formats.file("application/zip", EPUB);
-  test.notOk(epub.streamForResource({ url: "kowabunga.dude" }));
+  test.notOk(await epub.streamForResource({ url: "kowabunga.dude" }));
 });
 
 tap.test("Zip factory url", async (test, done) => {

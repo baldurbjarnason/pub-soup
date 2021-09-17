@@ -1,14 +1,14 @@
 import { Env } from "../env.js";
 import EventEmitter from "events";
 import { CentralDirectory } from "unzipper";
-import mime from "mime";
 import { Resource, ResourceDescriptor } from "../resource.js";
 import { purifyStyles } from "../css.js";
 import { purify } from "../parsers/purify.js";
-import { JSTYPES } from "../parsers/js-types.js";
+import { JSTYPES, isJS } from "../parsers/js-types.js";
 import { Publication } from "../metadata.js";
 import { extractZipMeta } from "./zip-metadata.js";
 import { getMarkup, view, getContents } from "../view/index.js";
+import { Readable } from "stream";
 
 export class ZipFactory {
   env: Env;
@@ -98,7 +98,7 @@ export class Zip extends EventEmitter {
         file.encodingFormat === "image/svg+xml"
       ) {
         file.value = await purify(file);
-      } else if (JSTYPES.includes(file.encodingFormat)) {
+      } else if (isJS(file.encodingFormat)) {
         return null;
       }
       this.files[resource.url] = file;
@@ -123,10 +123,31 @@ export class Zip extends EventEmitter {
     return file;
   }
 
-  streamForResource({ url }) {
+  async streamForResource(resource) {
+    const { url, encodingFormat } = resource;
     if (!this.directory.files.find((d) => d.path === url)) return null;
     const file = this.directory.files.find((d) => d.path === url);
-    return file.stream();
+    if (isJS(encodingFormat)) {
+      return null;
+    } else if (encodingFormat === "text/css") {
+      return Readable.from(
+        Buffer.from(
+          await purifyStyles(await this.textFile(resource.url), resource)
+        )
+      );
+    } else if (
+      encodingFormat === "text/html" ||
+      encodingFormat === "application/xhtml+xml" ||
+      encodingFormat === "image/svg+xml"
+    ) {
+      resource.value = await this.textFile(resource.url);
+      return Readable.from(Buffer.from(await purify(resource)));
+    } else return file.stream();
+  }
+
+  async stream(path) {
+    const resource = await this.resource(path);
+    return this.streamForResource(resource);
   }
 
   async textFile(name) {
