@@ -1,4 +1,6 @@
-# pub-soup
+# document-duck
+
+In progress [notes](NOTES.md).
 
 ## ESM support
 

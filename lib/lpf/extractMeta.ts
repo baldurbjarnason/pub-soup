@@ -5,10 +5,10 @@ import {
   Metadata,
   Publication,
   asPublication,
-  asArray,
   resourceProperties,
 } from "../metadata.js";
 import { Resource, asResource } from "../resource.js";
+import { asArray } from "../utils/asArray.js";
 
 const options = {
   withDomLvl1: true,

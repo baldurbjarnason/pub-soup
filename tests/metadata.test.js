@@ -51,7 +51,7 @@ tap.test("metadata get", async (test) => {
     ],
   };
   const publication = new Publication(_metadata);
-  test.equal(publication.get("numberOfPages"), 251);
+  test.equal(publication.getValue("numberOfPages"), 251);
 });
 
 tap.test("Invalid Publication", async (test) => {

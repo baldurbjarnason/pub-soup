@@ -2,6 +2,7 @@ import { env, Env } from "./lib/env.js";
 import { EpubFactory } from "./lib/epub/index.js";
 import { ZipFactory } from "./lib/zip/index.js";
 import { LpfFactory } from "./lib/lpf/index.js";
+export { settings } from "./lib/env.js";
 
 export class Formats {
   env: Env;

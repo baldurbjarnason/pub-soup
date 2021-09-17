@@ -67,7 +67,7 @@ tap.test("Lpf file - embedded metadata", async (test) => {
     "tests/fixtures/embedded.lpf"
   );
   const publication = await lpf.metadata();
-  test.equal(publication.get("name")[0], "ePub Experiment 1");
+  test.equal(publication.get("name")[0].value, "ePub Experiment 1");
   test.ok(await lpf.file("index.html"));
 });
 

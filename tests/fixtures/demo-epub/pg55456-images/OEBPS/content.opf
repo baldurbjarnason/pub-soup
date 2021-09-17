@@ -12,7 +12,7 @@
     <dc:contributor opf:file-as="Testing, Fake Editor For" opf:role="edt">Fake Editor For Testing</dc:contributor>
     <dc:contributor opf:file-as="Testing, Fake Actor For" opf:role="act">Fake Actor For Testing</dc:contributor>
     <dc:publisher>Project Gutenberg with alterations for testing by The Rebus Foundation</dc:publisher>
-    <dc:title>Aventures d'Alice au pays des merveilles</dc:title>
+    <dc:title xml:lang="fr">Aventures d'Alice au pays des merveilles</dc:title>
     <dc:language xsi:type="dcterms:RFC4646">fr</dc:language>
     <dc:date opf:event="publication">2017-08-30</dc:date>
     <dc:date opf:event="modification">2018-10-27T06:59:39.442041+00:00</dc:date>

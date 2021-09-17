@@ -45,3 +45,10 @@ export const env: Env = {
     return unzipper.Open.buffer(data);
   },
 };
+
+export const settings = new Map();
+
+// Default language
+settings.set("language", "en");
+settings.set("direction", "ltr");
+settings.set("inLanguage", "en");

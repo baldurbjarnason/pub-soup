@@ -1,4 +1,5 @@
 import cheerio from "cheerio";
+import { settings } from "../env.js";
 import { Metadata, Publication, asPublication } from "../metadata.js";
 
 // This should be rewritten to use a proper xml parser.
@@ -20,11 +21,16 @@ export function opf(text, opfPath): Publication {
     readingOrder: [],
   };
   book.inLanguage = $("dc\\:language").text();
-  const titles = [];
-  $("dc\\:title").each((index, el) => {
-    titles[index] = $(el).text();
-  });
-  book.name = titles.join("\n");
+  const titles = $("dc\\:title")
+    .map((index, el) => {
+      return {
+        value: $(el).text(),
+        language: $(el).attr("xml:lang") || settings.get("language"),
+        direction: $(el).attr("dir") || settings.get("direction"),
+      };
+    })
+    .toArray();
+  book.name = titles;
 
   const packageElement = $("package");
   const idforid = packageElement.attr("unique-identifier");
@@ -87,7 +93,11 @@ export function opf(text, opfPath): Publication {
     .map((index, contributor) => {
       const node = $(contributor);
       return {
-        name: node.text(),
+        name: {
+          value: node.text(),
+          language: node.attr("xml:lang") || settings.get("language"),
+          direction: node.attr("dir") || settings.get("direction"),
+        },
         id: node.attr("id"),
         role: node.attr("opf:role"),
       };
@@ -97,7 +107,11 @@ export function opf(text, opfPath): Publication {
     .map((index, contributor) => {
       const node = $(contributor);
       return {
-        name: node.text(),
+        name: {
+          value: node.text(),
+          language: node.attr("xml:lang") || settings.get("language"),
+          direction: node.attr("dir") || settings.get("direction"),
+        },
         id: node.attr("id"),
         role: node.attr("opf:role"),
       };
@@ -132,10 +146,10 @@ export function opf(text, opfPath): Publication {
   }
   book.author = creators
     .filter((creator) => creator.role === "aut")
-    .map((creator) => creator.name);
+    .map((creator) => creator.name.value);
   book.creator = creators
     .filter((creator) => !knownRoles.includes(creator.role))
-    .map((creator) => creator.name);
+    .map((creator) => creator.name.value);
 
   book.translator = [].concat(
     contributors

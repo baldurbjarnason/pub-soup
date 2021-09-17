@@ -2,12 +2,19 @@ import { getId } from "./id.js";
 import { filterResources } from "./parsers/js-types.js";
 import { ResourceDescriptor, asResource, Resource } from "./resource.js";
 import { Person, asPerson } from "./person.js";
+import { asArray } from "./utils/asArray.js";
+import { settings } from "./env.js";
+import { asValue } from "./utils/asValue.js";
+import { isString } from "./utils/isString.js";
 
 export interface Metadata {
   resources: ResourceDescriptor[];
   "@context"?: ["https://schema.org", "https://www.w3.org/ns/wp-context"];
   type?: string[];
-  name?: string | { value: string; language: string };
+  name?:
+    | string
+    | { value: string; language: string; direction?: string }
+    | Array<{ value: string; language: string; direction?: string }>;
   inLanguage?: string;
   links?: ResourceDescriptor[];
   readingOrder?: ResourceDescriptor[];
@@ -45,8 +52,11 @@ export class Publication {
   links?: Resource[];
   id?: string;
   type?: string[];
-  name: { value: string; language: string };
+  name:
+    | { value: string; language: string; direction?: string }
+    | Array<{ value: string; language: string; direction?: string }>;
   inLanguage: string;
+  #language: string;
   creator?: Person[];
   author?: Person[];
   translator?: Person[];
@@ -62,11 +72,15 @@ export class Publication {
   #resourceMap = new Map();
 
   constructor(descriptor) {
-    const { inLanguage = "en" } = descriptor;
+    const {
+      inLanguage = settings.get("inLanguage"),
+      language = settings.get("language"),
+    } = descriptor;
     this.#meta = { ...descriptor };
     this.id = descriptor.id;
     this.type = asArray(descriptor.type);
     this.inLanguage = inLanguage;
+    this.#language = language;
     this._epubVersion = descriptor._epubVersion;
     if (descriptor.dateModified) {
       this.dateModified = new Date(descriptor.dateModified);
@@ -77,7 +91,7 @@ export class Publication {
     for (const property of resourceProperties) {
       this[property] = asArray(descriptor[property]).map(
         (resource: unknown) => {
-          const result = asResource(resource, this.inLanguage);
+          const result = asResource(resource);
           if (property !== "links") {
             this.#resourceMap.set(result.url, result);
           }
@@ -87,11 +101,11 @@ export class Publication {
     }
     for (const property of personProperties) {
       this[property] = asArray(descriptor[property]).map((person: unknown) => {
-        return asPerson(person, this.inLanguage);
+        return asPerson(person, language);
       });
     }
     if (isString(descriptor.name)) {
-      this.name = { value: descriptor.name, language: inLanguage };
+      this.name = { value: descriptor.name, language };
     } else if (
       descriptor.name &&
       isString(descriptor.name.value) &&
@@ -102,7 +116,11 @@ export class Publication {
   }
 
   get(property) {
-    return this.#meta[property];
+    return asArray(this.#meta[property]).map((value) => asValue(value));
+  }
+
+  getValue(property) {
+    return this.get(property)[0].value;
   }
 
   resource(path) {
@@ -164,11 +182,6 @@ export class Publication {
     return { ...json, resources, links, readingOrder: undefined };
   }
 }
-
-function isString(x) {
-  return typeof x === "string";
-}
-
 export function asPublication(publication): Publication {
   if (
     publication.resources &&
@@ -179,15 +192,5 @@ export function asPublication(publication): Publication {
     return new Publication(publication);
   } else {
     throw new Error("Invalid metadata for publication");
-  }
-}
-
-export function asArray(x: unknown): any[] {
-  if (Array.isArray(x)) {
-    return x;
-  } else if (!x) {
-    return [];
-  } else if (typeof x === "string") {
-    return [x];
   }
 }

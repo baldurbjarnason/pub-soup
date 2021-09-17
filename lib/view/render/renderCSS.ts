@@ -15,7 +15,7 @@ export async function renderCSS(
         return style;
       } else {
         const file = await epub.fileForResource(style);
-        return chapterStyles(file.value, style.get("chapterId"), style);
+        return chapterStyles(file.value, style.getValue("chapterId"), style);
       }
     },
     { concurrency }

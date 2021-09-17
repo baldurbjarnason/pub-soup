@@ -579,10 +579,13 @@ exports[`tests/opf.test.js TAP parseOPF - epub2 > parseOPF - epub2 1`] = `
     }
   ],
   "inLanguage": "fr",
-  "name": {
-    "value": "Aventures d'Alice au pays des merveilles",
-    "language": "fr"
-  },
+  "name": [
+    {
+      "value": "Aventures d'Alice au pays des merveilles",
+      "language": "fr",
+      "direction": "ltr"
+    }
+  ],
   "id": "http://www.gutenberg.org/ebooks/55456",
   "creator": [
     {
@@ -590,7 +593,7 @@ exports[`tests/opf.test.js TAP parseOPF - epub2 > parseOPF - epub2 1`] = `
         "Person"
       ],
       "name": {
-        "language": "fr",
+        "language": "en",
         "value": "Fake Author For Testing"
       }
     }
@@ -601,7 +604,7 @@ exports[`tests/opf.test.js TAP parseOPF - epub2 > parseOPF - epub2 1`] = `
         "Person"
       ],
       "name": {
-        "language": "fr",
+        "language": "en",
         "value": "Project Gutenberg with alterations for testing by The Rebus Foundation"
       }
     }
@@ -614,7 +617,7 @@ exports[`tests/opf.test.js TAP parseOPF - epub2 > parseOPF - epub2 1`] = `
         "Person"
       ],
       "name": {
-        "language": "fr",
+        "language": "en",
         "value": "Lewis Carroll"
       }
     }
@@ -625,8 +628,9 @@ exports[`tests/opf.test.js TAP parseOPF - epub2 > parseOPF - epub2 1`] = `
         "Person"
       ],
       "name": {
-        "language": "fr",
-        "value": "Henri Bué"
+        "value": "Henri Bué",
+        "language": "en",
+        "direction": "ltr"
       }
     }
   ],
@@ -636,8 +640,9 @@ exports[`tests/opf.test.js TAP parseOPF - epub2 > parseOPF - epub2 1`] = `
         "Person"
       ],
       "name": {
-        "language": "fr",
-        "value": "John Tenniel"
+        "value": "John Tenniel",
+        "language": "en",
+        "direction": "ltr"
       }
     }
   ],
@@ -647,8 +652,9 @@ exports[`tests/opf.test.js TAP parseOPF - epub2 > parseOPF - epub2 1`] = `
         "Person"
       ],
       "name": {
-        "language": "fr",
-        "value": "Fake Editor For Testing"
+        "value": "Fake Editor For Testing",
+        "language": "en",
+        "direction": "ltr"
       }
     }
   ],
@@ -658,8 +664,9 @@ exports[`tests/opf.test.js TAP parseOPF - epub2 > parseOPF - epub2 1`] = `
         "Person"
       ],
       "name": {
-        "language": "fr",
-        "value": "Fake Colourist For Testing"
+        "value": "Fake Colourist For Testing",
+        "language": "en",
+        "direction": "ltr"
       }
     }
   ],
@@ -669,8 +676,9 @@ exports[`tests/opf.test.js TAP parseOPF - epub2 > parseOPF - epub2 1`] = `
         "Person"
       ],
       "name": {
-        "language": "fr",
-        "value": "Fake Actor For Testing"
+        "value": "Fake Actor For Testing",
+        "language": "en",
+        "direction": "ltr"
       }
     },
     {
@@ -678,8 +686,9 @@ exports[`tests/opf.test.js TAP parseOPF - epub2 > parseOPF - epub2 1`] = `
         "Person"
       ],
       "name": {
-        "language": "fr",
-        "value": "Fake Author For Testing"
+        "value": "Fake Author For Testing",
+        "language": "en",
+        "direction": "ltr"
       }
     }
   ]
@@ -800,10 +809,18 @@ exports[`tests/opf.test.js TAP parseOPF - epub3 > parseOPF - epub3 1`] = `
     }
   ],
   "inLanguage": "en",
-  "name": {
-    "value": "Children's Literature\\nA Textbook of Sources for Teachers and Teacher-Training Classes",
-    "language": "en"
-  },
+  "name": [
+    {
+      "value": "Children's Literature",
+      "language": "en",
+      "direction": "ltr"
+    },
+    {
+      "value": "A Textbook of Sources for Teachers and Teacher-Training Classes",
+      "language": "en",
+      "direction": "ltr"
+    }
+  ],
   "id": "http://www.gutenberg.org/ebooks/25545",
   "creator": [
     {
@@ -835,8 +852,9 @@ exports[`tests/opf.test.js TAP parseOPF - epub3 > parseOPF - epub3 1`] = `
         "Person"
       ],
       "name": {
+        "value": "Fake Translator",
         "language": "en",
-        "value": "Fake Translator"
+        "direction": "ltr"
       }
     }
   ],
@@ -846,8 +864,9 @@ exports[`tests/opf.test.js TAP parseOPF - epub3 > parseOPF - epub3 1`] = `
         "Person"
       ],
       "name": {
+        "value": "Fake Illustrator",
         "language": "en",
-        "value": "Fake Illustrator"
+        "direction": "ltr"
       }
     }
   ],
@@ -857,8 +876,9 @@ exports[`tests/opf.test.js TAP parseOPF - epub3 > parseOPF - epub3 1`] = `
         "Person"
       ],
       "name": {
+        "value": "Fake Editor",
         "language": "en",
-        "value": "Fake Editor"
+        "direction": "ltr"
       }
     }
   ],
@@ -868,8 +888,9 @@ exports[`tests/opf.test.js TAP parseOPF - epub3 > parseOPF - epub3 1`] = `
         "Person"
       ],
       "name": {
+        "value": "Fake Colourist",
         "language": "en",
-        "value": "Fake Colourist"
+        "direction": "ltr"
       }
     }
   ],
@@ -879,8 +900,9 @@ exports[`tests/opf.test.js TAP parseOPF - epub3 > parseOPF - epub3 1`] = `
         "Person"
       ],
       "name": {
+        "value": "Fake Colourist",
         "language": "en",
-        "value": "Fake Colourist"
+        "direction": "ltr"
       }
     },
     {
@@ -888,8 +910,9 @@ exports[`tests/opf.test.js TAP parseOPF - epub3 > parseOPF - epub3 1`] = `
         "Person"
       ],
       "name": {
+        "value": "Charles Madison Curry",
         "language": "en",
-        "value": "Charles Madison Curry"
+        "direction": "ltr"
       }
     },
     {
@@ -897,8 +920,9 @@ exports[`tests/opf.test.js TAP parseOPF - epub3 > parseOPF - epub3 1`] = `
         "Person"
       ],
       "name": {
+        "value": "Erle Elsworth Clippinger",
         "language": "en",
-        "value": "Erle Elsworth Clippinger"
+        "direction": "ltr"
       }
     }
   ]

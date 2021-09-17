@@ -42,5 +42,5 @@ tap.test("get meta", async (test) => {
     name: { value: "Testimus Maximus", language: "latin" },
     additionalName: "Dingus",
   });
-  test.equal(person.get("additionalName"), "Dingus");
+  test.equal(person.getValue("additionalName"), "Dingus");
 });

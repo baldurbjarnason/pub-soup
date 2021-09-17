@@ -1,6 +1,8 @@
 import { path } from "./base.js";
 import mime from "mime";
 import { getId } from "./id.js";
+import { asArray } from "./utils/asArray.js";
+import { asValue } from "./utils/asValue.js";
 
 const loadingFormats = ["application/xhtml+xml", "text/html", "text/css"];
 
@@ -38,7 +40,11 @@ export class Resource implements ResourceDescriptor {
   }
 
   get(property) {
-    return this.#meta[property];
+    return asArray(this.#meta[property]).map((value) => asValue(value));
+  }
+
+  getValue(property) {
+    return this.get(property)[0].value;
   }
 
   id() {
