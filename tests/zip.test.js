@@ -1,6 +1,7 @@
 import { Epub, EpubFactory } from "../dist/lib/epub/index.js";
 // import { ZipFactory } from "../src/zip/index.js";
 import { Formats, formats } from "../dist/index.js";
+import { file, url, s3 } from "../dist/lib/filesystem/index.js";
 import { env } from "../dist/lib/env.js";
 import tap from "tap";
 import * as td from "testdouble";
@@ -8,19 +9,20 @@ import { readFile } from "fs/promises";
 import { join } from "path";
 import handler from "serve-handler";
 import * as http from "http";
+import S3 from "aws-sdk/clients/s3.js";
 
 tap.afterEach(() => {
   td.reset();
 });
 
-const EPUB = "tests/fixtures/test.epub";
+const EPUB = "tests/fixtures/test.zip";
 
 tap.test("Epub factory file", async (test) => {
-  const file = new Epub({}, env);
-  test.ok(file);
+  const result = new Epub({}, env);
+  test.ok(result);
   const factory = new EpubFactory(env);
   test.type(factory.Archive, Epub);
-  const epub = await formats.file("application/epub+zip", EPUB);
+  const epub = await file(EPUB);
   test.ok(epub);
 });
 
@@ -60,13 +62,21 @@ tap.test("Zip factory url", async (test, done) => {
     return handler(request, response);
   });
   server.listen(3000, () => {});
-  const epub = await formats.url(
-    "application/epub+zip",
-    "http://localhost:3000/tests/fixtures/test.epub"
-  );
+  const epub = await url("http://localhost:3000/tests/fixtures/test.zip");
   test.ok(epub);
   const file = await epub.textFile("mimetype");
   test.equal(file, "application/epub+zip");
+  const epub2 = await url(
+    "http://localhost:3000/tests/fixtures/fimbulfamb.zip"
+  );
+  test.notOk(epub2);
+  const epub3 = await formats.url(
+    "application/epub+zip",
+    "http://localhost:3000/tests/fixtures/test.zip"
+  );
+  test.ok(epub3);
+  const file2 = await epub.textFile("mimetype");
+  test.equal(file2, "application/epub+zip");
   server.close(done);
 });
 
@@ -84,6 +94,14 @@ tap.test("Zip factory s3", async (test) => {
   const epub = await formats.s3("application/zip", s3Client, config);
   test.ok(epub);
   td.verify(testEnv.s3(s3Client, config));
+});
+
+tap.test("filesystem factory s3", async (test) => {
+  const s3Client = new S3();
+  // This is a specific test file, uploaded to a dedicated test bucket, and made public.
+  const config = { Bucket: "documentduck-test", Key: "test.zip" };
+  const epub = await s3(s3Client, config, env);
+  test.ok(epub);
 });
 
 tap.test("Zip textFile", async (test) => {

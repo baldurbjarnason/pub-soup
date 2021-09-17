@@ -20,29 +20,26 @@ export class ZipFactory {
     return Zip;
   }
 
-  async file(path) {
-    const archive = new this.Archive(await this.env.file(path), this.env);
+  async file(path, options?, env = this.env) {
+    const archive = new this.Archive(await this.env.file(path), env);
     archive.url = path;
     return archive;
   }
 
-  async url(path) {
-    const archive = new this.Archive(await this.env.url(path), this.env);
+  async url(path, options?, env = this.env) {
+    const archive = new this.Archive(await this.env.url(path), env);
     archive.url = path;
     return archive;
   }
 
-  async s3(s3Client, config) {
-    const archive = new this.Archive(
-      await this.env.s3(s3Client, config),
-      this.env
-    );
+  async s3(s3Client, config, env = this.env) {
+    const archive = new this.Archive(await this.env.s3(s3Client, config), env);
     archive.url = config.key;
     return archive;
   }
 
-  async buffer(data, path?) {
-    const archive = new this.Archive(await this.env.buffer(data), this.env);
+  async buffer(data, path?, env = this.env) {
+    const archive = new this.Archive(await this.env.buffer(data), env);
     archive.url = path;
     return archive;
   }

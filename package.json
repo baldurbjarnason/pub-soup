@@ -46,7 +46,9 @@
     "valid-data-url": "^4.0.0"
   },
   "devDependencies": {
+    "@types/node": "^16.9.2",
     "@types/unzipper": "^0.10.4",
+    "aws-sdk": "^2.990.0",
     "c8": "^7.7.3",
     "cssnano": "^5.0.7",
     "cssnano-preset-advanced": "^5.1.3",

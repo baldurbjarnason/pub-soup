@@ -2,8 +2,14 @@ import { Lpf } from "../dist/lib/lpf/index.js";
 import { formats } from "../dist/index.js";
 import tap from "tap";
 import { readFile } from "fs/promises";
+import { file } from "../dist/lib/filesystem/index.js";
 
 const LPF = "tests/fixtures/test.lpf";
+
+tap.test("Lpf factory file", async (test) => {
+  const epub = await file(LPF);
+  test.ok(epub);
+});
 
 tap.test("Lpf file", async (test) => {
   const lpf = await formats.file("application/lpf+zip", LPF);
