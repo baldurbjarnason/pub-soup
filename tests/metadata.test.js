@@ -54,6 +54,86 @@ tap.test("metadata get", async (test) => {
   test.equal(publication.getValue("numberOfPages"), 251);
 });
 
+tap.test("metadata isAudiobook false", async (test) => {
+  const _metadata = {
+    type: ["Book"],
+    numberOfPages: 251,
+    name: { value: "Fake Book", language: "en" },
+    resources: [{ url: "file.html" }],
+    readingOrder: [{ url: "file.html" }],
+    links: [
+      { url: "https://www.example.com/important-external" },
+      { url: "important/external" },
+    ],
+  };
+  const publication = new Publication(_metadata);
+  test.notOk(publication.isAudiobook());
+});
+tap.test("metadata isAudiobook true type", async (test) => {
+  const _metadata = {
+    type: ["Audiobook"],
+    numberOfPages: 251,
+    name: { value: "Fake Book", language: "en" },
+    resources: [{ url: "file.html" }],
+    readingOrder: [{ url: "file.mp3" }],
+    links: [
+      { url: "https://www.example.com/important-external" },
+      { url: "important/external" },
+    ],
+  };
+  const publication = new Publication(_metadata);
+  test.ok(publication.isAudiobook());
+});
+
+tap.test("metadata isAudiobook true conformsTo", async (test) => {
+  const _metadata = {
+    type: ["Book"],
+    conformsTo: "https://www.w3.org/TR/audiobooks/",
+    numberOfPages: 251,
+    name: { value: "Fake Book", language: "en" },
+    resources: [{ url: "file.mp3" }],
+    readingOrder: [{ url: "file.mp3" }],
+    links: [
+      { url: "https://www.example.com/important-external" },
+      { url: "important/external" },
+    ],
+  };
+  const publication = new Publication(_metadata);
+  test.ok(publication.isAudiobook());
+});
+tap.test("metadata isGallery check false", async (test) => {
+  const _metadata = {
+    type: ["Book"],
+    conformsTo: "https://www.w3.org/TR/audiobooks/",
+    numberOfPages: 251,
+    name: { value: "Fake Book", language: "en" },
+    resources: [{ url: "file.mp3" }],
+    readingOrder: [{ url: "file.mp3" }],
+    links: [
+      { url: "https://www.example.com/important-external" },
+      { url: "important/external" },
+    ],
+  };
+  const publication = new Publication(_metadata);
+  test.notOk(publication.isGallery());
+});
+tap.test("metadata isGallery check true", async (test) => {
+  const _metadata = {
+    type: ["Book"],
+    conformsTo: "https://www.w3.org/TR/audiobooks/",
+    numberOfPages: 251,
+    name: { value: "Fake Book", language: "en" },
+    resources: [{ url: "file.svg" }],
+    readingOrder: [{ url: "file.svg" }],
+    links: [
+      { url: "https://www.example.com/important-external" },
+      { url: "important/external" },
+    ],
+  };
+  const publication = new Publication(_metadata);
+  test.ok(publication.isGallery());
+});
+
 tap.test("Invalid Publication", async (test) => {
   const metadata = {
     type: ["Book"],

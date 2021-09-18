@@ -115,12 +115,28 @@ export class Publication {
     }
   }
 
+  isAudiobook() {
+    return (
+      this.getRaw("type").includes("Audiobook") ||
+      this.getValue("conformsTo") === "https://www.w3.org/TR/audiobooks/"
+    );
+  }
+
+  isGallery() {
+    return this.readingOrder.every((resource) =>
+      resource.encodingFormat.startsWith("image")
+    );
+  }
+  getRaw(property) {
+    return asArray(this.#meta[property]);
+  }
+
   get(property) {
     return asArray(this.#meta[property]).map((value) => asValue(value));
   }
 
   getValue(property) {
-    return this.get(property)[0].value;
+    return this.get(property)[0]?.value;
   }
 
   resource(path) {
