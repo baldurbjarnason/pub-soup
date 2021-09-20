@@ -47,9 +47,9 @@ Currently, the library supports two core formats: EPUB and LPF.
 
 If I decide to go deep on EPUB then LPF processing will be deprecated and probably removed. While EPUB may not have conquered the world as an end user format, it is still widely used for ebook distribution and it is complex enough for it to benefit from an abstraction like this library. It would mean broader metadata support, better language and localisation support, and probably support for fixed layout EPUBs.
 
-If I decide to go deep on LPFs and Publication Manifests then EPUB support will probably be deprecated and removed. And since there isn't much of an ecosystem for the format yet (though not nonexistent) I'd focus on implementing high-fidelity capture of existing web pages and podcasts as LPF files. Archiving was one of the proposed use cases for the formats and I'd basically see how far I could push that, even to the point of using JSON-LD's built-in extension mechanisms to do so if needed.
+If I decide to go deep on LPFs and Publication Manifests then EPUB support will probably be deprecated and removed. And since there isn't much of an ecosystem for the format yet (though not nonexistent) I'd focus on implementing high-fidelity capture of existing web pages and podcasts as LPF files. Archiving was one of the proposed use cases for the format and I would basically see how far I could push that, even to the point of using JSON-LD's built-in extension mechanisms to do so if needed.
 
-But also, yes, deeper language and localisation features and audiobooks.
+But also, yes, deeper language and localisation features and audiobook support for Publication Manifests and LPFs.
 
 ### 2. Broad format support
 
