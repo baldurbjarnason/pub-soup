@@ -72,7 +72,9 @@ In the meantime, feel free to look through this repository. See if any of it loo
 
 ---
 
-## Language and localisation
+## Details
+
+### Language and localisation
 
 W3C's [Publication Manifest](https://www.w3.org/TR/pub-manifest/) has, via JSON-LD 1.1 and schema.org, a deep set of localisation and language features.
 
@@ -88,7 +90,7 @@ Right now, we only deliver the values from the JSON without normalising them. Th
 
 You can use the `settings` object to set default values for `inLanguage` and `language` properties.
 
-## EPUB3
+### EPUB3
 
 EPUB3 supports a refines mechanism for metadata. We don't support that yet. It's on the long term todo list. (Or, should be.)
 
@@ -102,10 +104,8 @@ EPUB3 has many interesting features that this library could support if there end
 
 This library ostensibly supports both EPUB2 and EPUB3 but could do a better job of both.
 
-## ESM support
+### ESM support
 
 This module is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c): Node 12+ is needed to use it and it must be imported instead of required.
 
 The recommended way to use this module on Lambda is to use the Node 14 runtime, re-export this module from an `.mjs` file and then use dynamic import in the commonjs-based handler.
-
-This library should make a distinction between preview formats (those that only generate covers and metadata) and readable formats (those that generate a full single-page HTML file).
